@@ -21,3 +21,17 @@
 
 ## Discussion
 * Measurements are not good for post-stall because of amplitude attentuation and frequency lag
+* Don't just talk about graphs, talk about connection to physics
+
+## Tips
+* Analysis will take full 2 weeks
+* **Data should match Xfoil**
+
+## Baseline Levels
+* Baseline values will actually change when the tunnel is running
+* Changes based on wind tunnel velocity
+* So there will be a constant offset
+
+29.214 m/s at Re = 2e5
+
+61 degrees
