@@ -1,0 +1,81 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{amsmath}
+\usepackage{booktabs} % For pretty tables
+\usepackage{caption} % For caption spacing
+\usepackage{subcaption} % For sub-figures
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage[all]{nowidow}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{er,positioning,bayesnet}
+\usepackage{multicol}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage[inline]{enumitem} % Horizontal lists
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\newcommand{\card}[1]{\left\vert{#1}\right\vert}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+\definecolor{blue}{HTML}{1F77B4}
+\definecolor{orange}{HTML}{FF7F0E}
+\definecolor{green}{HTML}{2CA02C}
+
+\pgfplotsset{compat=1.14}
+
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\setlength{\floatsep}{3pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{3pt plus 1pt minus 1pt}
+\setlength{\intextsep}{3pt plus 1pt minus 1pt}
+\setlength{\abovecaptionskip}{2pt plus 1pt minus 1pt}
+
+\begin{document}
+%
+\title{AER303 Aerospace Laboratory - Aerodynamic Forces on an Airfoil}
+%
+%\titlerunning{Add subtitle}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Eric Dai\inst{1} \and Jai Willems\inst{2} \and Mingde Yin\inst{3}}
+%
+%\authorrunning{F. Author et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Division of Engineering Science, University of Toronto, Toronto, Canada \email{eric.dai@mail.utoronto.ca}\\ \and Division of Engineering Science, University of Toronto, Toronto, Canada \email{jai.willems@mail.utoronto.ca}\\ \and Division of Engineering Science, University of Toronto, Toronto, Canada\\ \email{mingde.yin@mail.utoronto.ca}}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+
+Abstract goes here...
+
+\keywords{world one \and word 2 \and word 3 \and word 4 \and word 5}
+\end{abstract}
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{biblio}
+%
+\end{document}
