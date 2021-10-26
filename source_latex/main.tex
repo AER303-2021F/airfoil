@@ -12,6 +12,7 @@
 \usepackage{pgfplots}
 \usepackage[all]{nowidow}
 \usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz}
 \usetikzlibrary{er,positioning,bayesnet}
 \usepackage{multicol}
@@ -64,9 +65,9 @@
 
 \begin{abstract}
 
-Abstract goes here...
+A Clark Y airfoil is characterized at varying angles of attack in terms of $C_L$, $C_D$, and $C_M$ from surface pressure and wake velocity measurements in a subsonic wind tunnel. Measurements are collected using two separate methods, and their comparative effectiveness is evaluated.
 
-\keywords{world one \and word 2 \and word 3 \and word 4 \and word 5}
+\keywords{Airfoil \and Stall \and Inclined Manometer \and Scanivalve}
 \end{abstract}
 
 
@@ -75,7 +76,7 @@ Abstract goes here...
 % -----------------------------------------------------------------------------
 
 
-\section{Nomenclature}
+\section*{Nomenclature}
 
 
 % -----------------------------------------------------------------------------
@@ -84,7 +85,11 @@ Abstract goes here...
 
 
 \section{Introduction}
-
+Airfoils are two-dimensional cross sections of wings. They produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impact viscous drag forces on the airfoil, and a combination of both impart a pitching moment on the airfoil. The pressure distribution over an airfoil does not remain constant over different angles of attack, and changes sharply near stall.\\
+\\
+Stall is characterized by a significant separation in flow from the airfoil, resulting in loss of lift, increased drag, and a positive pitching moment. Stall leads to unpredictable behaviour of an airfoil, and loss of control in an aircraft. It is important to characterize the effect of a varying angle of attack on the above performance parameters of an airfoil.\\
+\\
+This report describes the experimental performance characterization of a Clark Y airfoil at varying angles of attack. Measurements of the surface pressure distribution of the airfoil, along with velocity measurements of the wake are used to determine the lift, moment, and drag coefficients on the airfoil up to the point of stall. Measurements are performed using two separate methods, and their comparative effectiveness is evaluated.
 
 % -----------------------------------------------------------------------------
 %   Experimental Set-Up
@@ -92,7 +97,14 @@ Abstract goes here...
 
 
 \section{Experimental Set-Up}
-
+\subsection{Procedure}
+\subsection{Apparatus}
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 % -----------------------------------------------------------------------------
 %   Results and Discussion
@@ -125,6 +137,7 @@ Abstract goes here...
 
 
 \appendix
+\section{Pressure Measurements}
 
 
 \end{document}
