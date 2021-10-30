@@ -24,7 +24,7 @@
     * Convert data into pressure and calibrate data (add to appendix) (Eric)
     * Autocorrelation (Eric)
     * Handle pressure data to calculate lift, drag, and moment. (Jai)
-    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Eric)
+    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Jai)
     * Cross reference data against xfoil (Mingde)
     * uncertainty analysis. (EVERYONE)
 * Appendix
