@@ -78,18 +78,26 @@ A Clark Y airfoil is characterized at varying angles of attack in terms of $C_L$
 
 \section*{Nomenclature}
 
+This section defines useful terms and symbols for the purposes of this paper.
+
+\begin{itemize}
+    \item Voltage-pressure measurement: A measurement of the pressure calculated at a point in the wind tunnel in the voltage space as returned by the data acquisition card.
+\end{itemize}
+
 
 % -----------------------------------------------------------------------------
-%   Introduction
+%   Introduction and Background
 % -----------------------------------------------------------------------------
 
 
-\section{Introduction}
+\section{Introduction and Background}\label{sec:introduction_and_background}
+
 Airfoils are two-dimensional cross sections of wings. They produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impact viscous drag forces on the airfoil, and a combination of both impart a pitching moment on the airfoil. The pressure distribution over an airfoil does not remain constant over different angles of attack, and changes sharply near stall.\\
-\\
+
 Stall is characterized by a significant separation in flow from the airfoil, resulting in loss of lift, increased drag, and a positive pitching moment. Stall leads to unpredictable behaviour of an airfoil, and loss of control in an aircraft. It is important to characterize the effect of a varying angle of attack on the above performance parameters of an airfoil.\\
-\\
+
 This report describes the experimental performance characterization of a Clark Y airfoil at varying angles of attack. Measurements of the surface pressure distribution of the airfoil, along with velocity measurements of the wake are used to determine the lift, moment, and drag coefficients on the airfoil up to the point of stall. Measurements are performed using two separate methods, and their comparative effectiveness is evaluated.
+
 
 % -----------------------------------------------------------------------------
 %   Experimental Set-Up
@@ -97,14 +105,43 @@ This report describes the experimental performance characterization of a Clark Y
 
 
 \section{Experimental Set-Up}
-\subsection{Procedure}
+
+This section will detail the lab setup and experimental procedure used in the experiment.
+
 \subsection{Apparatus}
-\begin{figure}
-    \centering
-    \includegraphics{}
-    \caption{Caption}
-    \label{fig:my_label}
-\end{figure}
+
+\subsection{Procedure}
+
+% What was measured and how was it aquired.
+
+The procedure used for acquisition of pressure measurements was as follows:
+
+\begin{enumerate}
+
+    \item The first step in the experimental procedure is to determine the sample frequency and data acquisition time that allow for a $\pm 1\%$ accuracy in the pressure transducer measurements. We began by turning on the wind tunnel to a speed of $110\si{km}.\si{h}^{-1}$. We then took a series of representative measurements from the pressure transducer output with which we calculated the sample spectrum to determine the sample frequency and data acquisition time to use in the experiment.
+    
+    \item After calculating our sampling frequency and sampling time, we then determine the calibration curve that will allow us to transform the voltage-pressure representations gained from the pressure transducer into a useful pressure representation. To determine this correction curve, we varied the wind tunnel speed and took ten different voltage-pressure measurements using a MATLAB program and found the corresponding pressure measurements using the Betz manometer. This correspondance between representations can be used to calculate our pressure measurements in a useful representation.
+    
+    \item We then set the wind tunnel speed back to $110\si{km}.\si{h}^{-1}$ and measured the wind tunnel's pitot-static pressure difference to calculate the actual wind speed experiences in the wind tunnel.
+    
+    \item Next, we change the airfoil angle of attack in the positive and negative directions to determine the stall angle values. Using this information, we determined what angles of attack would be useful to measure such that we can accurately represent the airfoil properties up to and past stall conditions. The angle of attack values we chose were 0, 3, 6, 8, 10, 11, 13, 15, 16, 17, and 20 degrees.
+
+    \item Cycling through each angle of attack, we measured the pressure distribution along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values were measured by reading the fluid hight changes from the inclined manometer. To get greater precision in the wake measurements, we moved the wake rake by $5\si{mm}$ and re-tookmeasurements again which increased our measurement density. Note that we took the measurements using two devices: (1) the pressure transducer controled by a MATLAB program and (2) an inclined manometer.
+
+\end{enumerate}
+
+Once the pressure measurements were taken, the data was pre-processed to get our pressure disstributions over the airfoil and in its wake. This pre-processing took different forms depending on the method used.
+
+\begin{itemize}
+
+    \item For data calculated using the pressure transducer, we used the calibration curve that provided a correspondance between the voltage-pressure representations gained from the pressure transducer and the pressure representations used in the experiment.
+
+    \item For data calculated using the inclined manometer, we found the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation, determined the corresponding change in pressure.
+
+\end{itemize}
+
+After the data was pre-processed, the data was analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis was done using the methods described in section \ref{sec:introduction_and_background}.
+
 
 % -----------------------------------------------------------------------------
 %   Results and Discussion
