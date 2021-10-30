@@ -19,6 +19,7 @@
 \usepackage{algpseudocode,algorithm,algorithmicx}
 \usepackage{minted}
 \usepackage{hyperref}
+\usepackage{siunitx}
 \usepackage[inline]{enumitem} % Horizontal lists
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -92,50 +93,49 @@ This section defines useful terms and symbols for the purposes of this paper.
 
 \section{Introduction and Background}\label{sec:introduction_and_background}
 
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impact viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. These airfoil characteristics strongly depend on the pressure distributions over the airfoil which will not remain constant over different angles of attack and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and behavioural characteristics of the airfoil.
+Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and behavioural characteristics of the airfoil.
 
 \subsection{Normal, Axial, and Moment Forces}
 
-The normal force exerted on an airfoil is the pressure force componenet normal to the airfoils chord and is perpendicular to the axial force. These forces are valuable in expressing the net pressure forces exerted on an airfoil which can then be combined with the angle of attack to determine the lift and drag forces.
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.
 
-With these definitions in mind, let us define $P_u$ as the pressure distribution on the airfoils upper surface, $P_\ell$ as the pressure distribution on the airfoils lower surface, and $\theta$ as the angle between the chords normal and the airfoils surface normal.
+$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.
 
-The normal force can be calculated by summing up the pressure distribution components normal to the airfoils chord as seen in equation \ref{eq:normal_force} where a positive value indicates a force acting towards the airfoils upper surface. In a simlar approach, the axial force can be calculated by summing the pressure distribution components parallel to the chord as seen in equation \ref{eq:axial_force} where a positive value indicates a force acting in the direction of the airfoils trailing edge. The moment around the leading edge of the airfoil can be calculated by summing up the pressure distribution components normal to the airfoil multiplied by its placement along the chord and the pressure distribution components parallel to the chord multiplied by the vertical offset from the chord line. The moment is calculated using equation \ref{eq:moment} where a positive value indicates a moment that will increase the angle of attack.
+The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.
 
 \begin{align}
     N' &= \int_{LE}^{TE} -P_u\cos\theta ds_u + \int_{LE}^{TE} P_\ell\cos\theta ds_\ell
-    \label{eq:normal_force}
+    \label{eq:normal_force}\\
     A' &= \int_{LE}^{TE} -P_u\sin\theta ds_u + \int_{LE}^{TE} P_\ell\sin\theta ds_\ell
-    \label{eq:axial_force}
+    \label{eq:axial_force}\\
     M' &= \int_{LE}^{TE} \left[(P_u\cos\theta)x - (P_u\sin\theta)y\right]ds_u + \int_{LE}^{TE} \left[(-P_\ell\cos\theta)x + (P_\ell\sin\theta)y\right]ds_\ell
     \label{eq:leading_edge_moment}
 \end{align}
 
-\subsection{Calculating Lift, Drag and the Coefficients}
+\subsection{Calculating Lift, Drag and Dimensionless Coefficients}
 
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using equation \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow.
-
+The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow.
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
-    D' &= N'\sin\alpha + A'\cos\alpha \label{eq:drag} \\
+    D' &= N'\sin\alpha + A'\cos\alpha \label{eq:drag}
 \end{align}
 
-A useful representation of the lift, drag, and moment of an airfoil are in their dimensionless forms which model the airfoils properties with some flow conditions. The coefficients of lift, drag, and moment are calculated using equations\ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty2$ is the dynamic pressure and $C$ is the chord length.
+Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where\\
+$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $C$ is the chord length.
 
 \begin{align}
     C_L &= \frac{L'}{q_\infty C}
-    \label{eq:cl}
+    \label{eq:cl}\\
     C_D &= \frac{D'}{q_\infty C}
-    \label{eq:cd}
-    C_M &= \frac{M'}{\q_infty C^2}
+    \label{eq:cd}\\
+    C_M &= \frac{M'}{q_\infty C^2}
     \label{eq:cm}
 \end{align}
 
 \subsection{Stall}
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in loss of lift, increased drag, and a zero-or-positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
-When an airfoil stalls, there exists a significant separation in flow from the airfoil resulting in loss of lift, increased drag, and a positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
-
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to gain insight into the performance characteristics. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
 
 
 
@@ -146,7 +146,7 @@ This report aims to explore the experimental performance of a Clark Y airfoil at
 
 \section{Experimental Set-Up}
 
-This section will detail the lab setup and experimental procedure used in the experiment.
+This details the lab setup and experimental procedure used in the experiment.
 
 \subsection{Apparatus}
 
@@ -190,6 +190,7 @@ After the data was pre-processed, the data was analyzed to determine the lift, m
 
 \section{Results and Discussion}
 
+\subsection{Comparison with XFOIL}
 
 % -----------------------------------------------------------------------------
 %   Conclusion
