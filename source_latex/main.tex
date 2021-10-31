@@ -92,8 +92,9 @@ This section defines useful terms and symbols for the purposes of this paper.
 
 
 \section{Introduction and Background}\label{sec:introduction_and_background}
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
 
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and behavioural characteristics of the airfoil.
+Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.
 
 \subsection{Normal, Axial, and Moment Forces}
 
@@ -114,28 +115,11 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
 
 \subsection{Calculating Lift, Drag and Dimensionless Coefficients}
 
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow.
+The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
     D' &= N'\sin\alpha + A'\cos\alpha \label{eq:drag}
 \end{align}
-
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where\\
-$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $C$ is the chord length.
-
-\begin{align}
-    C_L &= \frac{L'}{q_\infty C}
-    \label{eq:cl}\\
-    C_D &= \frac{D'}{q_\infty C}
-    \label{eq:cd}\\
-    C_M &= \frac{M'}{q_\infty C^2}
-    \label{eq:cm}
-\end{align}
-
-\subsection{Stall}
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in loss of lift, increased drag, and a zero-or-positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
-
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
 
 %% TEST: Does a diagram like this look good?
 \begin{figure}
@@ -156,6 +140,21 @@ This report aims to explore the experimental performance of a Clark Y airfoil at
     \label{fig:airfoil_directions}
 \end{figure}
 
+Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where\\
+$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $C$ is the chord length.
+
+\begin{align}
+    C_L &= \frac{L'}{q_\infty C}
+    \label{eq:cl}\\
+    C_D &= \frac{D'}{q_\infty C}
+    \label{eq:cd}\\
+    C_M &= \frac{M'}{q_\infty C^2}
+    \label{eq:cm}
+\end{align}
+
+\subsection{Stall}
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in loss of lift, increased drag, and a zero-or-positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+
 % -----------------------------------------------------------------------------
 %   Experimental Set-Up
 % -----------------------------------------------------------------------------
@@ -166,39 +165,91 @@ This report aims to explore the experimental performance of a Clark Y airfoil at
 This details the lab setup and experimental procedure used in the experiment.
 
 \subsection{Apparatus}
+The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|}\hline
+        x/c & 0 & 0.03 & 0.06 & 0.10 & 0.15 & 0.20 & 0.30 & 0.40 & 0.55 & 0.70 \\\hline
+        Tap Number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\\hline \hline
+        x/c & 0.85 & 1.00 & 0.90 & 0.60 & 0.40 & 0.30 & 0.20 & 0.10 & 0.05&\\\hline
+        Tap Number & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19&\\\hline
+    \end{tabular}
+    \caption{Static pressure tap locations for the test model. Taps 1 through 12 are on the top surface, while 13 thought 19 are on the bottom surface.}
+    \label{tab:pressure_taps}
+\end{table}
+
+Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{Apparatus Pictures/wind_tunnel_setup.jpg}
+    \caption{The wind tunnel section, with the 3D printed test model installed.}
+    \label{fig:wind_tunnel_setup}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{Apparatus Pictures/aoa_selector.jpg}
+    \caption{Adjustable rotary mechanism to hold the airfoil at different angles of attack.}
+    \label{fig:aoa_select}
+\end{figure}
+
+In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.
+
+A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.
+
+The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Apparatus Pictures/scanivalve.jpg}
+    \caption{Scanivalve system, connected to a pressure transcuder. The system allows rapid switching of each of the 36 channels to the transducer to sweep through all pressure measurements.}
+    \label{fig:scanivalve}
+\end{figure}
+
+The inclined manometer takes in 36 input channels and one reference channel to measure the pressure difference between each of the 36 inputs compared to the reference. The reference pressure is set to that of the upstream static tube.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Apparatus Pictures/inclined_manometer_slope_graduations.jpg}
+    \caption{Inclined manometer.}
+    \label{fig:manometer}
+\end{figure}
 
 \subsection{Procedure}
 
-% What was measured and how was it aquired.
+% What is measured and how it is acquired.
 
-The procedure used for acquisition of pressure measurements was as follows:
+The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
 
-    \item The first step in the experimental procedure is to determine the sample frequency and data acquisition time that allow for a $\pm 1\%$ accuracy in the pressure transducer measurements. We began by turning on the wind tunnel to a speed of $110\si{km}.\si{h}^{-1}$. We then took a series of representative measurements from the pressure transducer output with which we calculated the sample spectrum to determine the sample frequency and data acquisition time to use in the experiment.
+    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel is set to a speed of $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
     
-    \item After calculating our sampling frequency and sampling time, we then determine the calibration curve that will allow us to transform the voltage-pressure representations gained from the pressure transducer into a useful pressure representation. To determine this correction curve, we varied the wind tunnel speed and took ten different voltage-pressure measurements using a MATLAB program and found the corresponding pressure measurements using the Betz manometer. This correspondance between representations can be used to calculate our pressure measurements in a useful representation.
+    \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements are taken at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
     
-    \item We then set the wind tunnel speed back to $110\si{km}.\si{h}^{-1}$ and measured the wind tunnel's pitot-static pressure difference to calculate the actual wind speed experiences in the wind tunnel.
+    \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experiences in the wind tunnel.
     
-    \item Next, we change the airfoil angle of attack in the positive and negative directions to determine the stall angle values. Using this information, we determined what angles of attack would be useful to measure such that we can accurately represent the airfoil properties up to and past stall conditions. The angle of attack values we chose were 0, 3, 6, 8, 10, 11, 13, 15, 16, 17, and 20 degrees.
+    \item Next, the angle of attack is changed in the positive and negative directions to determine the stall angle values. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen were \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
 
-    \item Cycling through each angle of attack, we measured the pressure distribution along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values were measured by reading the fluid hight changes from the inclined manometer. To get greater precision in the wake measurements, we moved the wake rake by $5\si{mm}$ and re-tookmeasurements again which increased our measurement density. Note that we took the measurements using two devices: (1) the pressure transducer controled by a MATLAB program and (2) an inclined manometer.
+    \item Cycling through each angle of attack, the pressure distribution is measured along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values are measured by reading the fluid height changes from the inclined manometer. To get greater precision in the wake measurements, the wake rake is displaced by $5\si{mm}$ for a second round of measurements to fill the gaps between each rake tube. Pressure measurements are taken using two methods: (1) the pressure transducer fed by the scanivalve device and (2) the inclined manometer.
 
 \end{enumerate}
 
-Once the pressure measurements were taken, the data was pre-processed to get our pressure disstributions over the airfoil and in its wake. This pre-processing took different forms depending on the method used.
+Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
 
-\begin{itemize}
+\begin{enumerate}
 
-    \item For data calculated using the pressure transducer, we used the calibration curve that provided a correspondance between the voltage-pressure representations gained from the pressure transducer and the pressure representations used in the experiment.
+    \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For data calculated using the inclined manometer, we found the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation, determined the corresponding change in pressure.
+    \item For data calculated using the inclined manometer, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation.
 
-\end{itemize}
+\end{enumerate}
 
-After the data was pre-processed, the data was analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis was done using the methods described in section \ref{sec:introduction_and_background}.
+After the data is pre-processed, the data is analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis is done using the methods described in section \ref{sec:introduction_and_background}.
 
+%% TODO: mention image analysis process
 
 % -----------------------------------------------------------------------------
 %   Results and Discussion
@@ -208,6 +259,11 @@ After the data was pre-processed, the data was analyzed to determine the lift, m
 \section{Results and Discussion}
 
 \subsection{Comparison with XFOIL}
+Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
+
+\subsection{Comparison with other experiments}
+Experimental performance data of a Clark Y airfoil is available in literature
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}.
 
 % -----------------------------------------------------------------------------
 %   Conclusion
@@ -233,6 +289,40 @@ After the data was pre-processed, the data was analyzed to determine the lift, m
 
 \appendix
 \section{Pressure Measurements}
+\subsection{Scanivalve Measurements}
+NOTE: These tables are not final; just here to test.
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+         $\alpha$ & \multicolumn{19}{|c|}{Airfoil Ports ($\num{1e3}\si{V}$)} \\\hline
+         \ang{0} & 519 & -1 & -176 & -229 & -306 & -341 & -297 & -261 & -232 & -178 & -48 & 70 & 73 & 38 & 16 & -16 & -47 & -95 & -152  \\\hline
+         \ang{3} & 439 & -319 & -449 & -457 & -459 & -471 & -389 & -339 & -291 & -153 & -49 & 82 & 94 & 83 & 89 & 78 & 67 & 70 & 95 \\\hline
+         \ang{6} & -52 & -711 & -744 & -685 & -661 & -622 & -518 & -436 & -306 & -182 & -62 & 75 & 107 & 126 & 143 & 146 & 161 & 205 & 274\\\hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:pressure_scanivalve}
+\end{table}
 
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+         $\alpha$ & \multicolumn{17}{|c|}{Rake Ports 1 ($\num{1e3}\si{V}$)} \\\hline
+         \ang{0} & 544 & 533 & 530 & 522 & 521 & 522 & 521 & 520 & 519 & 459 & 509 & 521 & 519 & 521 & 552 & 508 & 528  \\\hline
+         \ang{3} & 547 & 551 & 543 & 529 & 534 & 529 & 533 & 539 & 534 & 504 & 482 & 525 & 528 & 534 & 565 & 542 & 535 \\ \hline
+    \end{tabular}
+    \caption{RAW}
+    \label{tab:pressure_rake1}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+         $\alpha$ & \multicolumn{17}{|c|}{Rake Ports 2 ($\num{1e3}\si{V}$)} \\\hline
+         \ang{0} &  545 & 534 & 530 & 532 & 536 & 530 & 511 & 529 & 508 & 469 & 523 & 527 & 528 & 530 & 557 & 533 & 534   \\\hline
+        \ang{3} & 549 & 544 & 548 & 533 & 536 & 532 & 533 & 526 & 537 & 479 & 515 & 536 & 517 & 550 & 564 & 548 & 528 \\\hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:pressure_rake2}
+\end{table}
 
 \end{document}

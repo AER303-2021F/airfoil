@@ -15,7 +15,7 @@
 
 # 5. To-Do
 * Data Annotation (Eric and Jai)
-* Learn xFOIL (Mingde and Eric)
+* Learn xFOIL (Mingde and Eric) Guide video: https://www.youtube.com/watch?v=hTq1C_oYmhY
 * Introduction write up (Mingde)
 * Experimental SetUp
     * Procedure (Jai)
