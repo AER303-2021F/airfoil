@@ -14,19 +14,27 @@
 * Get integral timescales
 
 # 5. To-Do
-* Data Annotation (Eric and Jai)
-* Learn xFOIL (Mingde and Eric) Guide video: https://www.youtube.com/watch?v=hTq1C_oYmhY
-* Introduction write up (Mingde)
-* Experimental SetUp
-    * Procedure (Jai)
+* Data Annotation (Eric and Jai) [DONE]
+* Learn xFOIL (Mingde and Eric) Guide video: https://www.youtube.com/watch?v=hTq1C_oYmhY [DONE]
+* Introduction write up (Mingde) [DONE]
+* Experimental SetUp [DONE]
+    * Procedure (Jai) - ADD PHOTO DATA EXTRACTION. https://automeris.io/WebPlotDigitizer/
     * Lab set up (Mingde)
 * Results and discussion
-    * Convert data into pressure and calibrate data (add to appendix) (Eric)
-    * Autocorrelation (Eric)
-    * Handle pressure data to calculate lift, drag, and moment. (Jai)
-    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Jai)
-    * Cross reference data against xfoil (Mingde)
-    * uncertainty analysis. (EVERYONE)
+    * Convert data into pressure and calibrate data (add to appendix) (Eric) [IPR]
+        * calibration of 
+    * Autocorrelation (Eric) [NOT STARTED]
+    * Handle pressure data to calculate lift, pressure drag, and moment. (Jai) [NOT STARTED]
+    * Calculate Wake drag (Mingde)
+    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Jai) [NOT STARTED]
+    * Cross reference data against xfoil (Mingde) [NOT STARTED]
+    * uncertainty analysis. (EVERYONE) [NOT STARTED]
 * Appendix
-    * Tabulate pressure data (Jai)
+    * Annotate pressure data (Jai) [DONE]
+    * Tabulate pressure data in the report
+* Question for Suraj
+    * What is the free stream q? Is it from port 36? 
+        * $q_\infty = \frac{1}{2} \rho U_\infty ^2$
+
+
     
