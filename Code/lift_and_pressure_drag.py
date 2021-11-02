@@ -6,103 +6,134 @@ import matplotlib.pyplot as plt
 from typing import Tuple
 
 
+# -----------------------------------------------------------------------------
+# Interpolate airfoil data at tap locations.
+# -----------------------------------------------------------------------------
+
+
+airfoil_data = np.loadtxt("./XFOIL Analysis/clark_y.dat", skiprows=1)
+n = airfoil_data.shape[0] // 2
+
+airfoil_x_upper = airfoil_data[:n + 1, 0]
+airfoil_x_lower = airfoil_data[n:, 0]
+airfoil_y_upper = airfoil_data[:n + 1, 1]
+airfoil_y_lower = airfoil_data[n:, 1]
+
 locations = [0, 0.03, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.55, 0.70, 0.85, 1.00, 0.90, 0.60, 0.40, 0.30, 0.20, 0.10, 0.05]
-LOCATION_TOP = 12
+
+locations_x_upper = [0, 0.03, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.55, 0.70, 0.85, 1.00]
+locations_x_lower = [0.90, 0.60, 0.40, 0.30, 0.20, 0.10, 0.05]
+locations_y_upper = []
+locations_y_lower = []
+
+for loc in locations_x_upper:
+    locations_y_upper.append(interp1d(airfoil_x_upper, airfoil_y_upper, kind='cubic')(loc))
+
+for loc in locations_x_lower:
+    locations_y_lower.append(interp1d(airfoil_x_lower, airfoil_y_lower, kind='cubic')(loc))
+
+# plt.plot(airfoil_x_upper, airfoil_y_upper, label="Actual Upper")
+# plt.scatter(locations_x_upper, locations_y_upper, label="Interpolated Upper")
+# plt.plot(airfoil_x_lower, airfoil_y_lower, label="Actual Lower")
+# plt.scatter(locations_x_lower, locations_y_lower, label="Interpolated Lower")
+# plt.title("Airfoil Interpolation")
+# plt.legend()
+# plt.grid()
+# plt.show()
 
 
-def airfoil_theta(airfoil_data: np.ndarray, locations: np.ndarray) -> float:
-    """Return the angle between the chord line's normal and the aifoil normal.
-
-    Parameters
-    ----------
-    airfoil_data : np.ndarray
-        Array of shape (n, 2) containing the x and y coordinates of the airfoil.
-
-    Returns
-    -------
-    float
-        Array of shape (n,) containing the angle between the chord line's
-        normal and the aifoil normal.
-    """
-
-    # plt.plot(airfoil_data[:, 0], airfoil_data[:, 1])
-    num = np.diff(airfoil_data[:, 1])
-    denom = np.diff(airfoil_data[:, 0])
-    theta = np.arctan(num / denom)
-    # plt.plot(airfoil_data[1:, 0], theta)
-
-    min_airfoil_x_val = np.min(airfoil_data[:, 0])
-    min_airfoil_x = np.where(airfoil_data[:, 0] == min_airfoil_x_val)[0][0] - 1
-
-    up_x, up_y = airfoil_data[:min_airfoil_x + 2, 0], theta[:min_airfoil_x + 2]
-    low_x, low_y = airfoil_data[min_airfoil_x + 1: -1, 0], theta[min_airfoil_x + 1:]
-    upper_interp = interp1d(up_x, up_y, kind='cubic')
-    lower_interp = interp1d(low_x, low_y, kind='cubic')
-
-    up_interp = upper_interp(locations[:LOCATION_TOP])
-    low_interp = lower_interp(locations[LOCATION_TOP:])
-    theta = np.concatenate((up_interp, low_interp))
-
-    # plt.scatter(locations, theta)
-    # plt.grid()
-    # plt.show()
-
-    return theta
+# -----------------------------------------------------------------------------
+# Segregate the upper and lower pressure measurements.
+# -----------------------------------------------------------------------------
 
 
-def normal_force(pressure_data: np.ndarray, airfoil_data: np.ndarray, locations: np.ndarray) -> float:
+pressure_data = np.loadtxt("Data/pressure_data_csv.csv", delimiter=",", skiprows=1)
+AoA = pressure_data[:, 0].reshape((-1,))
+
+pressure_upper = pressure_data[:, 1:13]
+pressure_lower = pressure_data[:, 13:]
+
+
+# -----------------------------------------------------------------------------
+# Define functions.
+# -----------------------------------------------------------------------------
+
+
+def airfoil_theta(xl, yl, xu, yu):
+
+    num = - np.diff(yl)
+    denom = np.diff(xl)
+    theta_l = np.arctan(num / denom)
+
+    num = np.diff(yu)
+    denom = np.diff(xu)
+    theta_u = np.arctan(num / denom)
+
+    return theta_l, theta_u
+
+def normal_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+
+    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    N = 0
+
+    for n in range(len(ds_upper) - 1):
+        N -= pu[n] * np.cos(thetau[n]) * ds_upper[n]
     
-    theta = airfoil_theta(airfoil_data, locations)
+    for n in range(len(ds_lower) - 1):
+        N += pl[n] * np.cos(thetal[n]) * ds_lower[n]
 
-    vertical_pressure = pressure_data * np.cos(theta)
-
-    sign = np.ones(len(vertical_pressure))
-    sign[:len(vertical_pressure) // 2] = -1
-    signed_vertical_pressure = sign * vertical_pressure
-
-    normal_force = np.trapz(signed_vertical_pressure, locations, dx=0.01)
-
-    return normal_force
+    return N
 
 
-def axial_force(pressure_data: np.ndarray, airfoil_data: np.ndarray, locations: np.ndarray) -> float:
+def axial_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+
+    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    A = 0
+
+    for n in range(len(ds_upper) - 1):
+        A -= pu[n] * np.sin(thetau[n]) * ds_upper[n]
     
-    theta = airfoil_theta(airfoil_data, locations)
+    for n in range(len(ds_lower) - 1):
+        A += pl[n] * np.sin(thetal[n]) * ds_lower[n]
 
-    horizontal_pressure = pressure_data * np.sin(theta)
-    signed_horizontal_pressure = np.sign(theta) * horizontal_pressure
-
-    axial_force = np.trapz(signed_horizontal_pressure, locations, dx=0.01)
-
-    return axial_force
+    return A
 
 
-def moment(pressure_data: np.ndarray, airfoil_data: np.ndarray, locations: np.ndarray) -> float:
+def moment(xl, yl, xu, yu, pl, pu, thetal, thetau):
+
+    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    M = 0
+
+    for n in range(len(ds_upper) - 1):
+        M += pu[n] * np.cos(thetau[n]) * ds_upper[n] * xu[n]
+        M -= pu[n] * np.sin(thetau[n]) * ds_upper[n] * yu[n]
     
-    theta = airfoil_theta(airfoil_data, locations)
+    for n in range(len(ds_lower) - 1):
+        M += pl[n] * np.sin(thetal[n]) * ds_lower[n]
 
-    vertical_pressure = pressure_data * np.cos(theta)
-    signed_vertical_pressure = np.sign(theta) * vertical_pressure
+        M -= pl[n] * np.cos(thetal[n]) * ds_lower[n] * xl[n]
+        M += pl[n] * np.sin(thetal[n]) * ds_lower[n] * yl[n]
 
-    horizontal_pressure = pressure_data * np.sin(theta)
-    signed_horizontal_pressure = np.sign(theta) * horizontal_pressure
-
-    moment = np.trapz(signed_vertical_pressure, locations, dx=0.01)
-
-    return moment
+    return M
 
 
-def lift(N: float, A: float, aoa: float) -> float:
+def lift(N, A, aoa):
     
     return N * np.cos(aoa) - A * np.sin(aoa)
 
 
-def pressure_drag(N: float, A: float, aoa: float) -> float:
+def pressure_drag(N, A, aoa):
     
     return N * np.sin(aoa) + A * np.cos(aoa)
 
 
-def coefficients(L: float, D: float, M: float) -> Tuple[float, float, float]:
+def coefficients(L, D, M):
     # Assuming chord equals one.
 
     q_infty = 0.5 * 1.225 * 29.214 ** 2
@@ -116,11 +147,6 @@ def coefficients(L: float, D: float, M: float) -> Tuple[float, float, float]:
 
 def main():
 
-    airfoil_data = np.loadtxt("./XFOIL Analysis/clark_y.dat", skiprows=1)
-    
-    pressure_data = np.loadtxt("Data/pressure_data_csv.csv", delimiter=",", skiprows=1)
-    AoA = pressure_data[:, 0].reshape((-1,))
-
     L_vs_aoa = np.zeros(AoA.size)
     D_vs_aoa = np.zeros(AoA.size)
     M_vs_aoa = np.zeros(AoA.size)
@@ -128,18 +154,22 @@ def main():
     cD_vs_aoa = np.zeros(AoA.size)
     cM_vs_aoa = np.zeros(AoA.size)
 
+    thetal, thetau = airfoil_theta(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper)
+
     for i in range(AoA.size):
 
-        print(f"Calculations for AOA={AoA[i]}")
+        aoa = int(AoA[i])
 
-        N = normal_force(pressure_data[i, 1:], airfoil_data, locations)
-        A = axial_force(pressure_data[i, 1:], airfoil_data, locations)
-        M = moment(pressure_data[i, 1:], airfoil_data, locations)
+        print(f"Calculations for AOA={aoa}")
+
+        N = normal_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
+        A = axial_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
+        M = moment(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
 
         L = lift(N, A, AoA[i])
-        D = pressure_drag(N, A, AoA[i])
+        D = pressure_drag(N, A, aoa)
 
-        cL, cD, cM = coefficients(L, D, 1)
+        cL, cD, cM = coefficients(L, D, M)
 
         L_vs_aoa[i] = L
         D_vs_aoa[i] = D
