@@ -19,15 +19,15 @@
 * Introduction write up (Mingde) [DONE]
 * Experimental SetUp [DONE]
     * Procedure (Jai) - ADD PHOTO DATA EXTRACTION. https://automeris.io/WebPlotDigitizer/
-    * Lab set up (Mingde)
+    * Lab set up (Mingde) [DONE]
 * Results and discussion
     * Convert data into pressure and calibrate data (add to appendix) (Eric) [IPR]
         * calibration of 
     * Autocorrelation (Eric) [NOT STARTED]
-    * Handle pressure data to calculate lift, pressure drag, and moment. (Jai) [NOT STARTED]
-    * Calculate Wake drag (Mingde)
-    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Jai) [NOT STARTED]
-    * Cross reference data against xfoil (Mingde) [NOT STARTED]
+    * Handle pressure data to calculate lift, pressure drag, and moment. (Jai) [DONE]
+    * Calculate Wake drag (Mingde) [DONE]
+    * Calculate and plot the Cl, Cd, Cm (versus alpha) (Jai) [DONE]
+    * Cross reference data against xfoil (Mingde) [DONE]
     * uncertainty analysis. (EVERYONE) [NOT STARTED]
 * Appendix
     * Annotate pressure data (Jai) [DONE]
