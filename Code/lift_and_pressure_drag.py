@@ -3,7 +3,26 @@
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
-from typing import Tuple
+
+
+# -----------------------------------------------------------------------------
+# Constants.
+# -----------------------------------------------------------------------------
+
+
+FREE_STREAM_VELOCITY = {
+    0: 30.1224,
+    3: 30.2637,
+    6: 30.4689,
+    8: 30.7127,
+    10: 30.6284,
+    11: 30.7055,
+    13: 30.7579,
+    15: 30.9922,
+    16: 31.1288,
+    17: 31.2287,
+    20: 31.4522
+}
 
 
 # -----------------------------------------------------------------------------
@@ -19,10 +38,8 @@ airfoil_x_lower = airfoil_data[n:, 0]
 airfoil_y_upper = airfoil_data[:n + 1, 1]
 airfoil_y_lower = airfoil_data[n:, 1]
 
-locations = [0, 0.03, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.55, 0.70, 0.85, 1.00, 0.90, 0.60, 0.40, 0.30, 0.20, 0.10, 0.05]
-
 locations_x_upper = [0, 0.03, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.55, 0.70, 0.85, 1.00]
-locations_x_lower = [0.90, 0.60, 0.40, 0.30, 0.20, 0.10, 0.05]
+locations_x_lower = [0.05, 0.10, 0.20, 0.30, 0.40, 0.60, 0.90]
 locations_y_upper = []
 locations_y_lower = []
 
@@ -51,7 +68,7 @@ pressure_data = np.loadtxt("Data/pressure_data_csv.csv", delimiter=",", skiprows
 AoA = pressure_data[:, 0].reshape((-1,))
 
 pressure_upper = pressure_data[:, 1:13]
-pressure_lower = pressure_data[:, 13:]
+pressure_lower = np.flip(pressure_data[:, 13:], axis=1)
 
 
 # -----------------------------------------------------------------------------
@@ -60,83 +77,252 @@ pressure_lower = pressure_data[:, 13:]
 
 
 def airfoil_theta(xl, yl, xu, yu):
+    """Return the angle between the pressure and airfoil normals.
+
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+
+    Returns
+    -------
+    np.ndarray, np.ndarray
+        A tuple of arrays, each of shape (n,), containing the angle between the
+        pressure and airfoil normals in radians.
+    """
 
     num = - np.diff(yl)
     denom = np.diff(xl)
     theta_l = np.arctan(num / denom)
 
-    num = np.diff(yu)
+    num = - np.diff(yu)
     denom = np.diff(xu)
     theta_u = np.arctan(num / denom)
 
     return theta_l, theta_u
 
 def normal_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return normal force of the airfoil.
 
-    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
-    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The normal force of the airfoil.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
 
     N = 0
 
-    for n in range(len(ds_upper) - 1):
-        N -= pu[n] * np.cos(thetau[n]) * ds_upper[n]
+    for n in range(len(ds_upper)):
+        N -= 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * ds_upper[n]
     
-    for n in range(len(ds_lower) - 1):
-        N += pl[n] * np.cos(thetal[n]) * ds_lower[n]
+    for n in range(len(ds_lower)):
+        N += 0.5 * (pl[n] + pl[n + 1]) * np.cos(thetal[n]) * ds_lower[n]
 
     return N
 
 
 def axial_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return axial force of the airfoil.
 
-    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
-    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The axial force in Newtons.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
 
     A = 0
 
-    for n in range(len(ds_upper) - 1):
-        A -= pu[n] * np.sin(thetau[n]) * ds_upper[n]
+    for n in range(len(ds_upper)):
+        A -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * ds_upper[n]
     
-    for n in range(len(ds_lower) - 1):
-        A += pl[n] * np.sin(thetal[n]) * ds_lower[n]
+    for n in range(len(ds_lower)):
+        A += 0.5 * (pl[n] + pl[n + 1]) * np.sin(thetal[n]) * ds_lower[n]
 
     return A
 
 
 def moment(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return the moment of the airfoil in Newtons.
 
-    ds_upper = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
-    ds_lower = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The moment of the airfoil in Newtons.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
 
     M = 0
 
-    for n in range(len(ds_upper) - 1):
-        M += pu[n] * np.cos(thetau[n]) * ds_upper[n] * xu[n]
-        M -= pu[n] * np.sin(thetau[n]) * ds_upper[n] * yu[n]
+    for n in range(len(ds_upper)):
+        M += 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * xu[n] * ds_upper[n]
+        M -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * yu[n] * ds_upper[n]
     
-    for n in range(len(ds_lower) - 1):
-        M += pl[n] * np.sin(thetal[n]) * ds_lower[n]
-
-        M -= pl[n] * np.cos(thetal[n]) * ds_lower[n] * xl[n]
-        M += pl[n] * np.sin(thetal[n]) * ds_lower[n] * yl[n]
+    for n in range(len(ds_lower)):
+        M -= 0.5 * (pl[n] + pl[n + 1]) * np.cos(thetal[n]) * xl[n] * ds_lower[n]
+        M += 0.5 * (pl[n] + pl[n + 1]) * np.sin(thetal[n]) * yl[n] * ds_lower[n]
 
     return M
 
 
 def lift(N, A, aoa):
-    
+    """Return the lift force in Newtons.
+
+    Parameters
+    ----------
+    N : float
+        The airfoils normal force.
+    A : float
+        The airfoils axial force.
+    aoa : int
+        The angle of attack of the airfoil.
+
+    Returns
+    -------
+    float
+        The lift force in Newtons.
+    """
+
+    aoa = np.radians(aoa)
     return N * np.cos(aoa) - A * np.sin(aoa)
 
 
 def pressure_drag(N, A, aoa):
+    """Return the pressure drag force in Newtons.
+
+    Parameters
+    ----------
+    N : float
+        The airfoils normal force.
+    A : float
+        The airfoils axial force.
+    aoa : int
+        The angle of attack of the airfoil.
+
+    Returns
+    -------
+    float
+        The pressure drag force in Newtons.
+    """
     
+    aoa = np.radians(aoa)
     return N * np.sin(aoa) + A * np.cos(aoa)
 
 
-def coefficients(L, D, M):
-    # Assuming chord equals one.
+def coefficients(L, D, M, aoa):
+    """Return the lift, drag, and moment coefficients.
 
-    q_infty = 0.5 * 1.225 * 29.214 ** 2
+    Parameters
+    ----------
+    L : float
+        The lift force in Newtons.
+    D : float
+        The drag force in Newtons.
+    M : float
+        The moment force in Newtons.
+    aoa : int
+        The angle of attack of the airfoil.
+
+    Returns
+    -------
+    float, float, float
+        A tuple containing the lift coefficient, drag coefficient, and
+        moment coefficient.
+    """
+
+    q_infty = 0.5 * 1.225 * FREE_STREAM_VELOCITY[aoa] ** 2
 
     C_L = L / q_infty
     C_D = D / q_infty
@@ -162,14 +348,14 @@ def main():
 
         print(f"Calculations for AOA={aoa}")
 
-        N = normal_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
-        A = axial_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
-        M = moment(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[aoa, :], pressure_upper[aoa, :], thetal, thetau)
+        N = normal_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[i, :], pressure_upper[i, :], thetal, thetau)
+        A = axial_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[i, :], pressure_upper[i, :], thetal, thetau)
+        M = moment(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower[i, :], pressure_upper[i, :], thetal, thetau)
 
-        L = lift(N, A, AoA[i])
+        L = lift(N, A, aoa)
         D = pressure_drag(N, A, aoa)
 
-        cL, cD, cM = coefficients(L, D, M)
+        cL, cD, cM = coefficients(L, D, M, aoa)
 
         L_vs_aoa[i] = L
         D_vs_aoa[i] = D
@@ -180,17 +366,16 @@ def main():
 
         print(f"Lift = {L}, Drag = {D}, Moment = {M}")
         print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
-    
-    plt.plot(AoA, L_vs_aoa, label="Lift")
-    plt.plot(AoA, D_vs_aoa, label="Drag")
-    plt.plot(AoA, M_vs_aoa, label="Moment")
-    plt.legend()
-    plt.grid()
-    plt.show()
 
-    plt.plot(AoA, cL_vs_aoa, label="cL")
-    plt.plot(AoA, cD_vs_aoa, label="cD")
-    plt.plot(AoA, cM_vs_aoa, label="cM")
+    val_data = np.loadtxt("./Data/validation_coefficients.txt", skiprows=12, usecols=(0, 1, 2, 4))
+    plt.plot(val_data[:, 0], val_data[:, 1], label="cL xfoil")
+    plt.plot(val_data[:, 0], val_data[:, 2], label="cD xfoil")
+    plt.plot(val_data[:, 0], val_data[:, 3], label="cM xfoil")
+
+    plt.plot(AoA, cL_vs_aoa, label="cL, calc")
+    plt.plot(AoA, cD_vs_aoa, label="cD, calc")
+    plt.plot(AoA, cM_vs_aoa, label="cM, calc")
+    
     plt.legend()
     plt.grid()
     plt.show()
