@@ -264,14 +264,6 @@ def moment(xl, yl, xu, yu, pl, pu, thetal, thetau):
 
     M = 0
 
-    # for n in range(len(ds_upper)):
-    #     M += 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * xu[n] * ds_upper[n]
-    #     M -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * yu[n] * ds_upper[n]
-    
-    # for n in range(len(ds_lower)):
-    #     M -= 0.5 * (pl[n] + pl[n + 1]) * np.cos(thetal[n]) * xl[n] * ds_lower[n]
-    #     M += 0.5 * (pl[n] + pl[n + 1]) * np.sin(thetal[n]) * yl[n] * ds_lower[n]
-
     for n in range(len(ds_upper)):
         M += 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * xu[n] * ds_upper[n]
         M -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * yu[n] * ds_upper[n]
@@ -376,21 +368,23 @@ def main():
 
         print(f"Calculations for AOA={aoa}")
 
-        N = normal_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_s[i, :], pressure_upper_s[i, :], thetal, thetau)
-        A = axial_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_s[i, :], pressure_upper_s[i, :], thetal, thetau)
-        M = moment(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_s[i, :], pressure_upper_s[i, :], thetal, thetau)
+        params = [
+            locations_x_lower,
+            locations_y_lower,
+            locations_x_upper,
+            locations_y_upper,
+            pressure_lower_s[i, :],
+            pressure_upper_s[i, :],
+            thetal,
+            thetau
+        ]
 
-        L = lift(N, A, aoa)
-        D = pressure_drag(N, A, aoa)
-
+        N, A, M = normal_force(*params), axial_force(*params), moment(*params)
+        L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
         cL, cD, cM = coefficients(L, D, M, aoa)
 
-        L_vs_aoa_s[i] = L
-        D_vs_aoa_s[i] = D
-        M_vs_aoa_s[i] = M
-        cL_vs_aoa_s[i] = cL
-        cD_vs_aoa_s[i] = cD
-        cM_vs_aoa_s[i] = cM
+        L_vs_aoa_s[i], D_vs_aoa_s[i], M_vs_aoa_s[i] = L, D, M
+        cL_vs_aoa_s[i], cD_vs_aoa_s[i], cM_vs_aoa_s[i] = cL, cD, cM
 
         print(f"Lift = {L}, Drag = {D}, Moment = {M}")
         print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
@@ -410,21 +404,23 @@ def main():
 
         print(f"Calculations for AOA={aoa}")
 
-        N = normal_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_m[i, :], pressure_upper_m[i, :], thetal, thetau)
-        A = axial_force(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_m[i, :], pressure_upper_m[i, :], thetal, thetau)
-        M = moment(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper, pressure_lower_m[i, :], pressure_upper_m[i, :], thetal, thetau)
+        params = [
+            locations_x_lower,
+            locations_y_lower,
+            locations_x_upper,
+            locations_y_upper,
+            pressure_lower_m[i, :],
+            pressure_upper_m[i, :],
+            thetal,
+            thetau
+        ]
 
-        L = lift(N, A, aoa)
-        D = pressure_drag(N, A, aoa)
-
+        N, A, M = normal_force(*params), axial_force(*params), moment(*params)
+        L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
         cL, cD, cM = coefficients(L, D, M, aoa)
 
-        L_vs_aoa_m[i] = L
-        D_vs_aoa_m[i] = D
-        M_vs_aoa_m[i] = M
-        cL_vs_aoa_m[i] = cL
-        cD_vs_aoa_m[i] = cD
-        cM_vs_aoa_m[i] = cM
+        L_vs_aoa_m[i], D_vs_aoa_m[i], M_vs_aoa_m[i] = L, D, M
+        cL_vs_aoa_m[i], cD_vs_aoa_m[i], cM_vs_aoa_m[i] = cL, cD, cM
 
         print(f"Lift = {L}, Drag = {D}, Moment = {M}")
         print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
@@ -449,7 +445,7 @@ def main():
 
     # Plot manometer and validation data.
 
-    val_data = np.loadtxt("./Data/validation_coefficients.txt", skiprows=12, usecols=(0, 1, 2, 4))
+    val_data = np.loadtxt("./Data/validation_coefficients.txt", skiprows=12, usecols=(0, 1, 3, 4))
     plt.plot(val_data[:, 0], val_data[:, 1], label="cL xfoil")
     plt.plot(val_data[:, 0], val_data[:, 2], label="cD xfoil")
     plt.plot(val_data[:, 0], val_data[:, 3], label="cM xfoil")
@@ -466,6 +462,10 @@ def main():
     plt.show()
 
     # Plot scanivalve and manometer data.
+
+    plt.plot(val_data[:, 0], val_data[:, 1], label="cL xfoil")
+    plt.plot(val_data[:, 0], val_data[:, 2], label="cD xfoil")
+    plt.plot(val_data[:, 0], val_data[:, 3], label="cM xfoil")
 
     plt.plot(AoA, cL_vs_aoa_s, label="cL, scani")
     plt.plot(AoA, cD_vs_aoa_s, label="cD, scani")
