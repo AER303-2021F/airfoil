@@ -1,11 +1,15 @@
 % http://brennen.caltech.edu/fluidbook/externalflows/drag/dragNwake.pdf
-load("alpha_0_wake_pressure_test.mat")
-load("../../Data/Calibrated_Rake_Pa.mat")
+load("../../Data/Calibrated_Rake_Pa.mat");
+XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients", "numheaderlines", 12);
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
+c_D = zeros(size(alphas));
+drag_force = zeros(size(alphas));
+chord = 0.1; % m
 
 figure
 hold on
 
+title("Wake Velocity Profile for varying AoA")
 xlabel("Velocity Deficit (m/s)", "interpreter", "latex")
 ylabel("Vertical Position (m)", "interpreter", "latex")
 
@@ -20,12 +24,29 @@ for i = 1:11
     combined_rakes = [eval(sprintf("p_rakeb_%d", alpha)); eval(sprintf("p_rakea_%d", alpha))];
     combined_rakes = combined_rakes(:);
     velocities = sqrt(2 * combined_rakes / RHO);
-
-    plot(V_mps - velocities, combined_locations)
-    %title("Wake Velocity Profile for $\alpha$ = " + sprintf("%d", alpha) + "$^\circ$", "interpreter", "latex")
     
+    V_inf = 1/2 * (sqrt(2 * combined_rakes(1) / RHO) + sqrt(2 * combined_rakes(end) / RHO));
 
-    drag = RHO * trapz(combined_locations,  velocities .* (V_mps - velocities));
-    c_D = drag / (1/2 * RHO * V_mps^2 * 0.1);
-    fprintf("D = %f N, CD = %f for AoA = %d\n", drag, c_D, alpha);
+    plot(V_inf- velocities, combined_locations, "DisplayName", sprintf("%d", alpha));
+
+    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (V_inf - velocities));
+    c_D(i) = drag_force(i) / (1/2 * RHO * V_inf^2 * chord);
+    %fprintf("D = %f N, CD = %f for AoA = %d\n", drag_force, c_D(i), alpha);
 end
+legend
+grid
+figure
+plot(alphas, c_D, "DisplayName", "Experiment")
+hold on
+plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
+xlabel("$\alpha$ (degrees)", "interpreter", "latex")
+ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
+title("Comparison of XFOIL with Actual c_D variation")
+legend
+grid
+figure
+plot(alphas, drag_force)
+xlabel("$\alpha$ (degrees)", "interpreter", "latex")
+ylabel("Drag Force (N)")
+title("Drag Force")
+grid
