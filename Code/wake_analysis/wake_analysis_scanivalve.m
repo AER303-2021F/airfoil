@@ -3,6 +3,7 @@ load("../../Data/Calibrated_Rake_Pa.mat");
 XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients", "numheaderlines", 12);
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
 c_D = zeros(size(alphas));
+v_inf = zeros(size(alphas));
 drag_force = zeros(size(alphas));
 chord = 0.1; % m
 
@@ -26,6 +27,7 @@ for i = 1:11
     velocities = sqrt(2 * combined_rakes / RHO);
     
     V_inf = 1/2 * (sqrt(2 * combined_rakes(1) / RHO) + sqrt(2 * combined_rakes(end) / RHO));
+    v_inf(i) = V_inf;
 
     plot(V_inf- velocities, combined_locations, "DisplayName", sprintf("%d", alpha));
 
