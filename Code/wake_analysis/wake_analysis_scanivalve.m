@@ -35,6 +35,8 @@ for i = 1:11
 end
 legend
 grid
+saveas(gcf,'scanivalve_wake_velocities.png')
+
 figure
 plot(alphas, c_D, "DisplayName", "Experiment")
 hold on
@@ -44,9 +46,12 @@ ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
 title("Comparison of XFOIL with Actual c_D variation")
 legend
 grid
+saveas(gcf,'scanivalve_cd.png')
+
 figure
 plot(alphas, drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("Drag Force (N)")
 title("Drag Force")
 grid
+saveas(gcf,'scanivalve_drag_force.png')
