@@ -5,7 +5,7 @@ d_theta = 0.1; % degrees uncertainty
 
 cmH20_to_Pa = 98.0665; % Pa / (cmH20)
 
-REF_HEIGHT = 18.2; % cm, initial guess 15.6
+REF_HEIGHT = 16; % cm, initial guess 15.6
 
 airfoil_export = zeros(11, 20);
 airfoil_manometer = zeros(11, 19);
