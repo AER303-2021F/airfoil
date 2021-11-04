@@ -20,6 +20,7 @@
 \usepackage{minted}
 \usepackage{hyperref}
 \usepackage{siunitx}
+\usepackage{esdiff}
 \usepackage[inline]{enumitem} % Horizontal lists
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -324,5 +325,60 @@ NOTE: These tables are not final; just here to test.
     \caption{Caption}
     \label{tab:pressure_rake2}
 \end{table}
+
+\subsection{Manometer Measurements}
+
+\appendix
+\section{Uncertainty Propagation}
+\subsection{Manometer Pressure}
+Reference height $h_R = 18.2 \ \si{cm}$ (assumed errorless) on manometer used for baseline. $\theta = 61 \pm 0.1^\circ$
+\begin{align*}
+    P_{mano} &= -\rho g (h - h_R) \sin\theta\\
+    \delta P_{mano} &= \sqrt{\left(-\rho g \sin \theta \delta h\right)^2 + \left(-\rho g  (h-h_R)\cos\theta \delta \theta\right)^2}\\
+    \delta P_{mano} &= \sqrt{\left(-\rho g \sin \theta \delta h\right)^2 + \left(\frac{P_{mano}}{\tan \theta}\right)^2}
+\end{align*}
+
+\subsection{Flow Velocity}
+For cases where we want the velocity of airfoil at a single pitot tube.
+\begin{align*}
+    U_\infty &=  \sqrt{\frac{2 P}{\rho}} \\
+    \delta U_\infty &= \frac{P}{U_\infty \rho}
+\end{align*}
+
+\subsection{Free Stream Velocity}
+An average free stream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
+\begin{align*}
+    U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 P_{20}}{\rho}} + \sqrt{\frac{2 P_{36}}{\rho}} \right) \\
+    \delta U_\infty &= \sqrt{\left(\frac{1}{2U_\infty \rho}  P_{20}\right)^2 + \left(\frac{1}{2U_\infty \rho } P_{36}\right)^2}
+\end{align*}
+
+\subsection{Velocity Deficit}
+This is used to create the wake velocity distribution.
+\begin{align*}
+    \Delta V &= U_\infty - u\\
+    \delta \Delta V &= \sqrt{\delta U_\infty^2 + \delta u^2}
+\end{align*}
+
+\subsection{Drag Force}
+This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
+\begin{align*}
+    D &= \rho\int u (U_\infty - u) dS\\
+    \diffp{D}{{U_\infty}} &= \rho \int  u dS\\
+    \diffp{D}{u} &= \rho \int (U_\infty - 2u) dS\\
+    \delta D &= \sqrt{\left(\rho \int  u dS \ \delta U_\infty \right)^2 + \left(\rho \int (U_\infty - 2u) dS \ \delta u \right)^2}
+\end{align*}
+
+\subsection{Dynamic Pressure}
+\begin{align*}
+    q &= \frac{1}{2} \rho u^2\\
+    \delta q &= \rho u
+\end{align*}
+
+\subsection{Drag Coefficient}
+Assume the chord length to be known perfectly.
+\begin{align*}
+    c_D &= \frac{D}{q_\infty c}\\
+    \delta c_D &= \sqrt{\left(\frac{\delta D}{q_\infty c}\right)^2 + \left( \frac{\delta q c_D}{q} \right)^2}
+\end{align*}
 
 \end{document}

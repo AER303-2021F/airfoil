@@ -3,9 +3,15 @@ load("../../Data/calibrated_manometer_data_Pa.mat");
 XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients", "numheaderlines", 12);
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
 c_D = zeros(size(alphas));
-v_inf = zeros(size(alphas));
+d_c_D = zeros(size(alphas));
 drag_force = zeros(size(alphas));
+d_drag_force = zeros(size(alphas));
 chord = 0.1; % m
+
+% Read freestream velocities from data folder
+freestream = readmatrix("../../Data/velocities_manometer.csv");
+d_freestream = freestream(2, :);
+freestream = freestream(1, :);
 
 figure
 hold on
@@ -24,23 +30,34 @@ for i = 1:11
     combined_locations = combined_locations(:) / 100; % locations in m
     combined_rakes = [rake_b_manometer(i,:); rake_a_manometer(i,:)];
     combined_rakes = combined_rakes(:);
+    d_combined_rakes = [d_rake_b_manometer(i,:); d_rake_a_manometer(i,:)];
+    d_combined_rakes = d_combined_rakes(:);
     velocities = sqrt(2 * combined_rakes / RHO);
+    d_velocities = d_combined_rakes ./ (2 * velocities * RHO);
     
-    V_inf = 1/2 * (sqrt(2 * combined_rakes(1) / RHO) + sqrt(2 * combined_rakes(end) / RHO));
-    v_inf(i) = V_inf;
+    vel_diff_err = sqrt(d_freestream(i)^2 + d_velocities.^2);
 
-    plot(V_inf- velocities, combined_locations, "DisplayName", sprintf("%d", alpha));
-
-    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (V_inf - velocities));
-    c_D(i) = drag_force(i) / (1/2 * RHO * V_inf^2 * chord);
-    %fprintf("D = %f N, CD = %f for AoA = %d\n", drag_force, c_D(i), alpha);
+    errorbar(freestream(i)- velocities, combined_locations, vel_diff_err, "horizontal", "DisplayName", sprintf("%d", alpha));
+    
+    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
+    
+    % Calculate drag error
+    dDdu = RHO * trapz(combined_locations, freestream(i) - 2*velocities);
+    dDdU = RHO * trapz(combined_locations, velocities);
+    d_drag_force(i) = sqrt((dDdu * max(d_velocities))^2 + (dDdU * d_freestream(i))^2);
+    
+    q = 1/2 * RHO * freestream(i).^2;
+    d_q = d_freestream(i) * RHO * freestream(i);
+    
+    c_D(i) = drag_force(i) / (q * chord);
+    d_c_D = sqrt((d_drag_force / (q * chord)).^2 + (c_D(i) / q * d_q).^2);
 end
 legend
 grid
 saveas(gcf,'manometer_wake_velocities.png')
 
 figure
-plot(alphas, c_D, "DisplayName", "Experiment")
+errorbar(alphas, c_D, d_c_D, "DisplayName", "Experiment")
 hold on
 plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
@@ -51,7 +68,7 @@ grid
 saveas(gcf,'manometer_cd.png')
 
 figure
-plot(alphas, drag_force)
+errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("Drag Force (N)")
 title("Drag Force")
