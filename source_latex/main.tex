@@ -380,7 +380,30 @@ Experimental performance data of a Clark Y airfoil is available in literature
 
 \section{Sources of Error}
 
-\subsection{Quantifiable Sources of Error}
+\subsection{Quantifiable Sources of Errors}
+\begin{table}[H]
+\begin{center}
+    \begin{tabular}{||c|c||}
+        \hline
+        \multicolumn{2}{||c||}{Quantifiable Error}\\
+        \hline
+        \hline
+        Manometer Uncertainty Reading & $\pm 1 mm$\\
+        \hline
+        Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
+        \hline
+        Scanivalve Precision & Acquired from autocorrelation using port 36 in each trial. See table (x)\\
+        \hline
+        Scanivalve Bias & Assume to be 0 \\
+        \hline
+        Calibration Coefficients & Assume to be 0\\
+        \hline
+        
+\end{tabular}
+\end{center}
+\caption{Quantifiable Sources of Error, Tabulated}
+\label{tab:quant_error}
+\end{table}
 
 \subsection{Non-Quantifiable Sources of Error}
 \label{sec:non_quantifiable_sources_of_error}
@@ -701,30 +724,13 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
 \newpage
 \section{Uncertainty Propagation}
 
-\subsection{Quantifiable Errors}
-\begin{table}[H]
-\begin{center}
-    \begin{tabular}{||c|c||}
-        \hline
-        \multicolumn{2}{||c||}{Quantifiable Error}\\
-        \hline
-        \hline
-        Manometer Uncertainty Reading & $\pm 1 mm$\\
-        \hline
-        Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
-        \hline
-        Scanivalve Precision & Acquired from autocorrelation using port 36 in each trial. See table (x)\\
-        \hline
-        Scanivalve Bias & Assume to be 0 \\
-        \hline
-        Calibration Coefficients & Assume to be 0\\
-        \hline
-        
-\end{tabular}
-\end{center}
-\caption{Quantifiable Error}
-\label{tab:quant_error}
-\end{table}
+\subsection{Scanivalve Calibration}
+
+\begin{align*}
+    \Delta P &= kV + m \\
+    \delta \Delta P &= k\delta V\\
+\end{align*}
+The precision error of $\delta V$ on Scanivalve is given by autocorrelation analysis on port 36 for all 11 AOAs 
 
 \subsection{Manometer Pressure}
 
@@ -741,8 +747,8 @@ Reference height $h_R = 18.2 \ \si{cm}$ (assumed errorless) on manometer used fo
 For cases where we want the velocity of airfoil at a single pitot tube.
 
 \begin{align*}
-    U_\infty &=  \sqrt{\frac{2 P}{\rho}} \\
-    \delta U_\infty &= \frac{P}{U_\infty \rho}
+    U_\infty &=  \sqrt{\frac{2 \Delta P}{\rho}} \\
+    \delta U_\infty &= \frac{\Delta P}{U_\infty \rho} \delta \Delta P
 \end{align*}
 
 \subsection{Free Stream Velocity}
@@ -763,6 +769,8 @@ This is used to create the wake velocity distribution.
     \delta \Delta V &= \sqrt{\delta U_\infty^2 + \delta u^2}
 \end{align*}
 
+
+
 \subsection{Drag Force}
 
 This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
@@ -778,7 +786,7 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \begin{align*}
     q_\infty &= \frac{1}{2} \rho_\infty U_\infty^2\\
-    \delta q_\infty &= \rho_\infty U_\infty
+    \delta q_\infty &= \rho_\infty U_\infty \delta U
 \end{align*}
 
 \subsection{Normal Force}
@@ -814,6 +822,13 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 \begin{align*}
     D &= N\sin\alpha + A\cos\alpha \\
     \delta D &= \sqrt{\left(\sin(\alpha)\delta N\right)^2 + \left(\cos(\alpha)\delta A\right)^2 + \left(\left[N\cos\alpha - A\sin\alpha\right]\delta \alpha\right)^2}
+\end{align*}
+
+\subsection{Coefficient of Pressure}
+
+\begin{align*}
+    C_p &= \frac{\Delta p}{q_\infty} \\
+    \frac{\delta C_p}{C_p} &= \sqrt{ (\frac{\delta \Delta p}{\Delta p})^2 + (\frac{\delta q_\infty}{q_\infty})^2}
 \end{align*}
 
 \subsection{Coefficient of Lift}
