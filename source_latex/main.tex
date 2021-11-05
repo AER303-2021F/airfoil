@@ -323,6 +323,7 @@ In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and
 $C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.
 
 Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.
+
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -340,6 +341,7 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
     \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
+
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -360,7 +362,7 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
 
 \subsection{Coefficient of Lift, Pressure Drag, and Moment}
 
-Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
+Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \noindent
 In both plots, the coefficient of lift increases with the angle of attack until $\alpha\approx13^\circ$ at which the coefficient of lift begins decreasing for all higher angles of attack. There are various features within the lift curve to discuss.
@@ -371,12 +373,19 @@ In both plots, the coefficient of lift increases with the angle of attack until 
     
     \item A linear $C_L$-$\alpha$ dependency exists for angles of attack within the approximate range from $0^\circ$ to $8^\circ$. This region is characterized by a very minimal boundary layer that does not significantly hinder lift production.
     
-    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing coefficient of lift. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the begining of the plateu on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
+    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing lift slope. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the beginning of the plateau on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
     
-    \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an slow slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircrafts weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle at which the aircraft can no longer sustain flight.
+    \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an aircraft slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircraft's weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle is met at which the aircraft can no longer sustain flight.
     
     \item For the remainder of the $C_L$ curve, increasing the angle of attack emphasizes the domination of flow separation and the continual decrease in lift production.
 \end{itemize}
+
+\noindent
+The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $D_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
+
+
+\noindent
+Lastly, the coefficient of moment curves follow a behaviour inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. This behaviour of the moment force on an airfoil is essential from a pilot perspective as it provides safe handling characteristics around the point of a stall. When an aircraft stalls, the goal of the pilot is to increase the airflow over the airfoil to regain laminar flow and reduce the drag effects. This is accomplished by lowering the angle of attack. The $C_M$ behaviour exhibited by the Clark Y airfoil, would cause the airfoil to pitch down when in a stall configuration which would allow for the regain of lift. Thusly, the moment behavior of an airfoil is an important consideration in aircraft design.
 
 \subsection{Pressure Drag and Total Drag Comparison}
 \begin{table}[h]
@@ -443,20 +452,37 @@ The relative errors in the drag calculations are large, particularly for the pre
 \begin{table}[h]
 \centering
 \begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+    % THE FOLLOWING IS THE PRE-SKETCHY TABLE
+% \toprule
+% $\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
+% \midrule
+%  $0.00\pm0.25$ & $0.380\pm0.039$ & $0.0100236\pm0.27$ &  $-0.170094\pm0.000050$ \\
+%  $3.00\pm0.25$ & $0.650\pm0.076$ & $0.01\pm0.26$ & $-0.15733\pm0.00051$ \\
+%  $6.00\pm0.25$ & $0.94\pm0.11$ & $0.01\pm0.24$ &  $-0.16652\pm0.00035$ \\
+%  $8.00\pm0.25$ & $1.12\pm0.26$ &  $0.02068\pm0.00082$ & $-0.15797\pm0.00026$ \\
+% $10.00\pm0.25$ & $1.25\pm0.11$ & $0.04\pm0.24$ & $-0.16007\pm0.00033$ \\
+% $11.00\pm0.25$ & $1.30\pm0.26$ & $0.05\pm0.037$ &  $-0.14797\pm0.00022$ \\
+% $13.00\pm0.25$ & $1.379\pm0.077$ &  $0.07\pm0.26$ & $-0.14144\pm0.00016$ \\
+% $15.00\pm0.25$ & $1.24\pm0.19$ & $0.09\pm0.17$ & $-0.13417\pm0.00032$ \\
+% $16.00\pm0.25$ & $1.238\pm0.038$ & $0.12\pm0.26$ & $-0.13876\pm0.00037$ \\
+% $17.00\pm0.25$ &  $1.14\pm0.23$ & $0.14\pm0.11$ &  $-0.15305\pm0.00048$ \\
+% $20.00\pm0.25$ & $0.99\pm0.21$ &  $0.21\pm0.13$ & $-0.16259\pm0.00021$ \\
+% \bottomrule
+% \end{tabular}
 \toprule
-$\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
+$\alpha^\circ$ &                   $C_L$ &               $C_{D,p}$ &                    $C_M$ \\
 \midrule
- $0.00\pm0.25$ & $0.380\pm0.039$ & $0.0100236\pm0.27$ &  $-0.170094\pm0.000050$ \\
- $3.00\pm0.25$ & $0.650\pm0.076$ & $0.01\pm0.26$ & $-0.15733\pm0.00051$ \\
- $6.00\pm0.25$ & $0.94\pm0.11$ & $0.01\pm0.24$ &  $-0.16652\pm0.00035$ \\
- $8.00\pm0.25$ & $1.12\pm0.26$ &  $0.02068\pm0.00082$ & $-0.15797\pm0.00026$ \\
-$10.00\pm0.25$ & $1.25\pm0.11$ & $0.04\pm0.24$ & $-0.16007\pm0.00033$ \\
-$11.00\pm0.25$ & $1.30\pm0.26$ & $0.05\pm0.037$ &  $-0.14797\pm0.00022$ \\
-$13.00\pm0.25$ & $1.379\pm0.077$ &  $0.07\pm0.26$ & $-0.14144\pm0.00016$ \\
-$15.00\pm0.25$ & $1.24\pm0.19$ & $0.09\pm0.17$ & $-0.13417\pm0.00032$ \\
-$16.00\pm0.25$ & $1.238\pm0.038$ & $0.12\pm0.26$ & $-0.13876\pm0.00037$ \\
-$17.00\pm0.25$ &  $1.14\pm0.23$ & $0.14\pm0.11$ &  $-0.15305\pm0.00048$ \\
-$20.00\pm0.25$ & $0.99\pm0.21$ &  $0.21\pm0.13$ & $-0.16259\pm0.00021$ \\
+ $0.00\pm0.25$ & $0.380\pm0.039$ & $0.001\pm0.027$ &  $-0.170094\pm0.000050$ \\
+ $3.00\pm0.25$ & $0.650\pm0.076$ & $0.001\pm0.026$ & $-0.15733\pm0.00051$ \\
+ $6.00\pm0.25$ & $0.94\pm0.11$ & $0.001\pm0.024$ &  $-0.16652\pm0.00035$ \\
+ $8.00\pm0.25$ & $1.12\pm0.26$ &  $0.002068\pm0.000082$ & $-0.15797\pm0.00026$ \\
+$10.00\pm0.25$ & $1.25\pm0.11$ & $0.004\pm0.024$ & $-0.16007\pm0.00033$ \\
+$11.00\pm0.25$ & $1.30\pm0.26$ &  $0.0047\pm0.0037$ &  $-0.14798\pm0.00022$ \\
+$13.00\pm0.25$ & $1.379\pm0.077$ & $0.007\pm0.026$ & $-0.14144\pm0.00016$ \\
+$15.00\pm0.25$ & $1.24\pm0.19$ & $0.009\pm0.017$ & $-0.13417\pm0.00032$ \\
+$16.00\pm0.25$ & $1.238\pm0.038$ & $0.012\pm0.026$ & $-0.13876\pm0.00037$ \\
+$17.00\pm0.25$ &  $1.14\pm0.23$ & $0.014\pm0.011$ &  $-0.15305\pm0.00048$ \\
+$20.00\pm0.25$ & $0.99\pm0.21$ & $0.021\pm0.013$ & $-0.16259\pm0.00021$ \\
 \bottomrule
 \end{tabular}
 \caption{Coefficients of lift, pressure drag, and moment for the scanivalve data.}
@@ -466,20 +492,37 @@ $20.00\pm0.25$ & $0.99\pm0.21$ &  $0.21\pm0.13$ & $-0.16259\pm0.00021$ \\
 \begin{table}[h]
 \centering
 \begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+% THE FOLLOWING IS THE PRE-SKETCHY TABLE
+% \toprule
+% $\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
+% \midrule
+%  $0.00\pm0.25$ & $0.322\pm0.050$ & $0.01\pm0.32$ &  $-0.072506\pm0.000050$ \\
+%  $3.00\pm0.25$ & $0.573\pm0.092$ &   $0.00\pm0.30$ & $-0.10605\pm0.00051$ \\
+%  $6.00\pm0.25$ & $0.79\pm0.13$ &  $0.0074\pm0.28$ &  $-0.06257\pm0.00035$ \\
+%  $8.00\pm0.25$ & $1.01\pm0.31$ & $0.0153\pm0.0086$ & $-0.071424\pm0.00026$ \\
+% $10.00\pm0.25$ & $1.08\pm0.13$ & $0.03\pm0.28$ & $-0.04364\pm0.00033$ \\
+% $11.00\pm0.25$ & $1.12\pm0.31$ & $0.032\pm0.047$ & $-0.01843\pm0.00022$ \\
+% $13.00\pm0.25$ & $1.181\pm0.087$ &  $0.05\pm0.30$ & $-0.04153\pm0.00016$ \\
+% $15.00\pm0.25$ & $1.11\pm0.23$ & $0.08\pm0.20$ & $-0.04825\pm0.00032$ \\
+% $16.00\pm0.25$ & $1.038\pm0.042$ & $0.09\pm0.30$ &  $0.00178\pm0.00037$ \\
+% $17.00\pm0.25$ & $0.99\pm0.27$ & $0.12\pm0.13$ &  $-0.05075\pm0.00048$ \\
+% $20.00\pm0.25$ & $0.89\pm0.25$ & $0.18\pm0.16$ & $-0.06027\pm0.00021$ \\
+% \bottomrule
+% \end{tabular}
 \toprule
 $\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
 \midrule
- $0.00\pm0.25$ & $0.322\pm0.050$ & $0.01\pm0.32$ &  $-0.072506\pm0.000050$ \\
- $3.00\pm0.25$ & $0.573\pm0.092$ &   $0.00\pm0.30$ & $-0.10605\pm0.00051$ \\
- $6.00\pm0.25$ & $0.79\pm0.13$ &  $0.0074\pm0.28$ &  $-0.06257\pm0.00035$ \\
- $8.00\pm0.25$ & $1.01\pm0.31$ & $0.0153\pm0.0086$ & $-0.071424\pm0.00026$ \\
-$10.00\pm0.25$ & $1.08\pm0.13$ & $0.03\pm0.28$ & $-0.04364\pm0.00033$ \\
-$11.00\pm0.25$ & $1.12\pm0.31$ & $0.032\pm0.047$ & $-0.01843\pm0.00022$ \\
-$13.00\pm0.25$ & $1.181\pm0.087$ &  $0.05\pm0.30$ & $-0.04153\pm0.00016$ \\
-$15.00\pm0.25$ & $1.11\pm0.23$ & $0.08\pm0.20$ & $-0.04825\pm0.00032$ \\
-$16.00\pm0.25$ & $1.038\pm0.042$ & $0.09\pm0.30$ &  $0.00178\pm0.00037$ \\
-$17.00\pm0.25$ & $0.99\pm0.27$ & $0.12\pm0.13$ &  $-0.05075\pm0.00048$ \\
-$20.00\pm0.25$ & $0.89\pm0.25$ & $0.18\pm0.16$ & $-0.06027\pm0.00021$ \\
+ $0.00\pm0.25$ & $0.322\pm0.050$ &  $0.001\pm0.032$ &  $-0.072506\pm0.000050$ \\
+ $3.00\pm0.25$ & $0.573\pm0.092$ &  $0.000\pm0.030$ & $-0.10605\pm0.00051$ \\
+ $6.00\pm0.25$ & $0.792\pm0.13$ & $0.001\pm0.028$ &  $-0.06257\pm0.00035$ \\
+ $8.00\pm0.25$ & $1.01\pm0.31$ & $0.00153\pm0.00085$ & $-0.07142\pm0.00026$ \\
+$10.00\pm0.25$ & $1.08\pm0.13$ & $0.0027\pm0.028$ & $-0.04364\pm0.00033$ \\
+$11.00\pm0.25$ & $1.12\pm0.31$ & $0.0032\pm0.0047$ & $-0.01843\pm0.00022$ \\
+$13.00\pm0.25$ & $1.181\pm0.087$ &  $0.005\pm0.030$ & $-0.04153\pm0.00016$ \\
+$15.00\pm0.25$ & $1.11\pm0.23$ & $0.008\pm0.020$ & $-0.04825\pm0.00032$ \\
+$16.00\pm0.25$ & $1.038\pm0.042$ & $0.009\pm0.030$ &  $0.00178\pm0.00037$ \\
+$17.00\pm0.25$ & $0.99\pm0.27$ & $0.012\pm0.013$ &  $-0.05075\pm0.00048$ \\
+$20.00\pm0.25$ & $0.89\pm0.25$ & $0.018\pm0.016$ & $-0.06027\pm0.00021$ \\
 \bottomrule
 \end{tabular}
 \caption{Coefficients of lift, pressure drag, and moment for the manometer data.}
