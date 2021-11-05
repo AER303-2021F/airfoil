@@ -124,17 +124,23 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 
 
 \section{Introduction and Background}\label{sec:introduction_and_background}
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
 
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.
+\noindent
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.\newline
+
+\noindent
+Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.\newline
 
 \subsection{Normal, Axial, and Moment Forces}
 
-Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.
+\noindent
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.\newline
 
-$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.
+\noindent
+$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.\newline
 
-The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.
+\noindent
+The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.\newline
 
 \begin{align}
     N' &= \int_{LE}^{TE} -P_u\cos\theta ds_u + \int_{LE}^{TE} P_\ell\cos\theta ds_\ell
@@ -147,7 +153,8 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
 
 \subsection{Calculating Lift, Drag and Dimensionless Coefficients}
 
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.
+\noindent
+The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.\newline
 
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
@@ -174,14 +181,17 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
 \end{figure}
 
 Pressure on measurement sites are nondimensionalized using Equation
+
 \begin{equation}
     C_p = \frac{\Delta P}{q_\infty}
     \label{eq:cp}
 \end{equation}
 
-where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\\
+\noindent
+where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\newline
 
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.
+\noindent
+Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.\newline
 
 \begin{align}
     C_L &= \frac{L'}{q_\infty c}
@@ -193,24 +203,33 @@ Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{
 \end{align}
 
 \subsection{Calculating Total Drag from Wake Velocity}
-The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.
+
+\noindent
+The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.\newline
+
 \begin{align}
     D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
 \end{align}
 
 \subsection{Stall}
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
-\\
-When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\\
-\\
-As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
-\\
-Flow separation incurs higher drag, resulting in higher $C_D$.\\
-\\
-$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\\
-\\
-Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
+\noindent
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\newline
+
+\noindent
+When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\newline
+
+\noindent
+As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\newline
+
+\noindent
+Flow separation incurs higher drag, resulting in higher $C_D$.\newline
+
+\noindent
+$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\newline
+
+\noindent
+Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
 
 % -----------------------------------------------------------------------------
@@ -220,11 +239,13 @@ Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircr
 
 \section{Experimental Set-Up}
 
+\noindent
 This details the lab setup and experimental procedure used in the experiment.
 
 \subsection{Apparatus}
 
-The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.
+\noindent
+The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.\newline
 
 \begin{table}
     \centering
@@ -238,7 +259,8 @@ The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of t
     \label{tab:pressure_taps}
 \end{table}
 
-Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.
+\noindent
+Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.\newline
 
 \begin{figure}
     \centering
@@ -254,11 +276,14 @@ Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with 
     \label{fig:aoa_select}
 \end{figure}
 
-In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.
+\noindent
+In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.\newline
 
-A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.
+\noindent
+A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.\newline
 
-The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.
+\noindent
+The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.\newline
 
 \begin{figure}[h]
     \centering
@@ -267,6 +292,7 @@ The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pres
     \label{fig:scanivalve}
 \end{figure}
 
+\noindent
 The inclined manometer takes in 36 input channels and one reference channel to measure the pressure difference between each of the 36 inputs compared to the reference. The reference pressure is set to that of the upstream static tube.
 
 \begin{figure}[h]
@@ -280,6 +306,7 @@ The inclined manometer takes in 36 input channels and one reference channel to m
 
 % What is measured and how it is acquired.
 
+\noindent
 The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
@@ -296,7 +323,8 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \end{enumerate}
 
-Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
+\noindent
+Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.\newline
 
 \begin{enumerate}
 
@@ -306,7 +334,8 @@ Once the pressure measurements were taken, the data is pre-processed to obtain p
 
 \end{enumerate}
 
-After the data is pre-processed, the data is analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis is done using the methods described in section \ref{sec:introduction_and_background}.
+\noindent
+After the data is pre-processed, the data is analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis is done using the methods described in section \ref{sec:introduction_and_background}.\newline
 
 %% TODO: mention image analysis process
 
@@ -318,13 +347,18 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \section{Results and Discussion}
 
 \subsection{XFOIL Reference}
-Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.
+
+\noindent
+Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.\newline
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
-Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix[WHICH SECTION].
+\noindent
+Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix[WHICH SECTION].\newline
 
-Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift
+\noindent
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift.\newline
+
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -351,15 +385,21 @@ Overall, the trend of the $C_p$ distribution fits the theoretical prediction. Th
 
 
 \subsection{Wake Velocity Profile}
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.
 
-The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.
+\noindent
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
-In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.
+\noindent
+The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
 
-$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.
+\noindent
+In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.\newline
 
-Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.
+\noindent
+$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
+
+\noindent
+Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
 
 \begin{figure}
     \centering
@@ -417,6 +457,7 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
     \label{fig:coeffs}
 \end{figure}
 
+\noindent
 Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
@@ -566,6 +607,31 @@ For the manometer data, there is a larger deviation between the lift and drag co
     \label{fig:cL_vs_cD}
 \end{figure}
 
+\noindent
+Experimental performance data of a Clark Y airfoil is available in literature
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.\newline
+
+\noindent
+The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cd.jpg}
+         \caption{}
+         \label{fig:reference_cl_cd}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cm.jpg}
+         \caption{}
+         \label{fig:reference_cl_cm}
+     \end{subfigure}
+    \caption{Reference data for the Clark Y airfoil at $Re = 200000$.}
+    \label{fig:clark_y_reference}
+\end{figure}
+
 \subsection{Pressure Drag and Total Drag Comparison}
 
 \begin{table}[h]
@@ -594,31 +660,6 @@ $20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $
 Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
 
 The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
-
-\subsection{Comparison with other experiments}
-
-Experimental performance data of a Clark Y airfoil is available in literature
-\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.
-
-The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
-
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cd.jpg}
-         \caption{}
-         \label{fig:reference_cl_cd}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cm.jpg}
-         \caption{}
-         \label{fig:reference_cl_cm}
-     \end{subfigure}
-    \caption{Reference data for the Clark Y airfoil at $Re = 200000$.}
-    \label{fig:clark_y_reference}
-\end{figure}
 
 
 % -----------------------------------------------------------------------------
@@ -651,6 +692,7 @@ The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well w
 \subsection{Non-Quantifiable Sources of Error}
 \label{sec:non_quantifiable_sources_of_error}
 
+\noindent
 The experimental setup contained various areas of non-quantifiable sources of error such as the low frequency response in the pressure tubes, the precision error of the manometer, the turbulence in the airfoil wake, and the distortion effect in image acquisition.\newline
 
 \noindent
@@ -671,12 +713,16 @@ The last source of a non-quantifiable source of error is the the effect of image
 \section{Conclusion}
 The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.
 
+\noindent
 The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
 
+\noindent
 $C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.
 
+\noindent
 $C_M$ remains relatively constant throughout all measurements, with no clear trend. This is not consistent with expectations in theory, and warrants additional investigation.
 
+\noindent
 For future experiments, there are several improvements which can be made:
 \begin{itemize}
     \item Multiple measurements at each angle of attack could be used to provide a better estimate of precision error.
@@ -685,7 +731,10 @@ For future experiments, there are several improvements which can be made:
     \item Take time-average measurements of the pressure distribution for higher angles of attack to better capture the time-varying behaviour.
 \end{itemize}
 
+\noindent
 Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around stall.
+
+
 % -----------------------------------------------------------------------------
 %   Bibliography
 % -----------------------------------------------------------------------------
@@ -706,6 +755,7 @@ Overall, this experiment was successful in characterizing a Clark Y airfoil up t
 
 \subsection{Scanivalve Measurements}
 
+\noindent
 Refer to table \ref{tab:pressure_scanivalve_airfoil} for the airfoil pressure data for each tap and angle of attack recorded during the lab. Table \ref{tab:pressure_scanivalve_rake_a} contains the pressure data associated with the rake in position a. Table \ref{tab:pressure_scanivalve_rake_b} contains the pressure data associated with the rake in position b.
 
 \begin{sidewaystable}
@@ -830,6 +880,7 @@ Refer to table \ref{tab:pressure_scanivalve_airfoil} for the airfoil pressure da
 
 \subsection{Manometer Data}
 
+\noindent
 Refer to table \ref{tab:pressure_manometer_airfoil} for the airfoil pressure data for each tap and angle of attack recorded during the lab. Table \ref{tab:pressure_manometer_rake_a} contains the pressure data associated with the rake in position a. Table \ref{tab:pressure_manometer_rake_b} contains the pressure data associated with the rake in position b.
 
 \begin{sidewaystable}
@@ -988,6 +1039,7 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
     \Delta P &= kV + m \\
     \delta \Delta P &= k\delta V\\
 \end{align*}
+
 The precision error of $\delta V$ on Scanivalve is given by autocorrelation analysis on port 36 for all 11 AOAs 
 
 \subsection{Manometer Pressure}
@@ -1026,8 +1078,6 @@ This is used to create the wake velocity distribution.
     \Delta V &= U_\infty - u\\
     \delta \Delta V &= \sqrt{\delta U_\infty^2 + \delta u^2}
 \end{align*}
-
-
 
 \subsection{Drag Force}
 
