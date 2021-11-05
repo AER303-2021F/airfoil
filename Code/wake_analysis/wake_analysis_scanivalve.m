@@ -19,7 +19,7 @@ freestream = freestream(1, :);
 figure
 hold on
 
-title("Wake Velocity Profile for varying AoA")
+title("Wake Velocity Profile for varying AoA [Scanivalve]")
 xlabel("Velocity Deficit (m/s)", "interpreter", "latex")
 ylabel("Vertical Position (m)", "interpreter", "latex")
 
@@ -45,7 +45,8 @@ for i = 1:11
     drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
     
     % Calculate drag error
-    integrand_error_squared = velocities .* d_freestream(i) + (freestream(i)-2.*velocities) .* d_velocities;
+    integrand_error_squared = abs(velocities .* d_freestream(i) +...
+                (freestream(i)-2.*velocities) .* d_velocities);
     d_drag_force(i) = sqrt(sum(integrand_error_squared));
     
     q = 1/2 * RHO * freestream(i).^2;
@@ -56,7 +57,7 @@ for i = 1:11
 end
 legend
 grid
-saveas(gcf,'scanivalve_wake_velocities.png')
+saveas(gcf,'../../source_latex/figures/scanivalve_wake_velocities.png')
 
 figure
 errorbar(alphas, c_D, d_c_D, "DisplayName", "Experiment")
@@ -64,18 +65,18 @@ hold on
 plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
-title("Comparison of XFOIL with Actual c_D variation")
+title("Comparison of XFOIL with Actual c_D variation [Scanivalve]")
 legend
 grid
-saveas(gcf,'scanivalve_cd.png')
+saveas(gcf,'../../source_latex/figures/scanivalve_cd.png')
 
 figure
 errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
-ylabel("Drag Force per Unit Span (N/m)")
+ylabel("Drag Force per Unit Span (N/m) [Scanivalve]")
 title("Drag Force")
 grid
-saveas(gcf,'scanivalve_drag_force.png')
+saveas(gcf,'../../source_latex/figures/scanivalve_drag_force.png')
 
 % Export CSV
 writematrix(c_D, "cd_scanivalve.csv")
