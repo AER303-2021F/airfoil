@@ -27,6 +27,7 @@ ylabel('Coefficients')
 title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Scanivalve Data', 'interpreter', 'latex')
 legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex')
 grid on
+set(gca, 'FontSize', 15)
 saveas(gcf,'scanivalve_cl_cd_cm.png')
 
 % Plot cL vs cD.
@@ -36,6 +37,7 @@ xlabel('$C_{D,p}$', "interpreter", "latex")
 ylabel('$C_L$', "interpreter", "latex")
 title('$C_L$ vs $C_{D,p}$ for Scanivalve Data', 'interpreter', 'latex')
 grid on
+set(gca, 'FontSize', 15)
 saveas(gcf,'scanivalve_cl_vs_cd.png')
 
 % Import manometer data.
@@ -65,6 +67,7 @@ ylabel('Coefficients')
 title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Manometer Data', 'interpreter', 'latex')
 legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex')
 grid on
+set(gca, 'FontSize', 15)
 saveas(gcf,'manometer_cl_cd_cm.png')
 
 % Plot cL vs cD.
@@ -74,4 +77,5 @@ xlabel('$C_{D,p}$', "interpreter", "latex")
 ylabel('$C_L$', "interpreter", "latex")
 title('$C_L$ vs $C_{D,p}$ for Manometer Data', 'interpreter', 'latex')
 grid on
+set(gca, 'FontSize', 15)
 saveas(gcf,'manometer_cl_vs_cd.png')
