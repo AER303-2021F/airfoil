@@ -394,12 +394,14 @@ This is used to create the wake velocity distribution.
 \end{align*}
 
 \subsection{Drag Force}
-This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
+This was evaluated numerically using trapezoidal rule, and so the error was analyzed in terms of a summation.
 \begin{align*}
-    D &= \rho\int u (U_\infty - u) dS\\
-    \diffp{D}{{U_\infty}} &= \rho \int  u dS\\
-    \diffp{D}{u} &= \rho \int (U_\infty - 2u) dS\\
-    \delta D &= \sqrt{\left(\rho \int  u dS \ \delta U_\infty \right)^2 + \left(\rho \int (U_\infty - 2u) dS \ \delta u \right)^2}
+    D' &= \rho\int u (U_\infty - u) dy\\
+    D' &= \rho \sum_{\text{trapz}} u (U_\infty - u) dy
+    \intertext{The error of each term in the summation is therefore:}
+    & \sqrt{u \delta U_\infty + (U_\infty - 2u) \delta u}
+    \intertext{And hence the total error is:}
+    \delta D' &= \sqrt{\sum_{\text{rakes}} u \delta U_\infty + (U_\infty - 2u) \delta u}
 \end{align*}
 
 \subsection{Dynamic Pressure}

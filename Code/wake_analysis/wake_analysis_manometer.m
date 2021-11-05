@@ -42,9 +42,8 @@ for i = 1:11
     drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
     
     % Calculate drag error
-    dDdu = RHO * trapz(combined_locations, freestream(i) - 2*velocities);
-    dDdU = RHO * trapz(combined_locations, velocities);
-    d_drag_force(i) = sqrt((dDdu * max(d_velocities))^2 + (dDdU * d_freestream(i))^2);
+    integrand_error_squared = velocities .* d_freestream(i) + (freestream(i)-2.*velocities) .* d_velocities;
+    d_drag_force(i) = sqrt(sum(integrand_error_squared));
     
     q = 1/2 * RHO * freestream(i).^2;
     d_q = d_freestream(i) * RHO * freestream(i);
@@ -70,7 +69,7 @@ saveas(gcf,'manometer_cd.png')
 figure
 errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
-ylabel("Drag Force (N)")
-title("Drag Force")
+ylabel("Drag Force per Unit Span (N/m)")
+title("Drag")
 grid
 saveas(gcf,'manomater_drag_force.png')

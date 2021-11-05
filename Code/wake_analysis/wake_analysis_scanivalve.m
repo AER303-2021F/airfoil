@@ -4,7 +4,6 @@ XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients", "numheaderl
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
 c_D = zeros(size(alphas));
 d_c_D = zeros(size(alphas));
-v_inf = zeros(size(alphas));
 drag_force = zeros(size(alphas));
 d_drag_force = zeros(size(alphas));
 chord = 0.1; % m
@@ -30,27 +29,24 @@ for i = 1:11
     locations_a = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20] + 0.5; % Raised position
     locations_b = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20]; % Lowered position
 
+    % Merge the rake data together
     combined_locations = [locations_b; locations_a]; % indices in ascending order
     combined_locations = combined_locations(:) / 100; % locations in m
     combined_rakes = [eval(sprintf("p_rakeb_%d", alpha)); eval(sprintf("p_rakea_%d", alpha))];
     combined_rakes = combined_rakes(:);
 
     velocities = sqrt(2 * combined_rakes / RHO);
-    d_velocities = d_p_scani(i) / (2 * velocities * RHO);
+    d_velocities = d_p_scani(i) ./ (2 * velocities * RHO);
     
     vel_diff_err = sqrt(d_freestream(i)^2 + d_velocities.^2);
-    
-    V_inf = 1/2 * (sqrt(2 * combined_rakes(1) / RHO) + sqrt(2 * combined_rakes(end) / RHO));
-    v_inf(i) = V_inf;
 
     errorbar(freestream(i)- velocities, combined_locations, vel_diff_err, "horizontal", "DisplayName", sprintf("%d", alpha));
     
-    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (V_inf - velocities));
+    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
     
     % Calculate drag error
-    dDdu = RHO * trapz(combined_locations, freestream(i) - 2*velocities);
-    dDdU = RHO * trapz(combined_locations, velocities);
-    d_drag_force(i) = sqrt((dDdu * max(d_velocities))^2 + (dDdU * d_freestream(i))^2);
+    integrand_error_squared = velocities .* d_freestream(i) + (freestream(i)-2.*velocities) .* d_velocities;
+    d_drag_force(i) = sqrt(sum(integrand_error_squared));
     
     q = 1/2 * RHO * freestream(i).^2;
     d_q = d_freestream(i) * RHO * freestream(i);
@@ -76,7 +72,7 @@ saveas(gcf,'scanivalve_cd.png')
 figure
 errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
-ylabel("Drag Force (N)")
+ylabel("Drag Force per Unit Span (N/m)")
 title("Drag Force")
 grid
 saveas(gcf,'scanivalve_drag_force.png')
