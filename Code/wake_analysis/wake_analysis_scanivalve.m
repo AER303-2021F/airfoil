@@ -19,7 +19,7 @@ freestream = freestream(1, :);
 figure
 hold on
 
-title("Wake Velocity Profile for varying AoA [Scanivalve]")
+title("Wake Velocity Profile for varying AoA [Scanivalve]", "interpreter", "latex")
 xlabel("Velocity Deficit (m/s)", "interpreter", "latex")
 ylabel("Vertical Position (m)", "interpreter", "latex")
 
@@ -65,7 +65,7 @@ hold on
 plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
-title("Comparison of XFOIL with Actual c_D variation [Scanivalve]")
+title("Comparison of XFOIL with Actual $C_D$ variation [Scanivalve]", "interpreter", "latex")
 legend
 grid
 saveas(gcf,'../../source_latex/figures/scanivalve_cd.png')
@@ -73,8 +73,8 @@ saveas(gcf,'../../source_latex/figures/scanivalve_cd.png')
 figure
 errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
-ylabel("Drag Force per Unit Span (N/m) [Scanivalve]")
-title("Drag Force")
+ylabel("Drag Force per Unit Span (N/m)")
+title("Drag Force [Scanivalve]", "interpreter", "latex")
 grid
 saveas(gcf,'../../source_latex/figures/scanivalve_drag_force.png')
 
