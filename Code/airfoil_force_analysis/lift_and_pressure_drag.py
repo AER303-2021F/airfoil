@@ -3,6 +3,7 @@
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 # -----------------------------------------------------------------------------
@@ -428,12 +429,12 @@ for i in range(AoA.size):
 delta_aoa = AOA_UNCERTAINTY
 
 delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
-cL_uncertainty_s = cL_vs_aoa_s * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cL_uncertainty_s = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
-cD_uncertainty_s = cD_vs_aoa_s * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cD_uncertainty_s = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
-cM_uncertainty_s = cM_vs_aoa_s * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cM_uncertainty_s = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 
 # -----------------------------------------------------------------------------
@@ -498,12 +499,12 @@ for i in range(AoA.size):
 delta_aoa = AOA_UNCERTAINTY
 
 delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
-cL_uncertainty_m = cL_vs_aoa_s * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cL_uncertainty_m = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
-cD_uncertainty_m = cD_vs_aoa_s * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cD_uncertainty_m = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
-cM_uncertainty_m = cM_vs_aoa_s * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cM_uncertainty_m = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 
 # -----------------------------------------------------------------------------
@@ -573,20 +574,34 @@ np.savetxt("./Data/scanivalve_coefficients.csv", scani_coeff_data, delimiter=","
 cL_uncertainty_s = cL_uncertainty_s.reshape((cL_uncertainty_s.size, 1))
 cD_uncertainty_s = cD_uncertainty_s.reshape((cD_uncertainty_s.size, 1))
 cM_uncertainty_s = cM_uncertainty_s.reshape((cM_uncertainty_s.size, 1))
-scani_uncertainty_data = np.concatenate((AoA, cL_uncertainty_s, cD_uncertainty_s, cM_uncertainty_s), axis=1)
+scani_uncertainty_data = np.concatenate((np.repeat(0.25, AoA.size).reshape((-1, 1)), cL_uncertainty_s, cD_uncertainty_s, cM_uncertainty_s), axis=1)
 
 np.savetxt("./Data/scanivalve_coefficient_uncertainty.csv", scani_uncertainty_data, delimiter=",", header="AoA, cL Uncertainty, cDp Uncertainty, cM Uncertainty")
+
+scani_coeff_data = np.round(scani_coeff_data, decimals=7).astype("<U24")
+scani_uncertainty_data = np.round(scani_uncertainty_data, decimals=7).astype("<U24")
+scani_out = np.char.add(np.char.add(np.char.add(np.char.add("$", scani_coeff_data), "\pm"), scani_uncertainty_data), "$")
+columns = ["$\alpha^\circ$", "$C_L$", "$C_{D,p}$", "$C_M$"]
+df = pd.DataFrame(scani_out, columns=columns)
+print(df.to_latex(escape=False, index=False))
 
 cL_vs_aoa_m = cL_vs_aoa_m.reshape((cL_vs_aoa_m.size, 1))
 cD_vs_aoa_m = cD_vs_aoa_m.reshape((cD_vs_aoa_m.size, 1))
 cM_vs_aoa_m = cM_vs_aoa_m.reshape((cM_vs_aoa_m.size, 1))
-scani_coeff_data = np.concatenate((AoA, cL_vs_aoa_m, cD_vs_aoa_m, cM_vs_aoa_m), axis=1)
+mano_coeff_data = np.concatenate((AoA, cL_vs_aoa_m, cD_vs_aoa_m, cM_vs_aoa_m), axis=1)
 
-np.savetxt("./Data/manometer_coefficients.csv", scani_coeff_data, delimiter=",", header="AoA, cL, cDp, cM")
+np.savetxt("./Data/manometer_coefficients.csv", mano_coeff_data, delimiter=",", header="AoA, cL, cDp, cM")
 
 cL_uncertainty_m = cL_uncertainty_m.reshape((cL_uncertainty_m.size, 1))
 cD_uncertainty_m = cD_uncertainty_m.reshape((cD_uncertainty_m.size, 1))
 cM_uncertainty_m = cM_uncertainty_m.reshape((cM_uncertainty_m.size, 1))
-mano_uncertainty_data = np.concatenate((AoA, cL_uncertainty_m, cD_uncertainty_m, cM_uncertainty_m), axis=1)
+mano_uncertainty_data = np.concatenate((np.repeat(0.25, AoA.size).reshape((-1, 1)), cL_uncertainty_m, cD_uncertainty_m, cM_uncertainty_m), axis=1)
 
 np.savetxt("./Data/manometer_coefficient_uncertainty.csv", mano_uncertainty_data, delimiter=",", header="AoA, cL Uncertainty, cDp Uncertainty, cM Uncertainty")
+
+mano_coeff_data = np.round(mano_coeff_data, decimals=7).astype("<U24")
+mano_uncertainty_data = np.round(mano_uncertainty_data, decimals=7).astype("<U24")
+mano_out = np.char.add(np.char.add(np.char.add(np.char.add("$", mano_coeff_data), "\pm"), mano_uncertainty_data), "$")
+columns = ["$\alpha^\circ$", "$C_L$", "$C_{D,p}$", "$C_M$"]
+df = pd.DataFrame(mano_out, columns=columns)
+print(df.to_latex(escape=False, index=False))
