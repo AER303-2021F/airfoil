@@ -17,13 +17,16 @@ cm_err = scani_coeff_uncertainty.data(:, 4);
 
 % Plot coefficients.
 figure
-errorbar(aoa, cl, cl_err)
+yyaxis left
+errorbar(aoa, cl, cl_err, 'linewidth', 0.5)
+ylabel('$C_L$ Scale', 'interpreter', 'latex')
 hold on
-errorbar(aoa, cdp, cdp_err)
+yyaxis right
+errorbar(aoa, cdp, cdp_err, 'linewidth', 0.5)
 hold on
-errorbar(aoa, cm, cm_err)
+errorbar(aoa, cm, cm_err, 'linewidth', 0.5)
 xlabel('$\alpha^\circ$', "interpreter", "latex")
-ylabel('Coefficients')
+ylabel('$C_{D,p}$ and $C_M$ Scale', 'interpreter', 'latex')
 title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Scanivalve Data', 'interpreter', 'latex')
 legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex')
 grid on
@@ -32,7 +35,7 @@ saveas(gcf,'scanivalve_cl_cd_cm.png')
 
 % Plot cL vs cD.
 figure
-errorbar(cdp, cl, cl_err, cl_err, cdp_err, cdp_err)
+errorbar(cdp, cl, cl_err, cl_err, cdp_err, cdp_err, 'linewidth', 0.5)
 xlabel('$C_{D,p}$', "interpreter", "latex")
 ylabel('$C_L$', "interpreter", "latex")
 title('$C_L$ vs $C_{D,p}$ for Scanivalve Data', 'interpreter', 'latex')
@@ -57,13 +60,16 @@ cm_err = mano_coeff_uncertainty.data(:, 4);
 
 % Plot coefficients.
 figure
-errorbar(aoa, cl, cl_err)
+yyaxis left
+errorbar(aoa, cl, cl_err, 'linewidth', 0.5)
+ylabel('$C_L$ Scale', 'interpreter', 'latex')
 hold on
-errorbar(aoa, cdp, cdp_err)
+yyaxis right
+errorbar(aoa, cdp, cdp_err, 'linewidth', 0.5)
 hold on
-errorbar(aoa, cm, cm_err)
+errorbar(aoa, cm, cm_err, 'linewidth', 0.5)
 xlabel('$\alpha^\circ$', "interpreter", "latex")
-ylabel('Coefficients')
+ylabel('$C_{D,p}$ and $C_M$ Scale', 'interpreter', 'latex')
 title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Manometer Data', 'interpreter', 'latex')
 legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex')
 grid on
@@ -72,7 +78,7 @@ saveas(gcf,'manometer_cl_cd_cm.png')
 
 % Plot cL vs cD.
 figure
-errorbar(cdp, cl, cl_err, cl_err, cdp_err, cdp_err)
+errorbar(cdp, cl, cl_err, cl_err, cdp_err, cdp_err, 'linewidth', 0.5)
 xlabel('$C_{D,p}$', "interpreter", "latex")
 ylabel('$C_L$', "interpreter", "latex")
 title('$C_L$ vs $C_{D,p}$ for Manometer Data', 'interpreter', 'latex')
