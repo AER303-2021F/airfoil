@@ -17,7 +17,7 @@ freestream = freestream(1, :);
 figure
 hold on
 
-title("Wake Velocity Profile for varying AoA [Manometer]")
+title("Wake Velocity Profile for varying AoA [Manometer]", "interpreter", "latex")
 xlabel("Velocity Deficit (m/s)", "interpreter", "latex")
 ylabel("Vertical Position (m)", "interpreter", "latex")
 
@@ -67,7 +67,7 @@ hold on
 plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
-title("Comparison of XFOIL with Actual c_D variation [Manometer]")
+title("Comparison of XFOIL with Actual $C_D$ variation [Manometer]", "interpreter", "latex")
 legend
 grid
 saveas(gcf,'../../source_latex/figures/manometer_cd.png')
@@ -75,11 +75,13 @@ saveas(gcf,'../../source_latex/figures/manometer_cd.png')
 figure
 errorbar(alphas, drag_force, d_drag_force)
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
-ylabel("Drag Force per Unit Span (N/m) [Manometer]")
-title("Drag")
+ylabel("Drag Force per Unit Span (N/m)")
+title("Drag [Manometer]", "interpreter", "latex")
 grid
 saveas(gcf,'../../source_latex/figures/manometer_drag_force.png')
 
 % Export CSV
 writematrix(c_D, "cd_manometer.csv")
 writematrix(d_c_D, "cd_error_manometer.csv")
+writematrix(drag_force, "total_drag_manometer.csv")
+writematrix(d_drag_force, "total_drag_error_manometer.csv")
