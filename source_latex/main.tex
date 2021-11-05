@@ -69,7 +69,7 @@
 
 \begin{abstract}
 
-In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The lift and drag are then calculated which are used to determine coefficients of lift, drag, and moment ($C_L$, $C_D$, and $C_M$, respectively). Measurements are collected using two separate methods, and their comparative effectiveness is evaluated in terms of accuracy. Both sets of experimental measurements agree well with simulations from \textit{XFOIL} software, but errors are likely not correctly estimated for either case.
+In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The lift and drag are then calculated which are used to determine coefficients of lift, drag, and moment ($C_L$, $C_D$, and $C_M$, respectively). Measurements are collected using two separate methods, and their comparative effectiveness is evaluated.
 
 \keywords{Airfoil \and Stall \and Inclined Manometer \and Scanivalve}
 \end{abstract}
@@ -185,12 +185,6 @@ $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pres
     \label{eq:cm}
 \end{align}
 
-\subsection{Calculating Total Drag from Wake Velocity}
-The drag force formulation from above ignore viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil.
-\begin{align*}
-    D' &= \rho\int u (U_\infty - u) dy
-\end{align*}
-
 \subsection{Stall}
 Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
 \\
@@ -269,7 +263,7 @@ The inclined manometer takes in 36 input channels and one reference channel to m
     \label{fig:manometer}
 \end{figure}
 
-\subsection{Procedure}
+\subsection{Procedure}\label{sec:procedure}
 
 % What is measured and how it is acquired.
 
@@ -311,28 +305,46 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \section{Results and Discussion}
 
 \subsection{Wake Velocity Profile}
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake.
-\begin{figure}
+
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
-         \caption{}
-         \label{fig:scanivalve_wake_velocity}
+         \caption{$y=x$}
+         \label{fig:y equals x}
      \end{subfigure}
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
-         \caption{}
-         \label{fig:manometer_wake_velocity}
+         \caption{$y=3sinx$}
+         \label{fig:three sin x}
      \end{subfigure}
-    \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
+    \caption{Caption}
     \label{fig:wake_velocities}
 \end{figure}
 
 \subsection{Coefficient of Lift, Pressure Drag, and Moment}
 
-\begin{figure}
+Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
+
+\noindent
+In both plots, the coefficient of lift increases with the angle of attack until $\alpha\approx13^\circ$ at which the coefficient of lift begins decreasing for all higher angles of attack. There are various features within the lift curve to discuss.
+
+\begin{itemize}
+
+    \item The first feature to discuss is the non-zero coefficient of lift produced at $\alpha=0^\circ$. This signifies a degree of camber inherent to the airfoil indicating that the Clark Y airfoil is not symmetric which is in line with our understanding.
+    
+    \item A linear $C_L$-$\alpha$ dependency exists for angles of attack within the approximate range from $0^\circ$ to $8^\circ$. This region is characterized by a very minimal boundary layer that does not significantly hinder lift production.
+    
+    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing coefficient of lift. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the begining of the plateu on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
+    
+    \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an slow slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircrafts weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle at which the aircraft can no longer sustain flight.
+    
+    \item For the remainder of the $C_L$ curve, increasing the angle of attack emphasizes the domination of flow separation and the continual decrease in lift production.
+\end{itemize}
+
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
@@ -350,7 +362,7 @@ Wake velocities are obtained from total pressure measurements in the wake to det
     \label{fig:coeffs}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
@@ -438,8 +450,9 @@ Experimental performance data of a Clark Y airfoil is available in literature
         \toprule
         \multicolumn{2}{c}{Quantifiable Error}\\
         \midrule
-        Manometer Uncertainty Reading & $\pm 1 mm$\\
+        Manometer Uncertainty Reading & $\pm 1 \si{mm}$\\
         Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
+        Angle of Attack Uncertainty & $\pm 0.25^\circ$ \\
         Scanivalve Precision & Acquired from autocorrelation using port 36 in each trial. See table (x)\\
         Scanivalve Bias & Assume to be 0 \\
         Calibration Coefficients & Assume to be 0\\
@@ -801,8 +814,8 @@ For cases where we want the velocity of airfoil at a single pitot tube.
 An average free stream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
 
 \begin{align*}
-    U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 \Delta P_{20}}{\rho}} + \sqrt{\frac{2 \Delta P_{36}}{\rho}} \right) \\
-    \delta U_\infty &= \sqrt{\left(\frac{1}{2U_\infty \rho} \delta \Delta P_{20}\right)^2 + \left(\frac{1}{2U_\infty \rho } \delta \Delta P_{36}\right)^2}
+    U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 P_{20}}{\rho}} + \sqrt{\frac{2 P_{36}}{\rho}} \right) \\
+    \delta U_\infty &= \sqrt{\left(\frac{1}{2U_\infty \rho} \delta P_{20}\right)^2 + \left(\frac{1}{2U_\infty \rho } \delta P_{36}\right)^2}
 \end{align*}
 
 \subsection{Velocity Deficit}
@@ -818,14 +831,13 @@ This is used to create the wake velocity distribution.
 
 \subsection{Drag Force}
 
-This was evaluated numerically using trapezoidal rule, and so the error was analyzed in terms of a summation.
+This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
+
 \begin{align*}
-    D' &= \rho\int u (U_\infty - u) dy\\
-    D' &= \rho \sum_{\text{trapz}} u (U_\infty - u) dy
-    \intertext{The error of each term in the summation is therefore:}
-    & \sqrt{u \delta U_\infty + (U_\infty - 2u) \delta u}
-    \intertext{And hence the total error is:}
-    \delta D' &= \sqrt{\sum_{\text{rakes}} u \delta U_\infty + (U_\infty - 2u) \delta u}
+    D &= \rho\int u (U_\infty - u) dS\\
+    \diffp{D}{{U_\infty}} &= \rho \int  u dS\\
+    \diffp{D}{u} &= \rho \int (U_\infty - 2u) dS\\
+    \delta D &= \sqrt{\left(\rho \int  u dS \ \delta U_\infty \right)^2 + \left(\rho \int (U_\infty - 2u) dS \ \delta u \right)^2}
 \end{align*}
 
 \subsection{Dynamic Pressure}
