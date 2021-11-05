@@ -86,11 +86,10 @@ Refer to table \ref{tab:nomenclature} for definitions and symbols common to this
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{||p{4.5cm}|p{11cm}||}
-        \hline
+    \begin{tabular}{p{4.5cm}p{11cm}}
+        \toprule
         Symbol/Term & Description \\
-        \hline
-        \hline
+        \midrule
         $A'$ & Axial force per unit span. \\
         $C$ & Chord length. \\
         $C_D$ & Coefficient of Drag. \\
@@ -112,7 +111,7 @@ Refer to table \ref{tab:nomenclature} for definitions and symbols common to this
         $\Delta P$ & Dynamic pressure measurement. \\
         $\rho_\infty$ & Free stream density. \\
         $\theta$ & The angle made between the airfoils surface normal and the airfoils chord normal. \\
-        \hline
+        \bottomrule
     \end{tabular}
     \caption{Commonly used symbols and term.}
     \label{tab:nomenclature}
@@ -429,22 +428,16 @@ Experimental performance data of a Clark Y airfoil is available in literature
 \subsection{Quantifiable Sources of Errors}
 \begin{table}[H]
 \begin{center}
-    \begin{tabular}{||c|c||}
-        \hline
-        \multicolumn{2}{||c||}{Quantifiable Error}\\
-        \hline
-        \hline
+    \begin{tabular}{ll}
+        \toprule
+        \multicolumn{2}{c}{Quantifiable Error}\\
+        \midrule
         Manometer Uncertainty Reading & $\pm 1 mm$\\
-        \hline
         Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
-        \hline
         Scanivalve Precision & Acquired from autocorrelation using port 36 in each trial. See table (x)\\
-        \hline
         Scanivalve Bias & Assume to be 0 \\
-        \hline
         Calibration Coefficients & Assume to be 0\\
-        \hline
-        
+        \bottomrule
 \end{tabular}
 \end{center}
 \caption{Quantifiable Sources of Error, Tabulated}
