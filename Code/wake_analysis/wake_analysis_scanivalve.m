@@ -76,3 +76,7 @@ ylabel("Drag Force per Unit Span (N/m)")
 title("Drag Force")
 grid
 saveas(gcf,'scanivalve_drag_force.png')
+
+% Export CSV
+writematrix(c_D, "cd_scanivalve.csv")
+writematrix(d_c_D, "cd_error_scanivalve.csv")
