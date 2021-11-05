@@ -23,22 +23,30 @@ for i = 1:11
     alpha = alphas(i);
     airfoil_export(i, 1) = alpha;
     d_airfoil_export(i, 1) = alpha;
-    manometer_heights_a = readmatrix(sprintf("../Data/jai_enumerated_data/data_%da.csv", alpha));
-    manometer_heights_b = readmatrix(sprintf("../Data/jai_enumerated_data/data_%db.csv", alpha));
+    manometer_heights_a = readmatrix(sprintf(...
+        "../Data/jai_enumerated_data/data_%da.csv", alpha));
+    manometer_heights_b = readmatrix(sprintf(...
+        "../Data/jai_enumerated_data/data_%db.csv", alpha));
     
-    p_airfoil = -(manometer_heights_a(1:19, 2)'- REF_HEIGHT) * sin(theta) * cmH20_to_Pa;
+    p_airfoil = -(manometer_heights_a(1:19, 2)'- REF_HEIGHT)...
+        * sin(theta) * cmH20_to_Pa;
     airfoil_export(i, 2:end) = p_airfoil;
     airfoil_manometer(i,:) = p_airfoil;
-    d_airfoil_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 + (p_airfoil / tan(theta) * d_theta).^2);
+    d_airfoil_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 ...
+    + (p_airfoil / tan(theta) * d_theta).^2);
     d_airfoil_export(i, 2:end) = d_airfoil_manometer(i, :);
     
-    p_rake_1 = -(manometer_heights_a(20:end, 2)' - REF_HEIGHT) * sin(theta) * cmH20_to_Pa;
+    p_rake_1 = -(manometer_heights_a(20:end, 2)' - REF_HEIGHT) * sin(theta) ...
+        * cmH20_to_Pa;
     rake_a_manometer(i, :) = p_rake_1;
-    d_rake_a_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 + (p_rake_1 / tan(theta) * d_theta).^2);
+    d_rake_a_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 ...
+    + (p_rake_1 / tan(theta) * d_theta).^2);
     
-    p_rake_2 = - (manometer_heights_b(20:end, 2)' - REF_HEIGHT) * sin(theta) * cmH20_to_Pa;
+    p_rake_2 = - (manometer_heights_b(20:end, 2)' - REF_HEIGHT) * sin(theta) ...
+        * cmH20_to_Pa;
     rake_b_manometer(i, :) = p_rake_2;
-    d_rake_b_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 + (p_rake_2 / tan(theta) * d_theta).^2);
+    d_rake_b_manometer(i, :) = sqrt((-cmH20_to_Pa * sin(theta) * d_cm).^2 ...
+        + (p_rake_2 / tan(theta) * d_theta).^2);
     
 end
 writematrix(airfoil_export, "../Data/calibrated_manometer_airfoil.csv");

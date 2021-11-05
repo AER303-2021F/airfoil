@@ -40,9 +40,11 @@ for i = 1:11
     
     vel_diff_err = sqrt(d_freestream(i)^2 + d_velocities.^2);
 
-    errorbar(freestream(i)- velocities, combined_locations, vel_diff_err, "horizontal", "DisplayName", sprintf("%d", alpha));
+    errorbar(freestream(i)- velocities, combined_locations, vel_diff_err, ...
+        "horizontal", "DisplayName", sprintf("%d", alpha));
     
-    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
+    drag_force(i) = RHO * trapz(combined_locations,  velocities .* ...
+        (freestream(i) - velocities));
     
     % Calculate drag error
     integrand_error_squared = abs(velocities .* d_freestream(i) +...
@@ -65,7 +67,8 @@ hold on
 plot(XFOIL_data(:, 1), XFOIL_data(:,3), "DisplayName", "XFOIL")
 xlabel("$\alpha$ (degrees)", "interpreter", "latex")
 ylabel("$c_D$ (dimensionless)", "interpreter", "latex")
-title("Comparison of XFOIL with Actual $C_D$ variation [Scanivalve]", "interpreter", "latex")
+title("Comparison of XFOIL with Actual $C_D$ variation [Scanivalve]", ...
+    "interpreter", "latex")
 legend
 grid
 saveas(gcf,'../../source_latex/figures/scanivalve_cd.png')
