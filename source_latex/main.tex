@@ -22,6 +22,7 @@
 \usepackage{hyperref}
 \usepackage{siunitx}
 \usepackage{esdiff}
+\usepackage{float}
 \usepackage[inline]{enumitem} % Horizontal lists
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -602,15 +603,13 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
 \caption{Manometer rake pressure data at position b in pascals.}
 \label{tab:pressure_manometer_rake_b}
 \end{sidewaystable}
-
+\newpage
 \section{Uncertainty Propagation}
 
 \subsection{Quantifiable Errors}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{||                   >{\centering\arraybackslash}X|
-    >{\centering\arraybackslash}X||}
+\begin{table}[H]
+    \begin{tabular}{|c|c|c|}
+        \hline
         \multicolumn{2}{|c|}{Quantifiable Error}\\
         \hline
         Manometer Uncertainty Reading & $\pm 1 mm$\\
