@@ -124,17 +124,23 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 
 
 \section{Introduction and Background}\label{sec:introduction_and_background}
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.
 
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.
+\noindent
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.\newline
+
+\noindent
+Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.\newline
 
 \subsection{Normal, Axial, and Moment Forces}
 
-Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.
+\noindent
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.\newline
 
-$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.
+\noindent
+$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.\newline
 
-The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.
+\noindent
+The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.\newline
 
 \begin{align}
     N' &= \int_{LE}^{TE} -P_u\cos\theta ds_u + \int_{LE}^{TE} P_\ell\cos\theta ds_\ell
@@ -147,7 +153,8 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
 
 \subsection{Calculating Lift, Drag and Dimensionless Coefficients}
 
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.
+\noindent
+The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.\newline
 
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
@@ -174,14 +181,17 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
 \end{figure}
 
 Pressure on measurement sites are nondimensionalized using Equation
+
 \begin{equation}
     C_p = \frac{\Delta P}{q_\infty}
     \label{eq:cp}
 \end{equation}
 
-where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\\
+\noindent
+where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\newline
 
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.
+\noindent
+Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.\newline
 
 \begin{align}
     C_L &= \frac{L'}{q_\infty c}
@@ -193,24 +203,33 @@ Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{
 \end{align}
 
 \subsection{Calculating Total Drag from Wake Velocity}
-The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.
+
+\noindent
+The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.\newline
+
 \begin{align}
     D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
 \end{align}
 
 \subsection{Stall}
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
-\\
-When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\\
-\\
-As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
-\\
-Flow separation incurs higher drag, resulting in higher $C_D$.\\
-\\
-$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\\
-\\
-Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
+\noindent
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\newline
+
+\noindent
+When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\newline
+
+\noindent
+As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\newline
+
+\noindent
+Flow separation incurs higher drag, resulting in higher $C_D$.\newline
+
+\noindent
+$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\newline
+
+\noindent
+Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
 
 % -----------------------------------------------------------------------------
@@ -220,11 +239,13 @@ Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircr
 
 \section{Experimental Set-Up}
 
+\noindent
 This details the lab setup and experimental procedure used in the experiment.
 
 \subsection{Apparatus}
 
-The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.
+\noindent
+The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.\newline
 
 \begin{table}
     \centering
@@ -238,7 +259,8 @@ The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of t
     \label{tab:pressure_taps}
 \end{table}
 
-Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.
+\noindent
+Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.\newline
 
 \begin{figure}
     \centering
@@ -254,11 +276,14 @@ Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with 
     \label{fig:aoa_select}
 \end{figure}
 
-In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.
+\noindent
+In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.\newline
 
-A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.
+\noindent
+A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.\newline
 
-The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.
+\noindent
+The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.\newline
 
 \begin{figure}[h]
     \centering
@@ -267,6 +292,7 @@ The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pres
     \label{fig:scanivalve}
 \end{figure}
 
+\noindent
 The inclined manometer takes in 36 input channels and one reference channel to measure the pressure difference between each of the 36 inputs compared to the reference. The reference pressure is set to that of the upstream static tube.
 
 \begin{figure}[h]
@@ -280,6 +306,7 @@ The inclined manometer takes in 36 input channels and one reference channel to m
 
 % What is measured and how it is acquired.
 
+\noindent
 The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
@@ -296,7 +323,8 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \end{enumerate}
 
-Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
+\noindent
+Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.\newline
 
 \begin{enumerate}
 
@@ -306,7 +334,8 @@ Once the pressure measurements were taken, the data is pre-processed to obtain p
 
 \end{enumerate}
 
-After the data is pre-processed, the data is analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis is done using the methods described in section \ref{sec:introduction_and_background}.
+\noindent
+After the data is pre-processed, the data is analyzed to determine the lift, moment, and drag coefficients as well as a measure of the lift, moment, and pressure drag of the airfoil up to and past the point of stall. The analysis is done using the methods described in section \ref{sec:introduction_and_background}.\newline
 
 %% TODO: mention image analysis process
 
@@ -318,13 +347,18 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \section{Results and Discussion}
 
 \subsection{XFOIL Reference}
-Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.
+
+\noindent
+Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.\newline
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
-Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix \ref{app:CP}.
+\noindent
+Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix \ref{app:CP}. \newline
 
-Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically at the small section directly succeeding the leading edge. In lower angles of attack, the $C_p$ changes gradually after the leading edge, but in a higher angle of attack, a pressure plateau is visible on graphs due to stalling effects. 
+\noindent
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically at the small section directly succeeding the leading edge. In lower angles of attack, the $C_p$ changes gradually after the leading edge, but in a higher angle of attack, a pressure plateau is visible on graphs due to stalling effects. \newline
+
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -351,15 +385,21 @@ Overall, the trend of the $C_p$ distribution fits the theoretical prediction. Th
 
 
 \subsection{Wake Velocity Profile}
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.
 
-The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.
+\noindent
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
-In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.
+\noindent
+The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
 
-$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.
+\noindent
+In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.\newline
 
-Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.
+\noindent
+$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
+
+\noindent
+Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
 
 \begin{figure}
     \centering
@@ -417,6 +457,7 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
     \label{fig:coeffs}
 \end{figure}
 
+\noindent
 Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
@@ -566,6 +607,31 @@ For the manometer data, there is a larger deviation between the lift and drag co
     \label{fig:cL_vs_cD}
 \end{figure}
 
+\noindent
+Experimental performance data of a Clark Y airfoil is available in literature
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.\newline
+
+\noindent
+The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cd.jpg}
+         \caption{}
+         \label{fig:reference_cl_cd}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cm.jpg}
+         \caption{}
+         \label{fig:reference_cl_cm}
+     \end{subfigure}
+    \caption{Reference data for the Clark Y airfoil at $Re = 200000$.}
+    \label{fig:clark_y_reference}
+\end{figure}
+
 \subsection{Pressure Drag and Total Drag Comparison}
 
 \begin{table}[h]
@@ -594,31 +660,6 @@ $20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $
 Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
 
 The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
-
-\subsection{Comparison with other experiments}
-
-Experimental performance data of a Clark Y airfoil is available in literature
-\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.
-
-The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
-
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cd.jpg}
-         \caption{}
-         \label{fig:reference_cl_cd}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cm.jpg}
-         \caption{}
-         \label{fig:reference_cl_cm}
-     \end{subfigure}
-    \caption{Reference data for the Clark Y airfoil at $Re = 200000$.}
-    \label{fig:clark_y_reference}
-\end{figure}
 
 
 % -----------------------------------------------------------------------------
@@ -651,6 +692,7 @@ The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well w
 \subsection{Non-Quantifiable Sources of Error}
 \label{sec:non_quantifiable_sources_of_error}
 
+\noindent
 The experimental setup contained various areas of non-quantifiable sources of error such as the low frequency response in the pressure tubes, the precision error of the manometer, the turbulence in the airfoil wake, and the distortion effect in image acquisition.\newline
 
 \noindent
@@ -671,12 +713,16 @@ The last source of a non-quantifiable source of error is the the effect of image
 \section{Conclusion}
 The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.
 
+\noindent
 The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
 
+\noindent
 $C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.
 
+\noindent
 $C_M$ remains relatively constant throughout all measurements, with no clear trend. This is not consistent with expectations in theory, and warrants additional investigation.
 
+\noindent
 For future experiments, there are several improvements which can be made:
 \begin{itemize}
     \item Multiple measurements at each angle of attack could be used to provide a better estimate of precision error.
@@ -685,7 +731,10 @@ For future experiments, there are several improvements which can be made:
     \item Take time-average measurements of the pressure distribution for higher angles of attack to better capture the time-varying behaviour.
 \end{itemize}
 
+\noindent
 Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around stall.
+
+
 % -----------------------------------------------------------------------------
 %   Bibliography
 % -----------------------------------------------------------------------------
@@ -706,6 +755,7 @@ Overall, this experiment was successful in characterizing a Clark Y airfoil up t
 
 \subsection{Scanivalve Measurements}
 
+\noindent
 Refer to table \ref{tab:pressure_scanivalve_airfoil} for the airfoil pressure data for each tap and angle of attack recorded during the lab. Table \ref{tab:pressure_scanivalve_rake_a} contains the pressure data associated with the rake in position a. Table \ref{tab:pressure_scanivalve_rake_b} contains the pressure data associated with the rake in position b.
 
 \begin{sidewaystable}
@@ -830,6 +880,7 @@ Refer to table \ref{tab:pressure_scanivalve_airfoil} for the airfoil pressure da
 
 \subsection{Manometer Data}
 
+\noindent
 Refer to table \ref{tab:pressure_manometer_airfoil} for the airfoil pressure data for each tap and angle of attack recorded during the lab. Table \ref{tab:pressure_manometer_rake_a} contains the pressure data associated with the rake in position a. Table \ref{tab:pressure_manometer_rake_b} contains the pressure data associated with the rake in position b.
 
 \begin{sidewaystable}
@@ -988,6 +1039,7 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
     \Delta P &= kV + m \\
     \delta \Delta P &= k\delta V\\
 \end{align*}
+
 The precision error of $\delta V$ on Scanivalve is given by autocorrelation analysis on port 36 for all 11 AOAs 
 
 \subsection{Manometer Pressure}
@@ -1026,8 +1078,6 @@ This is used to create the wake velocity distribution.
     \Delta V &= U_\infty - u\\
     \delta \Delta V &= \sqrt{\delta U_\infty^2 + \delta u^2}
 \end{align*}
-
-
 
 \subsection{Drag Force}
 
@@ -1127,51 +1177,52 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \newpage
 \section{$C_p$ Distribution}\label{app:CP}
+
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA3.png}
         \caption{$C_p$ distribution at $\alpha = 3^\circ$}
         \label{fig:cp_3}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA8.png}
         \caption{$C_p$ distribution at $\alpha = 8^\circ$}
         \label{fig:cp_8}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA10.png}
         \caption{$C_p$ distribution at $\alpha = 10^\circ$}
         \label{fig:cp_10}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA11.png}
         \caption{$C_p$ distribution at $\alpha = 11^\circ$}
         \label{fig:cp_11}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA13.png}
         \caption{$C_p$ distribution at $\alpha = 13^\circ$}
         \label{fig:cp_13}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA16.png}
         \caption{$C_p$ distribution at $\alpha = 16^\circ$}
         \label{fig:cp_16}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA17.png}
         \caption{$C_p$ distribution at $\alpha = 17^\circ$}
         \label{fig:cp_17}
     \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.37\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/AOA20.png}
         \caption{$C_p$ distribution at $\alpha = 20^\circ$}
@@ -1180,9 +1231,12 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
     \label{fig:all_CP}
 \end{figure}
 
-\section{MATLAB Code}
+\section{MATLAB and Python Code}
+
 \subsection{Manometer Data Conversion}
+
 Source file: \verb|manometer_conversion.m|
+
 \begin{minted}{matlab}
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
 
@@ -1243,7 +1297,9 @@ save("../Data/calibrated_manometer_data_Pa.mat", ...
 \end{minted}
 
 \subsection{Freestream Velocity Calculation}
+
 Source file: \verb|freestream_velocity.m|
+
 \begin{minted}{matlab}
 % Calculation of free-stream velocity for each AoA
 
@@ -1291,9 +1347,637 @@ for i = 1:11
     writematrix([v_inf_scanivalve; d_v_inf_scanivalve], "../Data/velocities_scanivalve.csv");
 end
 \end{minted}
+
+\subsection{Lift, Pressure Drag, and Moment Coefficients}
+
+Source file: \verb|lift_and_pressure_drag.py|
+
+\begin{minted}{python}
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from scipy.interpolate import interp1d
+
+
+# -----------------------------------------------------------------------------
+# Define program functions.
+# -----------------------------------------------------------------------------
+
+
+AOA_UNCERTAINTY = 0.25  # Degrees.
+
+
+# -----------------------------------------------------------------------------
+# Define program functions.
+# -----------------------------------------------------------------------------
+
+
+def airfoil_theta(xl, yl, xu, yu):
+    """Return the angle between the pressure and airfoil normals.
+
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+
+    Returns
+    -------
+    np.ndarray, np.ndarray
+        A tuple of arrays, each of shape (n,), containing the angle between the
+        pressure and airfoil normals in radians.
+    """
+
+    num = - np.diff(yl)
+    denom = np.diff(xl)
+    theta_l = np.arctan(num / denom)
+
+    num = - np.diff(yu)
+    denom = np.diff(xu)
+    theta_u = np.arctan(num / denom)
+
+    return theta_l, theta_u
+
+
+def normal_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return normal force of the airfoil.
+
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The normal force of the airfoil.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    N = 0
+
+    for n in range(len(ds_upper)):
+        N -= 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * ds_upper[n]
+    
+    for n in range(len(ds_lower)):
+        N += 0.5 * (pl[n] + pl[n + 1]) * np.cos(thetal[n]) * ds_lower[n]
+
+    return N
+
+
+def axial_force(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return axial force of the airfoil.
+
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The axial force in Newtons.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    A = 0
+
+    for n in range(len(ds_upper)):
+        A -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * ds_upper[n]
+    
+    for n in range(len(ds_lower)):
+        A += 0.5 * (pl[n] + pl[n + 1]) * np.sin(thetal[n]) * ds_lower[n]
+
+    return A
+
+
+def moment(xl, yl, xu, yu, pl, pu, thetal, thetau):
+    """Return the moment of the airfoil in Newtons.
+
+    Parameters
+    ----------
+    xl : np.ndarray
+        Array of shape (n,) containing tap x positions on the lower wing
+        surface.
+    yl : np.ndarray
+        Array of shape (n,) containing tap y positions on the lower wing
+        surface.
+    xu : np.ndarray
+        Array of shape (n,) containing tap x positions on the upper wing
+        surface.
+    yu : np.ndarray
+        Array of shape (n,) containing tap y positions on the upper wing
+        surface.
+    pl : [type]
+        Array of shape (n,) containing the pressure at the lower wing taps.
+    pu : [type]
+        Array of shape (n,) containing the pressure at the upper wing taps.
+    thetal : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and lower airfoil surface normals.
+    thetau : [type]
+        Array of shape (n,) containing the angle between the pressure
+        and upper airfoil surface normals.
+
+    Returns
+    -------
+    float
+        The moment of the airfoil in Newtons.
+    """
+
+    ds_lower = np.sqrt(np.diff(xl) ** 2 + np.diff(yl) ** 2)
+    ds_upper = np.sqrt(np.diff(xu) ** 2 + np.diff(yu) ** 2)
+
+    M = 0
+
+    for n in range(len(ds_upper)):
+        M += 0.5 * (pu[n] + pu[n + 1]) * np.cos(thetau[n]) * xu[n] * ds_upper[n]
+        M -= 0.5 * (pu[n] + pu[n + 1]) * np.sin(thetau[n]) * yu[n] * ds_upper[n]
+    
+    for n in range(len(ds_lower)):
+        M += 0.5 * (pl[n] + pl[n + 1]) * np.cos(thetal[n]) * xl[n] * ds_lower[n]
+        M += 0.5 * (pl[n] + pl[n + 1]) * np.sin(thetal[n]) * yl[n] * ds_lower[n]
+
+    return M
+
+
+def lift(N, A, aoa):
+    """Return the lift force in Newtons.
+
+    Parameters
+    ----------
+    N : float
+        The airfoils normal force.
+    A : float
+        The airfoils axial force.
+    aoa : int
+        The angle of attack of the airfoil.
+
+    Returns
+    -------
+    float
+        The lift force in Newtons.
+    """
+
+    aoa = np.radians(aoa)
+    return N * np.cos(aoa) - A * np.sin(aoa)
+
+
+def pressure_drag(N, A, aoa):
+    """Return the pressure drag force in Newtons.
+
+    Parameters
+    ----------
+    N : float
+        The airfoils normal force.
+    A : float
+        The airfoils axial force.
+    aoa : int
+        The angle of attack of the airfoil.
+
+    Returns
+    -------
+    float
+        The pressure drag force in Newtons.
+    """
+    
+    aoa = np.radians(aoa)
+    return N * np.sin(aoa) + A * np.cos(aoa)
+
+
+def coefficients(L, D, M, velocity):
+    """Return the lift, drag, and moment coefficients.
+
+    Parameters
+    ----------
+    L : float
+        The lift force in Newtons.
+    D : float
+        The drag force in Newtons.
+    M : float
+        The moment force in Newtons.
+    velocity : np.ndarray
+        Array of shape (n,) containing the free stream velocity at a given
+        anngle of attack.
+
+    Returns
+    -------
+    float, float, float
+        A tuple containing the lift coefficient, drag coefficient, and
+        moment coefficient.
+    """
+
+    q_infty = 0.5 * 1.225 * velocity ** 2
+
+    C_L = L / q_infty
+    C_D = D / (q_infty * 0.1)
+    C_M = M / q_infty
+
+    return C_L, C_D, C_M
+
+
+# -----------------------------------------------------------------------------
+# Import free stream velocity data.
+# -----------------------------------------------------------------------------
+
+
+AoA = np.array([0, 3, 6, 8, 10, 11, 13, 15, 16, 17, 20])
+
+mano_velocity_file = "./Data/velocities_manometer.csv"
+scani_velocity_file = "./Data/velocities_scanivalve.csv"
+
+mano_velocity_data = np.loadtxt(mano_velocity_file, delimiter=",")
+mano_velocity = mano_velocity_data[0, :]
+mano_velocity_uncertainty = mano_velocity_data[1, :]
+
+scani_velocity_data = np.loadtxt(scani_velocity_file, delimiter=",")
+scani_velocity = scani_velocity_data[0, :]
+scani_velocity_uncertainty = scani_velocity_data[1, :]
+
+
+# -----------------------------------------------------------------------------
+# Import and interpolate airfoil data at tap locations.
+# -----------------------------------------------------------------------------
+
+
+airfoil_data = np.loadtxt("./XFOIL Analysis/clark_y.dat", skiprows=1)
+n = airfoil_data.shape[0] // 2
+
+airfoil_x_upper = airfoil_data[:n + 1, 0]
+airfoil_x_lower = airfoil_data[n:, 0]
+airfoil_y_upper = airfoil_data[:n + 1, 1]
+airfoil_y_lower = airfoil_data[n:, 1]
+
+locations_x_upper = [0, 0.03, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.55, 0.70, 0.85, 1.00]
+locations_x_lower = [0.05, 0.10, 0.20, 0.30, 0.40, 0.60, 0.90]
+locations_y_upper = []
+locations_y_lower = []
+
+for loc in locations_x_upper:
+    interp_loc = interp1d(airfoil_x_upper, airfoil_y_upper, kind='cubic')(loc)
+    locations_y_upper.append(interp_loc)
+
+for loc in locations_x_lower:
+    interp_loc = interp1d(airfoil_x_lower, airfoil_y_lower, kind='cubic')(loc)
+    locations_y_lower.append(interp_loc)
+
+
+# -----------------------------------------------------------------------------
+# Import and segregate the upper and lower pressure measurements.
+# -----------------------------------------------------------------------------
+
+
+scanivalve_data_file = "./Data/scanivalve_airfoil_pressure_data.csv"
+manometer_data_file = "./Data/calibrated_manometer_airfoil.csv"
+
+pressure_data_s = np.loadtxt(scanivalve_data_file, delimiter=",", skiprows=1)
+pressure_upper_s = pressure_data_s[:, 1:13]
+pressure_lower_s = np.flip(pressure_data_s[:, 13:], axis=1)
+
+pressure_data_m = np.loadtxt(manometer_data_file, delimiter=",", skiprows=0)
+pressure_upper_m = pressure_data_m[:, 1:13]
+pressure_lower_m = np.flip(pressure_data_m[:, 13:], axis=1)
+
+AoA = pressure_data_s[:, 0].reshape((-1,))
+
+
+# -----------------------------------------------------------------------------
+# Import and segregate the upper and lower pressure uncertainties.
+# -----------------------------------------------------------------------------
+
+
+scanivalve_error_file = "./Data/scanivalve_error.csv"
+manometer_data_file = "./Data/calibrated_manometer_airfoil_error.csv"
+
+pressure_error_s = np.loadtxt(scanivalve_error_file, delimiter=",") * 115
+pressure_error_m = np.loadtxt(manometer_data_file, delimiter=",", skiprows=0)
+pressure_error_m = pressure_error_m[:, 1:]
+
+
+# -----------------------------------------------------------------------------
+# Get theta angles.
+# -----------------------------------------------------------------------------
+
+
+thetal, thetau = airfoil_theta(locations_x_lower, locations_y_lower,
+                               locations_x_upper, locations_y_upper)
+
+
+# -----------------------------------------------------------------------------
+# Get coefficients for scanivalve data.
+# -----------------------------------------------------------------------------
+
+
+print("SCANIVALVE DATA")
+
+L_vs_aoa_s = np.zeros(AoA.size)
+D_vs_aoa_s = np.zeros(AoA.size)
+M_vs_aoa_s = np.zeros(AoA.size)
+cL_vs_aoa_s = np.zeros(AoA.size)
+cD_vs_aoa_s = np.zeros(AoA.size)
+cM_vs_aoa_s = np.zeros(AoA.size)
+
+delta_N = np.zeros(AoA.size)
+delta_A = np.zeros(AoA.size)
+delta_M = np.zeros(AoA.size)
+
+for i in range(AoA.size):
+
+    aoa = int(AoA[i])
+
+    print(f"Calculations for AOA={aoa}")
+
+    params = [
+        locations_x_lower,
+        locations_y_lower,
+        locations_x_upper,
+        locations_y_upper,
+        pressure_lower_s[i, :],
+        pressure_upper_s[i, :],
+        thetal,
+        thetau
+    ]
+
+    # Calculate values.
+    N, A, M = normal_force(*params), axial_force(*params), moment(*params)
+    L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
+    cL, cD, cM = coefficients(L, D/100, M, scani_velocity[i])
+
+    L_vs_aoa_s[i], D_vs_aoa_s[i], M_vs_aoa_s[i] = L, D, M
+    cL_vs_aoa_s[i], cD_vs_aoa_s[i], cM_vs_aoa_s[i] = cL, cD, cM
+
+    print(f"Lift = {L}, Drag = {D}, Moment = {M}")
+    print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
+
+    # Calculate uncertainties (assuming delta_rho and delta_c are zero).
+
+    up_diff = np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2)
+    low_diff = np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2)
+
+    delta_N_term_1 = np.sum((-np.cos(thetau) * up_diff * pressure_error_s[i]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_s[i]) ** 2)
+    delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
+
+    delta_A_term_1 = np.sum((-np.sin(thetau) * up_diff * pressure_error_s[i]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_s[i]) ** 2)
+    delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
+
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * up_diff * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * low_diff * pressure_error_s[i]) ** 2)
+    delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
+
+delta_aoa = AOA_UNCERTAINTY
+
+delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
+cL_uncertainty_s = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
+cD_uncertainty_s = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+np.savetxt("./Data/scani_pressure_drag.csv", D_vs_aoa_s / 100, delimiter=",")
+np.savetxt("./Data/scani_pressure_drag_error.csv", delta_D / 100, delimiter=",")
+
+cM_uncertainty_s = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+
+# -----------------------------------------------------------------------------
+# Get coefficients for manometer data.
+# -----------------------------------------------------------------------------
+
+    
+print("MANOMETER DATA")
+
+L_vs_aoa_m = np.zeros(AoA.size)
+D_vs_aoa_m = np.zeros(AoA.size)
+M_vs_aoa_m = np.zeros(AoA.size)
+cL_vs_aoa_m = np.zeros(AoA.size)
+cD_vs_aoa_m = np.zeros(AoA.size)
+cM_vs_aoa_m = np.zeros(AoA.size)
+
+delta_N = np.zeros(AoA.size)
+delta_A = np.zeros(AoA.size)
+delta_M = np.zeros(AoA.size)
+
+for i in range(AoA.size):
+
+    aoa = int(AoA[i])
+
+    print(f"Calculations for AOA={aoa}")
+
+    params = [
+        locations_x_lower,
+        locations_y_lower,
+        locations_x_upper,
+        locations_y_upper,
+        pressure_lower_m[i, :],
+        pressure_upper_m[i, :],
+        thetal,
+        thetau
+    ]
+
+    N, A, M = normal_force(*params), axial_force(*params), moment(*params)
+    L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
+    cL, cD, cM = coefficients(L, D / 100, M, mano_velocity[i])
+
+    L_vs_aoa_m[i], D_vs_aoa_m[i], M_vs_aoa_m[i] = L, D, M
+    cL_vs_aoa_m[i], cD_vs_aoa_m[i], cM_vs_aoa_m[i] = cL, cD, cM
+
+    print(f"Lift = {L}, Drag = {D}, Moment = {M}")
+    print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
+
+    # Calculate uncertainties (assuming delta_rho and delta_c are zero).
+
+    up_diff = np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2)
+    low_diff = np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2)
+
+    delta_N_term_1 = np.sum((-np.cos(thetau) * up_diff * pressure_error_m[i, :11]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_m[i, 13:]) ** 2)
+    delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
+
+    delta_A_term_1 = np.sum((-np.sin(thetau) * up_diff * pressure_error_m[i, :11]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_m[i, 13:]) ** 2)
+    delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
+
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * up_diff * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * low_diff * pressure_error_s[i]) ** 2)
+    delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
+
+delta_aoa = AOA_UNCERTAINTY
+
+delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
+cL_uncertainty_m = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
+cD_uncertainty_m = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+np.savetxt("./Data/mano_pressure_drag.csv", D_vs_aoa_m / 100, delimiter=",")
+np.savetxt("./Data/mano_pressure_drag_error.csv", delta_D / 100, delimiter=",")
+
+cM_uncertainty_m = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+
+# -----------------------------------------------------------------------------
+# Plot scanivalve vs validation data.
+# -----------------------------------------------------------------------------
+
+
+val_data = np.loadtxt("./Data/validation_coefficients.txt", skiprows=12, usecols=(0, 1, 2, 4))
+plt.plot(val_data[:, 0], val_data[:, 1], label="cL xfoil", color="red", linestyle="--", linewidth=1)
+plt.plot(val_data[:, 0], val_data[:, 2], label="cD xfoil", color="blue", linestyle="--", linewidth=1)
+plt.plot(val_data[:, 0], val_data[:, 3], label="cM xfoil", color="green", linestyle="--", linewidth=1)
+
+plt.plot(AoA, cL_vs_aoa_s, label="cL, scani", color="red", linewidth=1)
+plt.errorbar(AoA, cL_vs_aoa_s, yerr=cL_uncertainty_s, fmt="none", capsize=2, color="red", linewidth=1)
+plt.plot(AoA, cD_vs_aoa_s, label="cD, scani", color="blue", linewidth=1)
+plt.errorbar(AoA, cD_vs_aoa_s, yerr=cD_uncertainty_s, fmt="none", capsize=2, color="blue", linewidth=1)
+plt.plot(AoA, cM_vs_aoa_s, label="cM, scani", color="green", linewidth=1)
+plt.errorbar(AoA, cM_vs_aoa_s, yerr=cM_uncertainty_s, fmt="none", capsize=2, color="green", linewidth=1)
+
+plt.title("$C_L$, $C_D$, and $C_M$ vs $\\alpha$, Scanivalve Data")
+plt.xlabel("$\\alpha^\circ$")
+plt.ylabel("Coefficient")
+plt.legend()
+plt.grid()
+plt.show()
+
+
+# -----------------------------------------------------------------------------
+# Plot manometer vs validation data.
+# -----------------------------------------------------------------------------
+
+
+val_data = np.loadtxt("./Data/validation_coefficients.txt", skiprows=12, usecols=(0, 1, 3, 4))
+plt.plot(val_data[:, 0], val_data[:, 1], label="cL xfoil", color="red", linestyle="--", linewidth=1)
+plt.plot(val_data[:, 0], val_data[:, 2], label="cD xfoil", color="blue", linestyle="--", linewidth=1)
+plt.plot(val_data[:, 0], val_data[:, 3], label="cM xfoil", color="green", linestyle="--", linewidth=1)
+
+plt.plot(AoA, cL_vs_aoa_m, label="cL, mano", color="red", linewidth=1)
+plt.errorbar(AoA, cL_vs_aoa_m, yerr=cL_uncertainty_m, fmt="none", capsize=2, color="red", linewidth=1)
+plt.plot(AoA, cD_vs_aoa_m, label="cD, mano", color="blue", linewidth=1)
+plt.errorbar(AoA, cD_vs_aoa_m, yerr=cD_uncertainty_m, fmt="none", capsize=2, color="blue", linewidth=1)
+plt.plot(AoA, cM_vs_aoa_m, label="cM, mano", color="green", linewidth=1)
+plt.errorbar(AoA, cM_vs_aoa_m, yerr=cM_uncertainty_m, fmt="none", capsize=2, color="green", linewidth=1)
+
+plt.title("$C_L$, $C_D$, and $C_M$ vs $\\alpha$, Manometer Data")
+plt.xlabel("$\\alpha^\circ$")
+plt.ylabel("Coefficient")
+plt.legend()
+plt.grid()
+plt.show()
+
+
+# -----------------------------------------------------------------------------
+# Save scanivalve and manometer coefficients and uncertainties to csv.
+# -----------------------------------------------------------------------------
+
+
+AoA = AoA.reshape((AoA.size, 1))
+
+cL_vs_aoa_s = cL_vs_aoa_s.reshape((cL_vs_aoa_s.size, 1))
+cD_vs_aoa_s = cD_vs_aoa_s.reshape((cD_vs_aoa_s.size, 1))
+cM_vs_aoa_s = cM_vs_aoa_s.reshape((cM_vs_aoa_s.size, 1))
+scani_coeff_data = np.concatenate((AoA, cL_vs_aoa_s, cD_vs_aoa_s, cM_vs_aoa_s), axis=1)
+
+np.savetxt("./Data/scanivalve_coefficients.csv", scani_coeff_data, delimiter=",", header="AoA, cL, cDp, cM")
+
+cL_uncertainty_s = cL_uncertainty_s.reshape((cL_uncertainty_s.size, 1))
+cD_uncertainty_s = cD_uncertainty_s.reshape((cD_uncertainty_s.size, 1))
+cM_uncertainty_s = cM_uncertainty_s.reshape((cM_uncertainty_s.size, 1))
+scani_uncertainty_data = np.concatenate((np.repeat(0.25, AoA.size).reshape((-1, 1)), cL_uncertainty_s, cD_uncertainty_s, cM_uncertainty_s), axis=1)
+
+np.savetxt("./Data/scanivalve_coefficient_uncertainty.csv", scani_uncertainty_data, delimiter=",", header="AoA, cL Uncertainty, cDp Uncertainty, cM Uncertainty")
+
+scani_coeff_data = np.round(scani_coeff_data, decimals=7).astype("<U24")
+scani_uncertainty_data = np.round(scani_uncertainty_data, decimals=7).astype("<U24")
+scani_out = np.char.add(np.char.add(np.char.add(np.char.add("$", scani_coeff_data), "\pm"), scani_uncertainty_data), "$")
+columns = ["$\alpha^\circ$", "$C_L$", "$C_{D,p}$", "$C_M$"]
+df = pd.DataFrame(scani_out, columns=columns)
+print(df.to_latex(escape=False, index=False))
+
+cL_vs_aoa_m = cL_vs_aoa_m.reshape((cL_vs_aoa_m.size, 1))
+cD_vs_aoa_m = cD_vs_aoa_m.reshape((cD_vs_aoa_m.size, 1))
+cM_vs_aoa_m = cM_vs_aoa_m.reshape((cM_vs_aoa_m.size, 1))
+mano_coeff_data = np.concatenate((AoA, cL_vs_aoa_m, cD_vs_aoa_m, cM_vs_aoa_m), axis=1)
+
+np.savetxt("./Data/manometer_coefficients.csv", mano_coeff_data, delimiter=",", header="AoA, cL, cDp, cM")
+
+cL_uncertainty_m = cL_uncertainty_m.reshape((cL_uncertainty_m.size, 1))
+cD_uncertainty_m = cD_uncertainty_m.reshape((cD_uncertainty_m.size, 1))
+cM_uncertainty_m = cM_uncertainty_m.reshape((cM_uncertainty_m.size, 1))
+mano_uncertainty_data = np.concatenate((np.repeat(0.25, AoA.size).reshape((-1, 1)), cL_uncertainty_m, cD_uncertainty_m, cM_uncertainty_m), axis=1)
+
+np.savetxt("./Data/manometer_coefficient_uncertainty.csv", mano_uncertainty_data, delimiter=",", header="AoA, cL Uncertainty, cDp Uncertainty, cM Uncertainty")
+
+mano_coeff_data = np.round(mano_coeff_data, decimals=7).astype("<U24")
+mano_uncertainty_data = np.round(mano_uncertainty_data, decimals=7).astype("<U24")
+mano_out = np.char.add(np.char.add(np.char.add(np.char.add("$", mano_coeff_data), "\pm"), mano_uncertainty_data), "$")
+columns = ["$\alpha^\circ$", "$C_L$", "$C_{D,p}$", "$C_M$"]
+df = pd.DataFrame(mano_out, columns=columns)
+print(df.to_latex(escape=False, index=False))
+
+\end{minted}
+
 \subsection{Wake Analysis}
+
 \subsubsection{Scanivalve}
+
 Source file: \verb|wake_analysis/wake_analysis_scanivalve.m|
+
 \begin{minted}{matlab}
 % http://brennen.caltech.edu/fluidbook/externalflows/drag/dragNwake.pdf
 load("../../Data/Calibrated_Rake_Pa.mat");
