@@ -173,8 +173,15 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
     \label{fig:airfoil_directions}
 \end{figure}
 
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where\\
-$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $c$ is the chord length.
+Pressure on measurement sites are nondimensionalized using Equation
+\begin{equation}
+    C_p = \frac{\Delta P}{q_\infty}
+    \label{eq:cp}
+\end{equation}
+
+where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\\
+
+Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.
 
 \begin{align}
     C_L &= \frac{L'}{q_\infty c}
@@ -289,7 +296,7 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \end{enumerate}
 
-Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
+Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
 
 \begin{enumerate}
 
@@ -312,6 +319,10 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 
 \subsection{XFOIL Reference}
 Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.
+
+\subsection{Pressure Visualization and Coefficient of Pressure}
+
+
 
 \subsection{Wake Velocity Profile}
 Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.
