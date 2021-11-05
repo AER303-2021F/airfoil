@@ -22,6 +22,7 @@
 \usepackage{hyperref}
 \usepackage{siunitx}
 \usepackage{esdiff}
+\usepackage{float}
 \usepackage[inline]{enumitem} % Horizontal lists
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -189,7 +190,19 @@ $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pres
 \end{align}
 
 \subsection{Stall}
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in loss of lift, increased drag, and a zero-or-positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
+\\
+When flow separation occurs, the $c_P$ distribution becomes flat in the region of separation.\\
+\\
+As $\alpha$ increases, $c_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
+\\
+Flow separation incurs higher drag, resulting in higher $c_D$.\\
+\\
+$c_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $c_{M, LE}$ becomes zero or slightly positive.\\
+\\
+Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+
+
 
 % -----------------------------------------------------------------------------
 %   Experimental Set-Up
@@ -293,6 +306,25 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 
 
 \section{Results and Discussion}
+
+\subsection{Wake Velocity Profile}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
+         \caption{$y=x$}
+         \label{fig:y equals x}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
+         \caption{$y=3sinx$}
+         \label{fig:three sin x}
+     \end{subfigure}
+    \caption{Caption}
+    \label{fig:wake_velocities}
+\end{figure}
 
 \subsection{Comparison with XFOIL}
 Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
@@ -602,8 +634,30 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
 \caption{Manometer rake pressure data at position b in pascals.}
 \label{tab:pressure_manometer_rake_b}
 \end{sidewaystable}
-
+\newpage
 \section{Uncertainty Propagation}
+
+\subsection{Quantifiable Errors}
+\begin{table}[H]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{Quantifiable Error}\\
+        \hline
+        Manometer Uncertainty Reading & $\pm 1 mm$\\
+        \hline
+        Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
+        \hline
+        Scanivalve Precision & Acquired from autocorrelation using port 36 in each trial. See table (x)\\
+        \hline
+        Scanivalve Bias & Assume to be 0 \\
+        \hline
+        Calibration Coefficients & Assume to be 0\\
+        \hline
+        
+    \end{tabular}
+    \caption{Quantifiable Error}
+    \label{tab:quant_error}
+\end{table}
 
 \subsection{Manometer Pressure}
 
