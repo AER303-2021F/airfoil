@@ -270,7 +270,7 @@ def coefficients(L, D, M, velocity):
     q_infty = 0.5 * 1.225 * velocity ** 2
 
     C_L = L / q_infty
-    C_D = D / q_infty
+    C_D = D / (q_infty * 0.1)
     C_M = M / q_infty
 
     return C_L, C_D, C_M
@@ -404,7 +404,7 @@ for i in range(AoA.size):
     # Calculate values.
     N, A, M = normal_force(*params), axial_force(*params), moment(*params)
     L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
-    cL, cD, cM = coefficients(L, D, M, scani_velocity[i])
+    cL, cD, cM = coefficients(L, D/100, M, scani_velocity[i])
 
     L_vs_aoa_s[i], D_vs_aoa_s[i], M_vs_aoa_s[i] = L, D, M
     cL_vs_aoa_s[i], cD_vs_aoa_s[i], cM_vs_aoa_s[i] = cL, cD, cM
@@ -433,6 +433,9 @@ cL_uncertainty_s = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 *
 
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
 cD_uncertainty_s = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+np.savetxt("./Data/scani_pressure_drag.csv", D_vs_aoa_s / 100, delimiter=",")
+np.savetxt("./Data/scani_pressure_drag_error.csv", delta_D / 100, delimiter=",")
 
 cM_uncertainty_s = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
@@ -474,7 +477,7 @@ for i in range(AoA.size):
 
     N, A, M = normal_force(*params), axial_force(*params), moment(*params)
     L, D = lift(N, A, aoa), pressure_drag(N, A, aoa)
-    cL, cD, cM = coefficients(L, D, M, mano_velocity[i])
+    cL, cD, cM = coefficients(L, D / 100, M, mano_velocity[i])
 
     L_vs_aoa_m[i], D_vs_aoa_m[i], M_vs_aoa_m[i] = L, D, M
     cL_vs_aoa_m[i], cD_vs_aoa_m[i], cM_vs_aoa_m[i] = cL, cD, cM
@@ -503,6 +506,9 @@ cL_uncertainty_m = abs(cL_vs_aoa_s) * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 *
 
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
 cD_uncertainty_m = abs(cD_vs_aoa_s) * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+
+np.savetxt("./Data/mano_pressure_drag.csv", D_vs_aoa_m / 100, delimiter=",")
+np.savetxt("./Data/mano_pressure_drag_error.csv", delta_D / 100, delimiter=",")
 
 cM_uncertainty_m = abs(cM_vs_aoa_s) * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
