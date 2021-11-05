@@ -43,6 +43,35 @@ grid on
 set(gca, 'FontSize', 15)
 saveas(gcf,'scanivalve_cl_vs_cd.png')
 
+val_data = importdata("../Data/validation_coefficients.csv");
+val_aoa = val_data(:, 1);
+val_cl = val_data(:, 2);
+val_cdp = val_data(:, 3);
+val_cm = val_data(:, 4);
+
+figure
+yyaxis left
+plot(val_aoa, val_cl)
+hold on
+errorbar(aoa, cl, cl_err)
+yyaxis right
+hold on
+plot(val_aoa, val_cdp)
+hold on
+errorbar(aoa, cdp, cdp_err)
+hold on
+plot(val_aoa, val_cm)
+hold on
+errorbar(aoa, cm, cm_err)
+xlabel('$\alpha^\circ$', "interpreter", "latex")
+ylabel('$C_{D,p}$ and $C_M$ Scale', 'interpreter', 'latex')
+title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Scanivalve and XFOIL Data', 'interpreter', 'latex')
+legend('$C_L$', '$C_L$, XFOIL', '$C_{D,p}$', '$C_{D,p}$, XFOIL', '$C_M$', '$C_M$, XFOIL', 'interpreter', 'latex')
+grid on
+set(gca, 'FontSize', 15)
+saveas(gcf,'scanivalve_XFOIL_cl_vs_cd.png')
+
+
 % Import manometer data.
 mano_coeff_data = importdata("../Data/manometer_coefficients.csv");
 mano_coeff_uncertainty = importdata("../Data/manometer_coefficient_uncertainty.csv");
@@ -71,7 +100,7 @@ errorbar(aoa, cm, cm_err, 'linewidth', 0.5)
 xlabel('$\alpha^\circ$', "interpreter", "latex")
 ylabel('$C_{D,p}$ and $C_M$ Scale', 'interpreter', 'latex')
 title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Manometer Data', 'interpreter', 'latex')
-legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex')
+legend('$C_L$', '$C_{D,p}$', '$C_M$', 'interpreter', 'latex', 'location', 'southeast')
 grid on
 set(gca, 'FontSize', 15)
 saveas(gcf,'manometer_cl_cd_cm.png')
@@ -85,3 +114,25 @@ title('$C_L$ vs $C_{D,p}$ for Manometer Data', 'interpreter', 'latex')
 grid on
 set(gca, 'FontSize', 15)
 saveas(gcf,'manometer_cl_vs_cd.png')
+
+figure
+yyaxis left
+plot(val_aoa, val_cl)
+hold on
+errorbar(aoa, cl, cl_err)
+yyaxis right
+hold on
+plot(val_aoa, val_cdp)
+hold on
+errorbar(aoa, cdp, cdp_err)
+hold on
+plot(val_aoa, val_cm)
+hold on
+errorbar(aoa, cm, cm_err)
+xlabel('$\alpha^\circ$', "interpreter", "latex")
+ylabel('$C_{D,p}$ and $C_M$ Scale', 'interpreter', 'latex')
+title('$C_L$, $C_{D,p}$, and $C_M$ vs $\alpha$ for Manometer and XFOIL Data', 'interpreter', 'latex')
+legend('$C_L$', '$C_L$, XFOIL', '$C_{D,p}$', '$C_{D,p}$, XFOIL', '$C_M$', '$C_M$, XFOIL', 'interpreter', 'latex', 'location', 'northwest')
+grid on
+set(gca, 'FontSize', 15)
+saveas(gcf, 'manometer_XFOIL_cl_vs_cd.png')
