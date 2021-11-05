@@ -399,57 +399,6 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
 
 \subsection{Coefficient of Lift, Pressure Drag, and Moment}
 
-Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
-
-\noindent
-In both plots, the coefficient of lift increases with the angle of attack until $\alpha\approx13^\circ$ at which the coefficient of lift begins decreasing for all higher angles of attack. There are various features within the lift curve to discuss.
-
-\begin{itemize}
-
-    \item The first feature to discuss is the non-zero coefficient of lift produced at $\alpha=0^\circ$. This signifies a degree of camber inherent to the airfoil indicating that the Clark Y airfoil is not symmetric which is in line with our understanding.
-    
-    \item A linear $C_L$-$\alpha$ dependency exists for angles of attack within the approximate range from $0^\circ$ to $8^\circ$. This region is characterized by a very minimal boundary layer that does not significantly hinder lift production.
-    
-    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing lift slope. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the beginning of the plateau on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
-    
-    \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an aircraft slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircraft's weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle is met at which the aircraft can no longer sustain flight.
-    
-    \item For the remainder of the $C_L$ curve, increasing the angle of attack emphasizes the domination of flow separation and the continual decrease in lift production.
-\end{itemize}
-
-\noindent
-The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $D_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
-
-
-\noindent
-Lastly, the coefficient of moment curves follow a behaviour inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. This behaviour of the moment force on an airfoil is essential from a pilot perspective as it provides safe handling characteristics around the point of a stall. When an aircraft stalls, the goal of the pilot is to increase the airflow over the airfoil to regain laminar flow and reduce the drag effects. This is accomplished by lowering the angle of attack. The $C_M$ behaviour exhibited by the Clark Y airfoil, would cause the airfoil to pitch down when in a stall configuration which would allow for the regain of lift. Thusly, the moment behavior of an airfoil is an important consideration in aircraft design.
-
-\subsection{Pressure Drag and Total Drag Comparison}
-\begin{table}[h]
-\centering
-\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}}
-\toprule
-$\alpha^\circ$ & $D'_p$ (Scanivalve) & $D'_p$ (Manometer) & $D'$ (Scanivalve) & $D'$ (Manometer) \\
-\midrule
- $0.0\pm0.25$ &     $0.056\pm1.503$ &    $0.043\pm1.755$ &   $2.584\pm0.782$ &   $3.121\pm6.09$ \\
- $3.0\pm0.25$ &     $0.028\pm1.458$ &    $0.024\pm1.699$ &   $1.416\pm2.495$ &  $1.488\pm6.095$ \\
- $6.0\pm0.25$ &     $0.083\pm1.383$ &    $0.059\pm1.609$ &   $1.742\pm2.064$ &  $2.763\pm6.113$ \\
- $8.0\pm0.25$ &     $0.119\pm0.005$ &    $0.118\pm0.049$ &   $2.041\pm1.809$ &  $3.247\pm6.084$ \\
-$10.0\pm0.25$ &     $0.223\pm1.379$ &     $0.221\pm1.62$ &   $3.222\pm2.052$ &  $5.152\pm6.061$ \\
-$11.0\pm0.25$ &      $0.269\pm0.21$ &    $0.253\pm0.268$ &   $1.424\pm1.673$ &  $4.895\pm6.062$ \\
-$13.0\pm0.25$ &     $0.419\pm1.455$ &    $0.425\pm1.707$ &   $0.821\pm1.425$ &  $3.468\pm6.076$ \\
-$15.0\pm0.25$ &     $0.548\pm1.001$ &    $0.635\pm1.157$ &   $7.675\pm1.994$ &   $6.81\pm5.974$ \\
-$16.0\pm0.25$ &     $0.694\pm1.502$ &    $0.724\pm1.759$ &   $6.537\pm2.159$ & $10.239\pm5.926$ \\
-$17.0\pm0.25$ &     $0.832\pm0.622$ &    $0.951\pm0.745$ &  $10.323\pm2.421$ & $13.252\pm5.813$ \\
-$20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $18.301\pm5.583$ \\
-\bottomrule
-\end{tabular}
-\caption{Comparison of pressure and total drag force per unit span.}
-\label{tab:pressure_comparison}
-\end{table}
-Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
-
-The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -468,23 +417,7 @@ The relative errors in the drag calculations are large, particularly for the pre
     \label{fig:coeffs}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/scanivalve_cl_vs_cd.png}
-         \caption{$C_L$ vs $C_{D,p}$ from scanivalve data.}
-         \label{fig:scani_cL_cD}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/manometer_cl_vs_cd.png}
-         \caption{$C_L$ vs $C_{D,p}$ from manometer data.}
-         \label{fig:mano_cL_cD}
-     \end{subfigure}
-    \caption{Empirically determined $C_L$ vs $C_{D,p}$ curves.}
-    \label{fig:cL_vs_cD}
-\end{figure}
+Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
 \centering
@@ -566,11 +499,109 @@ $20.00\pm0.25$ & $0.89\pm0.25$ & $0.018\pm0.016$ & $-0.06027\pm0.00021$ \\
 \label{tab:mano_coeff}
 \end{table}
 
+\noindent
+In both plots, the coefficient of lift increases with the angle of attack until $\alpha\approx13^\circ$ at which the coefficient of lift begins decreasing for all higher angles of attack. There are various features within the lift curve to discuss.
+
+\begin{itemize}
+
+    \item The first feature to discuss is the non-zero coefficient of lift produced at $\alpha=0^\circ$. This signifies a degree of camber inherent to the airfoil indicating that the Clark Y airfoil is not symmetric which is in line with our understanding.
+    
+    \item A linear $C_L$-$\alpha$ dependency exists for angles of attack within the approximate range from $0^\circ$ to $8^\circ$. This region is characterized by a very minimal boundary layer that does not significantly hinder lift production.
+    
+    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing lift slope. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the beginning of the plateau on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
+    
+    \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an aircraft slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircraft's weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle is met at which the aircraft can no longer sustain flight.
+    
+    \item For the remainder of the $C_L$ curve, increasing the angle of attack emphasizes the domination of flow separation and the continual decrease in lift production.
+\end{itemize}
+
+\noindent
+The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $D_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
+
+\noindent
+Lastly, the coefficient of moment curves follow a behaviour inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. This behaviour of the moment force on an airfoil is essential from a pilot perspective as it provides safe handling characteristics around the point of a stall. When an aircraft stalls, the goal of the pilot is to increase the airflow over the airfoil to regain laminar flow and reduce the drag effects. This is accomplished by lowering the angle of attack. The $C_M$ behaviour exhibited by the Clark Y airfoil, would cause the airfoil to pitch down when in a stall configuration which would allow for the regain of lift. Thusly, the moment behavior of an airfoil is an important consideration in aircraft design.\newline
+
+\noindent
+The coefficients calculated from the experimental data can be compared to the results from XFOIL as seen in figures \ref{fig:scani_comp} and \ref{fig:mano_comp} for the scanivalve and manometer data respectively.\newline
+
+\noindent
+The experimental results are a better match for the $C_L$ and $C_D$ curve for the scanivalve data where the majority of the XFOIL data falls within the uncertainty of the experimental data. Since the experimental procedure did not calculate viscous effects, the experimental $C_D$ curve begins to deviate from the XFOIL $C_D$ curve at higher angles of attack when viscous effects become significant. XFOIL's viscous solver makes it a more accurate descriptor of the real flow in high viscous conditions. \newline
+
+\noindent
+For the manometer data, there is a larger deviation between the lift and drag coefficient curves compared to the XFOIL data. These discrepancies are emphasized by the greater sources of error associated with manometer measurements described in section \ref{sec:source_of_error}. The relationships between the lift and drag coefficient curves for the manometer data compared to the XFOIL data are similar to that of the scanivalve-to-XFOIL relationships stated earlier.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_XFOIL_cl_vs_cd.png}
+         \caption{$C_L$, $C_{D,p}$, and $C_M$ scanivalve data compared to XFOIL.}
+         \label{fig:scani_comp}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_XFOIL_cl_vs_cd.png}
+         \caption{$C_L$, $C_{D,p}$, and $C_M$ manometer data compared to XFOIL.}
+         \label{fig:mano_comp}
+     \end{subfigure}
+    \caption{Comparing $C_L$, $C_{D,p}$, and $C_M$ curves to XFOIL.}
+    \label{fig:curve_comp}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_cl_vs_cd.png}
+         \caption{$C_L$ vs $C_{D,p}$ from scanivalve data.}
+         \label{fig:scani_cL_cD}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_cl_vs_cd.png}
+         \caption{$C_L$ vs $C_{D,p}$ from manometer data.}
+         \label{fig:mano_cL_cD}
+     \end{subfigure}
+    \caption{Empirically determined $C_L$ vs $C_{D,p}$ curves.}
+    \label{fig:cL_vs_cD}
+\end{figure}
+
+\subsection{Pressure Drag and Total Drag Comparison}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}}
+\toprule
+$\alpha^\circ$ & $D'_p$ (Scanivalve) & $D'_p$ (Manometer) & $D'$ (Scanivalve) & $D'$ (Manometer) \\
+\midrule
+ $0.0\pm0.25$ &     $0.056\pm1.503$ &    $0.043\pm1.755$ &   $2.584\pm0.782$ &   $3.121\pm6.09$ \\
+ $3.0\pm0.25$ &     $0.028\pm1.458$ &    $0.024\pm1.699$ &   $1.416\pm2.495$ &  $1.488\pm6.095$ \\
+ $6.0\pm0.25$ &     $0.083\pm1.383$ &    $0.059\pm1.609$ &   $1.742\pm2.064$ &  $2.763\pm6.113$ \\
+ $8.0\pm0.25$ &     $0.119\pm0.005$ &    $0.118\pm0.049$ &   $2.041\pm1.809$ &  $3.247\pm6.084$ \\
+$10.0\pm0.25$ &     $0.223\pm1.379$ &     $0.221\pm1.62$ &   $3.222\pm2.052$ &  $5.152\pm6.061$ \\
+$11.0\pm0.25$ &      $0.269\pm0.21$ &    $0.253\pm0.268$ &   $1.424\pm1.673$ &  $4.895\pm6.062$ \\
+$13.0\pm0.25$ &     $0.419\pm1.455$ &    $0.425\pm1.707$ &   $0.821\pm1.425$ &  $3.468\pm6.076$ \\
+$15.0\pm0.25$ &     $0.548\pm1.001$ &    $0.635\pm1.157$ &   $7.675\pm1.994$ &   $6.81\pm5.974$ \\
+$16.0\pm0.25$ &     $0.694\pm1.502$ &    $0.724\pm1.759$ &   $6.537\pm2.159$ & $10.239\pm5.926$ \\
+$17.0\pm0.25$ &     $0.832\pm0.622$ &    $0.951\pm0.745$ &  $10.323\pm2.421$ & $13.252\pm5.813$ \\
+$20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $18.301\pm5.583$ \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of pressure and total drag force per unit span.}
+\label{tab:pressure_comparison}
+\end{table}
+
+Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
+
+The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
+
 \subsection{Comparison with other experiments}
+
 Experimental performance data of a Clark Y airfoil is available in literature
 \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.
 
 The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
+
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -595,7 +626,7 @@ The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well w
 % -----------------------------------------------------------------------------
 
 
-\section{Sources of Error}
+\section{Sources of Error}\label{sec:source_of_error}
 
 \subsection{Quantifiable Sources of Errors}
 \begin{table}[H]
