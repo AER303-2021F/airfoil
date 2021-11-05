@@ -118,10 +118,6 @@ Refer to table \ref{tab:nomenclature} for definitions and symbols common to this
     \label{tab:nomenclature}
 \end{table}
 
-\begin{itemize}
-    \item Voltage-pressure measurement: A measurement of the pressure calculated at a point in the wind tunnel in the voltage space as returned by the data acquisition card.
-\end{itemize}
-
 
 % -----------------------------------------------------------------------------
 %   Introduction and Background
@@ -153,6 +149,7 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
 \subsection{Calculating Lift, Drag and Dimensionless Coefficients}
 
 The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.
+
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
     D' &= N'\sin\alpha + A'\cos\alpha \label{eq:drag}
@@ -214,6 +211,7 @@ Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircr
 This details the lab setup and experimental procedure used in the experiment.
 
 \subsection{Apparatus}
+
 The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.
 
 \begin{table}
@@ -292,7 +290,7 @@ Once the pressure measurements were taken, the data is pre-processed to obtain p
 
     \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For data calculated using the inclined manometer, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation.
+    \item For the inclined manometer approach, the data is captured in images which we annotate using a web based data extraction tool for converting our image embedded data to csv files.\cite{Rohatgi2020} In this annotation stage, we specify graph boundaries and the scale of the graph. We then select the peaks of each manometer tube. The program will then interpolate between the boundaries to get a measure of our selection. Distortions in the image can cause nonlinear length scales that can provide error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation.
 
 \end{enumerate}
 
@@ -308,6 +306,7 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \section{Results and Discussion}
 
 \subsection{Wake Velocity Profile}
+
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -326,12 +325,77 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
     \label{fig:wake_velocities}
 \end{figure}
 
+\subsection{Coefficient of Lift, Pressure Drag, and Moment}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_cl_cd_cm.png}
+         \caption{Coefficients calculated from scanivalve data.}
+         \label{fig:scani_coeff}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_cl_cd_cm.png}
+         \caption{Coefficients calculated from manometer data.}
+         \label{fig:mano_coeff}
+     \end{subfigure}
+    \caption{Empirically determined coefficients of lift, pressure drag, and moment.}
+    \label{fig:coeffs}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_cl_vs_cd.png}
+         \caption{$C_L$ vs $C_{D,p}$ from scanivalve data.}
+         \label{fig:scani_cL_cD}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_cl_vs_cd.png}
+         \caption{$C_L$ vs $C_{D,p}$ from manometer data.}
+         \label{fig:mano_cL_cD}
+     \end{subfigure}
+    \caption{Empirically determined $C_L$ vs $C_{D,p}$ curves.}
+    \label{fig:cL_vs_cD}
+\end{figure}
+
 \subsection{Comparison with XFOIL}
+
 Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
 
 \subsection{Comparison with other experiments}
+
 Experimental performance data of a Clark Y airfoil is available in literature
 \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}.
+
+
+% -----------------------------------------------------------------------------
+%   Sources of Error
+% -----------------------------------------------------------------------------
+
+
+\section{Sources of Error}
+
+\subsection{Quantifiable Sources of Error}
+
+\subsection{Non-Quantifiable Sources of Error}
+\label{sec:non_quantifiable_sources_of_error}
+
+The experimental setup contained various areas of non-quantifiable sources of error such as the low frequency response in the pressure tubes, the precision error of the manometer, the turbulence in the airfoil wake, and the distortion effect in image acquisition.\newline
+
+\noindent
+For the pressure experienced in the wind tunnel to be measured by the scanivalve or manometer, the pressure changes had to travel down a series of long tubes before reaching the measuring devices. This long transit will cause a damping in the strength of pressure gradients and thus the extent or pressure changes at the manometer and scanivalve ends. This effect will result in a low frequency response of our measurements.\newline
+
+\noindent
+Two other sources of error arise from the unpredictable fluctuations in pressure information. Specifically, the imaging method of data acquisition from the manometer took a snapshot of the measurements in time. Not gaining a time series of the data prevents us from knowing the precision error of our measurements which would allow us to quantify the probability of getting the measurements we received from the distribution from all possible fluctuations. Another aspect of pressure fluctuations was seen in the airfoil's wake whose turbulent flow created random undulations in the measured pressure. The snapshot of this unsteady flow as measured by the rake device failed to capture the time series of these fluctuations, again, preventing the quantification of such oscillations in the airfoil wake velocity.\newline
+
+\noindent
+The last source of a non-quantifiable source of error is the the effect of image distortion on data annotation. In the data annotation workflow, we would mark upon the manometer images reference points and the length scale in between the reference points. The program then linearly interpolated this scale to measure the coordinates of points placed on the image. Although, angular distortions in an image cause a non-linear length scale which skews the measurements gained from the program thus adding to the error of the experiment. This error could be reduced through more direct manometer images, providing an image correction, or determining by hand, each manometer tube height.
+
 
 % -----------------------------------------------------------------------------
 %   Conclusion
@@ -639,9 +703,11 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
 
 \subsection{Quantifiable Errors}
 \begin{table}[H]
-    \begin{tabular}{|c|c|c|}
+\begin{center}
+    \begin{tabular}{||c|c||}
         \hline
-        \multicolumn{2}{|c|}{Quantifiable Error}\\
+        \multicolumn{2}{||c||}{Quantifiable Error}\\
+        \hline
         \hline
         Manometer Uncertainty Reading & $\pm 1 mm$\\
         \hline
@@ -654,9 +720,10 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
         Calibration Coefficients & Assume to be 0\\
         \hline
         
-    \end{tabular}
-    \caption{Quantifiable Error}
-    \label{tab:quant_error}
+\end{tabular}
+\end{center}
+\caption{Quantifiable Error}
+\label{tab:quant_error}
 \end{table}
 
 \subsection{Manometer Pressure}
@@ -710,17 +777,64 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 \subsection{Dynamic Pressure}
 
 \begin{align*}
-    q &= \frac{1}{2} \rho u^2\\
-    \delta q &= \rho u
+    q_\infty &= \frac{1}{2} \rho_\infty U_\infty^2\\
+    \delta q_\infty &= \rho_\infty U_\infty
 \end{align*}
 
-\subsection{Drag Coefficient}
-
-Assume the chord length to be known perfectly.
+\subsection{Normal Force}
 
 \begin{align*}
-    c_D &= \frac{D}{q_\infty c}\\
-    \delta c_D &= \sqrt{\left(\frac{\delta D}{q_\infty c}\right)^2 + \left( \frac{\delta q c_D}{q} \right)^2}
+    N' &= \int-P_u\cos\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
+    \delta N' &= \sqrt{\left(\int-\cos\theta ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int P_u\sin\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
+\end{align*}
+
+\subsection{Axial Force}
+
+\begin{align*}
+    A' &= \int-P_u\sin\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
+    \delta A' &= \sqrt{\left(\int-\sin\theta ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int -P_u\cos\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
+\end{align*}
+
+\subsection{Moment Force}
+
+\begin{align*}
+    M' &= \int \left(P_ux\cos\theta - P_uy\sin\theta\right) ds_u + \int \left(P_\ell x\cos\theta + P_\ell y\sin\theta\right) ds_\ell \\
+    \delta M' &= \sqrt{\left(\int \left(x\cos\theta - y\sin\theta\right) ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int -P_u\cos\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
+\end{align*}
+
+\subsection{Lift Force}
+
+\begin{align*}
+    L &= N\cos\alpha - A\sin\alpha \\
+    \delta L &= \sqrt{\left(\cos(\alpha)\delta N\right)^2 + \left(\sin(\alpha)\delta A\right)^2 + \left(\left[N\sin\alpha + A\cos\alpha\right]\delta \alpha\right)^2}
+\end{align*}
+
+\subsection{Pressure Drag Force}
+
+\begin{align*}
+    D &= N\sin\alpha + A\cos\alpha \\
+    \delta D &= \sqrt{\left(\sin(\alpha)\delta N\right)^2 + \left(\cos(\alpha)\delta A\right)^2 + \left(\left[N\cos\alpha - A\sin\alpha\right]\delta \alpha\right)^2}
+\end{align*}
+
+\subsection{Coefficient of Lift}
+
+\begin{align*}
+    C_L &= \frac{L'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
+    \frac{\delta C_L}{C_L} &= \sqrt{\left(\frac{\delta L'}{L'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
+\end{align*}
+
+\subsection{Coefficient of Drag}
+
+\begin{align*}
+    C_D &= \frac{D'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
+    \frac{\delta C_D}{C_D} &= \sqrt{\left(\frac{\delta D'}{D'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
+\end{align*}
+
+\subsection{Coefficient of Moment}
+
+\begin{align*}
+    C_M &= \frac{M'}{\frac{1}{2}\rho_\infty U^2_\infty C^2} \\
+    \frac{\delta C_M}{C_M} &= \sqrt{\left(\frac{\delta M'}{M'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(2\frac{\delta C}{C}\right)^2}
 \end{align*}
 
 \end{document}
