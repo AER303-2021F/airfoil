@@ -363,6 +363,52 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
     \label{fig:cL_vs_cD}
 \end{figure}
 
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+\toprule
+$\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
+\midrule
+ $0.00\pm0.25$ & $0.380\pm0.039$ & $0.0100236\pm0.27$ &  $-0.170094\pm0.000050$ \\
+ $3.00\pm0.25$ & $0.650\pm0.076$ & $0.01\pm0.26$ & $-0.15733\pm0.00051$ \\
+ $6.00\pm0.25$ & $0.94\pm0.11$ & $0.01\pm0.24$ &  $-0.16652\pm0.00035$ \\
+ $8.00\pm0.25$ & $1.12\pm0.26$ &  $0.02068\pm0.00082$ & $-0.15797\pm0.00026$ \\
+$10.00\pm0.25$ & $1.25\pm0.11$ & $0.04\pm0.24$ & $-0.16007\pm0.00033$ \\
+$11.00\pm0.25$ & $1.30\pm0.26$ & $0.05\pm0.037$ &  $-0.14797\pm0.00022$ \\
+$13.00\pm0.25$ & $1.379\pm0.077$ &  $0.07\pm0.26$ & $-0.14144\pm0.00016$ \\
+$15.00\pm0.25$ & $1.24\pm0.19$ & $0.09\pm0.17$ & $-0.13417\pm0.00032$ \\
+$16.00\pm0.25$ & $1.238\pm0.038$ & $0.12\pm0.26$ & $-0.13876\pm0.00037$ \\
+$17.00\pm0.25$ &  $1.14\pm0.23$ & $0.14\pm0.11$ &  $-0.15305\pm0.00048$ \\
+$20.00\pm0.25$ & $0.99\pm0.21$ &  $0.21\pm0.13$ & $-0.16259\pm0.00021$ \\
+\bottomrule
+\end{tabular}
+\caption{Coefficients of lift, pressure drag, and moment for the scanivalve data.}
+\label{tab:scani_coeff}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+\toprule
+$\alpha^\circ$ & $C_L$ & $C_{D,p}$ & $C_M$ \\
+\midrule
+ $0.00\pm0.25$ & $0.322\pm0.050$ & $0.01\pm0.32$ &  $-0.072506\pm0.000050$ \\
+ $3.00\pm0.25$ & $0.573\pm0.092$ &   $0.00\pm0.30$ & $-0.10605\pm0.00051$ \\
+ $6.00\pm0.25$ & $0.79\pm0.13$ &  $0.0074\pm0.28$ &  $-0.06257\pm0.00035$ \\
+ $8.00\pm0.25$ & $1.01\pm0.31$ & $0.0153\pm0.0086$ & $-0.071424\pm0.00026$ \\
+$10.00\pm0.25$ & $1.08\pm0.13$ & $0.03\pm0.28$ & $-0.04364\pm0.00033$ \\
+$11.00\pm0.25$ & $1.12\pm0.31$ & $0.032\pm0.047$ & $-0.01843\pm0.00022$ \\
+$13.00\pm0.25$ & $1.181\pm0.087$ &  $0.05\pm0.30$ & $-0.04153\pm0.00016$ \\
+$15.00\pm0.25$ & $1.11\pm0.23$ & $0.08\pm0.20$ & $-0.04825\pm0.00032$ \\
+$16.00\pm0.25$ & $1.038\pm0.042$ & $0.09\pm0.30$ &  $0.00178\pm0.00037$ \\
+$17.00\pm0.25$ & $0.99\pm0.27$ & $0.12\pm0.13$ &  $-0.05075\pm0.00048$ \\
+$20.00\pm0.25$ & $0.89\pm0.25$ & $0.18\pm0.16$ & $-0.06027\pm0.00021$ \\
+\bottomrule
+\end{tabular}
+\caption{Coefficients of lift, pressure drag, and moment for the manometer data.}
+\label{tab:mano_coeff}
+\end{table}
+
 \subsection{Comparison with XFOIL}
 
 Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
@@ -791,12 +837,16 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Normal Force}
 
+% Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
+
 \begin{align*}
     N' &= \int-P_u\cos\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
     \delta N' &= \sqrt{\left(\int-\cos\theta ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int P_u\sin\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
 \end{align*}
 
 \subsection{Axial Force}
+
+% Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
 
 \begin{align*}
     A' &= \int-P_u\sin\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
@@ -805,9 +855,14 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Moment Force}
 
+% Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
+
 \begin{align*}
     M' &= \int \left(P_ux\cos\theta - P_uy\sin\theta\right) ds_u + \int \left(P_\ell x\cos\theta + P_\ell y\sin\theta\right) ds_\ell \\
-    \delta M' &= \sqrt{\left(\int \left(x\cos\theta - y\sin\theta\right) ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int -P_u\cos\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
+    \delta M' &= \sqrt{\left(\beta P_u\right)^2 + \left(\gamma\delta P_\ell\right)^2 + \left(\eta\delta\theta\right)^2}\;\text{where}\\
+    \beta &= \int \left(x\cos\theta - y\sin\theta\right) ds_u \\
+    \gamma &= \int \left(x\cos\theta + y\sin\theta\right) ds_\ell\\
+    \eta &= \int \left(-P_ux\sin\theta -P_uy\cos\theta\right)ds_u + \int \left(-P_\ell x\sin\theta + P_\ell y\cos\theta\right) ds_u \\
 \end{align*}
 
 \subsection{Lift Force}
@@ -833,6 +888,8 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Coefficient of Lift}
 
+% Assumptions include that we know our free stream density and chord length perfectly.
+
 \begin{align*}
     C_L &= \frac{L'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
     \frac{\delta C_L}{C_L} &= \sqrt{\left(\frac{\delta L'}{L'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
@@ -840,12 +897,16 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Coefficient of Drag}
 
+% Assumptions include that we know our free stream density and chord length perfectly.
+
 \begin{align*}
     C_D &= \frac{D'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
     \frac{\delta C_D}{C_D} &= \sqrt{\left(\frac{\delta D'}{D'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
 \end{align*}
 
 \subsection{Coefficient of Moment}
+
+% Assumptions include that we know our free stream density and chord length perfectly.
 
 \begin{align*}
     C_M &= \frac{M'}{\frac{1}{2}\rho_\infty U^2_\infty C^2} \\
