@@ -8,7 +8,7 @@ load("../Data/Calibrated_Rake_Pa.mat");
 
 % Load manometer and scanivalve pressure data
 RHO = 1.225;
-d_p_scani = 9.80665 * readmatrix("../Data/scanivalve_error.csv");
+d_p_scani = 115 * readmatrix("../Data/scanivalve_error.csv");
 % Error from all scanivalve time series, Pa
 
 alphas = [0 3 6 8 10 11 13 15 16 17 20];

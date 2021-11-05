@@ -1,6 +1,7 @@
 % http://brennen.caltech.edu/fluidbook/externalflows/drag/dragNwake.pdf
 load("../../Data/calibrated_manometer_data_Pa.mat");
-XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients", "numheaderlines", 12);
+XFOIL_data = readmatrix("../../XFOIL Analysis/clark_y_coefficients",...
+             "numheaderlines", 12);
 alphas = [0 3 6 8 10 11 13 15 16 17 20];
 c_D = zeros(size(alphas));
 d_c_D = zeros(size(alphas));
@@ -23,8 +24,10 @@ ylabel("Vertical Position (m)", "interpreter", "latex")
 for i = 1:11
     alpha = alphas(i);
     RHO = 1.225; % kg/m^3
-    locations_a = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20] + 0.5; % Raised position
-    locations_b = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20]; % Lowered position
+    locations_a = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33,...
+                   20] + 0.5; % Raised position
+    locations_b = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33,...
+                   20]; % Lowered position
 
     combined_locations = [locations_b; locations_a]; % indices in ascending order
     combined_locations = combined_locations(:) / 100; % locations in m
@@ -37,12 +40,15 @@ for i = 1:11
     
     vel_diff_err = sqrt(d_freestream(i)^2 + d_velocities.^2);
 
-    errorbar(freestream(i)- velocities, combined_locations, vel_diff_err, "horizontal", "DisplayName", sprintf("%d", alpha));
+    errorbar(freestream(i)- velocities, combined_locations, vel_diff_err,...
+        "horizontal", "DisplayName", sprintf("%d", alpha));
     
-    drag_force(i) = RHO * trapz(combined_locations,  velocities .* (freestream(i) - velocities));
+    drag_force(i) = RHO * trapz(combined_locations,  velocities .* ...
+        (freestream(i) - velocities));
     
     % Calculate drag error
-    integrand_error_squared = velocities .* d_freestream(i) + (freestream(i)-2.*velocities) .* d_velocities;
+    integrand_error_squared = velocities .* d_freestream(i) + ...
+        (freestream(i)-2.*velocities) .* d_velocities;
     d_drag_force(i) = sqrt(sum(integrand_error_squared));
     
     q = 1/2 * RHO * freestream(i).^2;
