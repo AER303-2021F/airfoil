@@ -256,7 +256,7 @@ The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pres
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{Apparatus Pictures/scanivalve.jpg}
-    \caption{Scanivalve system, connected to a pressure transcuder. The system allows rapid switching of each of the 36 channels to the transducer to sweep through all pressure measurements.}
+    \caption{Scanivalve system, connected to a pressure transducer. The system allows rapid switching of each of the 36 channels to the transducer to sweep through all pressure measurements.}
     \label{fig:scanivalve}
 \end{figure}
 
@@ -401,7 +401,9 @@ $20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $
 \caption{Comparison of pressure and total drag force per unit span.}
 \label{tab:pressure_comparison}
 \end{table}
+Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
 
+The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -485,9 +487,27 @@ $20.00\pm0.25$ & $0.89\pm0.25$ & $0.18\pm0.16$ & $-0.06027\pm0.00021$ \\
 \end{table}
 
 \subsection{Comparison with other experiments}
-
 Experimental performance data of a Clark Y airfoil is available in literature
-\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}.
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.
+
+The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cd.jpg}
+         \caption{}
+         \label{fig:reference_cl_cd}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/clark_y_reference_cl_cm.jpg}
+         \caption{}
+         \label{fig:reference_cl_cm}
+     \end{subfigure}
+    \caption{Reference data for the Clark Y airfoil at $Re = 200000$.}
+    \label{fig:clark_y_reference}
+\end{figure}
 
 
 % -----------------------------------------------------------------------------
@@ -538,7 +558,11 @@ The last source of a non-quantifiable source of error is the the effect of image
 
 
 \section{Conclusion}
-The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were measured at 11 different angles of attack. Both sets of measurements agree well with simulations from XFOIL and literature. <TBD>
+The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.
+
+The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
+
+$C_L$ increases linearly with $\alpha$ up to around 10 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.
 
 % -----------------------------------------------------------------------------
 %   Bibliography
