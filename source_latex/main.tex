@@ -186,7 +186,7 @@ $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pres
 \end{align}
 
 \subsection{Calculating Total Drag from Wake Velocity}
-The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the 
+The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.
 \begin{align}
     D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
 \end{align}
@@ -314,22 +314,30 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.
 
 \subsection{Wake Velocity Profile}
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and 
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.
+
+The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.
+
+In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.
+
+$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.
+
+Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
-         \caption{$y=x$}
-         \label{fig:y equals x}
+          \caption{}
+         \label{fig:scanivalve_wake_velocity}
      \end{subfigure}
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
-         \caption{$y=3sinx$}
-         \label{fig:three sin x}
+         \caption{}
+         \label{fig:manometer_wake_velocity}
      \end{subfigure}
-    \caption{Caption}
+    \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
 \begin{figure}
