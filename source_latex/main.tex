@@ -69,7 +69,7 @@
 
 \begin{abstract}
 
-In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The lift and drag are then calculated which are used to determine coefficients of lift, drag, and moment ($C_L$, $C_D$, and $C_M$, respectively). Measurements are collected using two separate methods, and their comparative effectiveness is evaluated.
+In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The lift and drag are then calculated which are used to determine coefficients of lift, drag, and moment ($C_L$, $C_D$, and $C_M$, respectively). Measurements are collected using two separate methods, and their comparative effectiveness is evaluated in terms of accuracy. Both sets of experimental measurements agree well with simulations from \textit{XFOIL} software, but errors are likely not correctly estimated for either case.
 
 \keywords{Airfoil \and Stall \and Inclined Manometer \and Scanivalve}
 \end{abstract}
@@ -184,6 +184,12 @@ $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pres
     C_M &= \frac{M'}{q_\infty C^2}
     \label{eq:cm}
 \end{align}
+
+\subsection{Calculating Total Drag from Wake Velocity}
+The drag force formulation from above ignore viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil.
+\begin{align*}
+    D' &= \rho\int u (U_\infty - u) dy
+\end{align*}
 
 \subsection{Stall}
 Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
@@ -305,22 +311,22 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \section{Results and Discussion}
 
 \subsection{Wake Velocity Profile}
-
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake.
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
-         \caption{$y=x$}
-         \label{fig:y equals x}
+         \caption{}
+         \label{fig:scanivalve_wake_velocity}
      \end{subfigure}
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
-         \caption{$y=3sinx$}
-         \label{fig:three sin x}
+         \caption{}
+         \label{fig:manometer_wake_velocity}
      \end{subfigure}
-    \caption{Caption}
+    \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
 
@@ -795,8 +801,8 @@ For cases where we want the velocity of airfoil at a single pitot tube.
 An average free stream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
 
 \begin{align*}
-    U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 P_{20}}{\rho}} + \sqrt{\frac{2 P_{36}}{\rho}} \right) \\
-    \delta U_\infty &= \sqrt{\left(\frac{1}{2U_\infty \rho} \delta P_{20}\right)^2 + \left(\frac{1}{2U_\infty \rho } \delta P_{36}\right)^2}
+    U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 \Delta P_{20}}{\rho}} + \sqrt{\frac{2 \Delta P_{36}}{\rho}} \right) \\
+    \delta U_\infty &= \sqrt{\left(\frac{1}{2U_\infty \rho} \delta \Delta P_{20}\right)^2 + \left(\frac{1}{2U_\infty \rho } \delta \Delta P_{36}\right)^2}
 \end{align*}
 
 \subsection{Velocity Deficit}
@@ -812,13 +818,14 @@ This is used to create the wake velocity distribution.
 
 \subsection{Drag Force}
 
-This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
-
+This was evaluated numerically using trapezoidal rule, and so the error was analyzed in terms of a summation.
 \begin{align*}
-    D &= \rho\int u (U_\infty - u) dS\\
-    \diffp{D}{{U_\infty}} &= \rho \int  u dS\\
-    \diffp{D}{u} &= \rho \int (U_\infty - 2u) dS\\
-    \delta D &= \sqrt{\left(\rho \int  u dS \ \delta U_\infty \right)^2 + \left(\rho \int (U_\infty - 2u) dS \ \delta u \right)^2}
+    D' &= \rho\int u (U_\infty - u) dy\\
+    D' &= \rho \sum_{\text{trapz}} u (U_\infty - u) dy
+    \intertext{The error of each term in the summation is therefore:}
+    & \sqrt{u \delta U_\infty + (U_\infty - 2u) \delta u}
+    \intertext{And hence the total error is:}
+    \delta D' &= \sqrt{\sum_{\text{rakes}} u \delta U_\infty + (U_\infty - 2u) \delta u}
 \end{align*}
 
 \subsection{Dynamic Pressure}
