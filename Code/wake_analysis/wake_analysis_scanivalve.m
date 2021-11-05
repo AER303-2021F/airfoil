@@ -81,3 +81,5 @@ saveas(gcf,'../../source_latex/figures/scanivalve_drag_force.png')
 % Export CSV
 writematrix(c_D, "cd_scanivalve.csv")
 writematrix(d_c_D, "cd_error_scanivalve.csv")
+writematrix(drag_force, "total_drag_scanivalve.csv")
+writematrix(d_drag_force, "total_drag_error_scanivalve.csv")

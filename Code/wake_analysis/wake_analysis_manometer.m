@@ -83,3 +83,5 @@ saveas(gcf,'../../source_latex/figures/manometer_drag_force.png')
 % Export CSV
 writematrix(c_D, "cd_manometer.csv")
 writematrix(d_c_D, "cd_error_manometer.csv")
+writematrix(drag_force, "total_drag_manometer.csv")
+writematrix(d_drag_force, "total_drag_error_manometer.csv")

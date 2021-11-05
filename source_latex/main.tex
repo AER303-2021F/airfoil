@@ -174,33 +174,33 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
 \end{figure}
 
 Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively where\\
-$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $C$ is the chord length.
+$q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure and $c$ is the chord length.
 
 \begin{align}
-    C_L &= \frac{L'}{q_\infty C}
+    C_L &= \frac{L'}{q_\infty c}
     \label{eq:cl}\\
-    C_D &= \frac{D'}{q_\infty C}
+    C_D &= \frac{D'}{q_\infty c}
     \label{eq:cd}\\
-    C_M &= \frac{M'}{q_\infty C^2}
+    C_M &= \frac{M'}{q_\infty c^2}
     \label{eq:cm}
 \end{align}
 
 \subsection{Calculating Total Drag from Wake Velocity}
-The drag force formulation from above ignore viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil.
-\begin{align*}
-    D' &= \rho\int u (U_\infty - u) dy
-\end{align*}
+The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the 
+\begin{align}
+    D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
+\end{align}
 
 \subsection{Stall}
 Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
 \\
-When flow separation occurs, the $c_P$ distribution becomes flat in the region of separation.\\
+When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\\
 \\
-As $\alpha$ increases, $c_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
+As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
 \\
-Flow separation incurs higher drag, resulting in higher $c_D$.\\
+Flow separation incurs higher drag, resulting in higher $C_D$.\\
 \\
-$c_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $c_{M, LE}$ becomes zero or slightly positive.\\
+$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\\
 \\
 Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
 
@@ -310,8 +310,11 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 
 \section{Results and Discussion}
 
+\subsection{XFOIL Reference}
+Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.
+
 \subsection{Wake Velocity Profile}
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake.
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and 
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -329,9 +332,49 @@ Wake velocities are obtained from total pressure measurements in the wake to det
     \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_cd.png}
+         \caption{}
+         \label{fig:scanivalve_wake_velocity}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_cd.png}
+         \caption{}
+         \label{fig:manometer_wake_velocity}
+     \end{subfigure}
+    \caption{Total drag coefficient versus XFOIL.}
+    \label{fig:total_drag_coefficient}
+\end{figure}
 
 \subsection{Coefficient of Lift, Pressure Drag, and Moment}
 
+\subsection{Pressure Drag and Total Drag Comparison}
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}p{3cm}}
+\toprule
+$\alpha^\circ$ & $D'_p$ (Scanivalve) & $D'_p$ (Manometer) & $D'$ (Scanivalve) & $D'$ (Manometer) \\
+\midrule
+ $0.00\pm0.25$ \\
+ $3.00\pm0.25$ \\
+ $6.00\pm0.25$ \\
+ $8.00\pm0.25$ \\
+$10.00\pm0.25$ \\
+$11.00\pm0.25$ \\
+$13.00\pm0.25$ \\
+$15.00\pm0.25$ \\
+$16.00\pm0.25$ \\
+$17.00\pm0.25$ \\
+$20.00\pm0.25$ \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of pressure and total drag force per unit span.}
+\label{tab:pressure_comparison}
+\end{table}
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -414,10 +457,6 @@ $20.00\pm0.25$ & $0.89\pm0.25$ & $0.18\pm0.16$ & $-0.06027\pm0.00021$ \\
 \label{tab:mano_coeff}
 \end{table}
 
-\subsection{Comparison with XFOIL}
-
-Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
-
 \subsection{Comparison with other experiments}
 
 Experimental performance data of a Clark Y airfoil is available in literature
@@ -471,7 +510,7 @@ The last source of a non-quantifiable source of error is the the effect of image
 
 
 \section{Conclusion}
-
+The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were measured at 11 different angles of attack. Both sets of measurements agree well with simulations from XFOIL and literature. <TBD>
 
 % -----------------------------------------------------------------------------
 %   Bibliography
