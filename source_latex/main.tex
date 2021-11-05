@@ -190,7 +190,19 @@ $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pres
 \end{align}
 
 \subsection{Stall}
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in loss of lift, increased drag, and a zero-or-positive pitching moment. Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircrat control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\\
+\\
+When flow separation occurs, the $c_P$ distribution becomes flat in the region of separation.\\
+\\
+As $\alpha$ increases, $c_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\\
+\\
+Flow separation incurs higher drag, resulting in higher $c_D$.\\
+\\
+$c_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $c_{M, LE}$ becomes zero or slightly positive.\\
+\\
+Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+
+
 
 % -----------------------------------------------------------------------------
 %   Experimental Set-Up
@@ -294,6 +306,25 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 
 
 \section{Results and Discussion}
+
+\subsection{Wake Velocity Profile}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
+         \caption{$y=x$}
+         \label{fig:y equals x}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
+         \caption{$y=3sinx$}
+         \label{fig:three sin x}
+     \end{subfigure}
+    \caption{Caption}
+    \label{fig:wake_velocities}
+\end{figure}
 
 \subsection{Comparison with XFOIL}
 Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment. The results as are follows:
