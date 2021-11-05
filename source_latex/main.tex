@@ -322,6 +322,32 @@ Results in this section are compared to data obtained from \textit{XFOIL}, a fre
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
+Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix[WHICH SECTION].
+
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/AOA0.png}
+         \caption{}
+         \label{fig:cp_0}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/AOA6.png}
+         \caption{}
+         \label{fig:cp_6}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{figures/AOA15.png}
+         \caption{}
+         \label{fig:cp_6}
+     \end{subfigure}
+    \caption{$C_p$ distribution at $\alpha = 0^\circ$,$6^\circ$ and $15^\circ$}
+    \label{fig:cp}
+\end{figure}
 
 
 \subsection{Wake Velocity Profile}
@@ -1067,6 +1093,60 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
     C_M &= \frac{M'}{\frac{1}{2}\rho_\infty U^2_\infty C^2} \\
     \frac{\delta C_M}{C_M} &= \sqrt{\left(\frac{\delta M'}{M'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(2\frac{\delta C}{C}\right)^2}
 \end{align*}
+
+\section{$C_p$ Distribution}\label{app:CP}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA3.png}
+        \caption{$C_p$ distribution at $\alpha = 3^\circ$}
+        \label{fig:cp_3}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA8.png}
+        \caption{$C_p$ distribution at $\alpha = 8^\circ$}
+        \label{fig:cp_8}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA10.png}
+        \caption{$C_p$ distribution at $\alpha = 10^\circ$}
+        \label{fig:cp_10}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA11.png}
+        \caption{$C_p$ distribution at $\alpha = 11^\circ$}
+        \label{fig:cp_11}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA13.png}
+        \caption{$C_p$ distribution at $\alpha = 13^\circ$}
+        \label{fig:cp_13}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA16.png}
+        \caption{$C_p$ distribution at $\alpha = 16^\circ$}
+        \label{fig:cp_16}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA17.png}
+        \caption{$C_p$ distribution at $\alpha = 17^\circ$}
+        \label{fig:cp_17}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA20.png}
+        \caption{$C_p$ distribution at $\alpha = 20^\circ$}
+        \label{fig:cp_20}
+    \end{subfigure}
+    \label{fig:all_CP}
+\end{figure}
 
 \section{MATLAB Code}
 \subsection{Manometer Data Conversion}
