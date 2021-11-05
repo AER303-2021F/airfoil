@@ -79,3 +79,7 @@ ylabel("Drag Force per Unit Span (N/m)")
 title("Drag")
 grid
 saveas(gcf,'manomater_drag_force.png')
+
+% Export CSV
+writematrix(c_D, "cd_manometer.csv")
+writematrix(d_c_D, "cd_error_manometer.csv")
