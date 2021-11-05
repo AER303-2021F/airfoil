@@ -330,19 +330,8 @@ for loc in locations_x_lower:
 # -----------------------------------------------------------------------------
 
 
-scanivalve_data_file = "./Data/pressure_data_csv.csv"
+scanivalve_data_file = "./Data/scanivalve_airfoil_pressure_data.csv"
 manometer_data_file = "./Data/calibrated_manometer_airfoil.csv"
-
-scani = False
-
-if scani:
-    data_file = scanivalve_data_file
-    skiprows = 1
-    title = "$C_L$, $C_D$, and $C_M$ vs $\\alpha$, Scanivalve Data"
-else:
-    data_file = manometer_data_file
-    skiprows = 0
-    title = "$C_L$, $C_D$, and $C_M$ vs $\\alpha$, Manometer Data"
 
 pressure_data_s = np.loadtxt(scanivalve_data_file, delimiter=",", skiprows=1)
 pressure_upper_s = pressure_data_s[:, 1:13]
@@ -353,6 +342,19 @@ pressure_upper_m = pressure_data_m[:, 1:13]
 pressure_lower_m = np.flip(pressure_data_m[:, 13:], axis=1)
 
 AoA = pressure_data_s[:, 0].reshape((-1,))
+
+
+# -----------------------------------------------------------------------------
+# Import and segregate the upper and lower pressure uncertainties.
+# -----------------------------------------------------------------------------
+
+
+scanivalve_error_file = "./Data/scanivalve_error.csv"
+manometer_data_file = "./Data/calibrated_manometer_airfoil_error.csv"
+
+pressure_error_s = np.loadtxt(scanivalve_error_file, delimiter=",") * 115
+pressure_error_m = np.loadtxt(manometer_data_file, delimiter=",", skiprows=0)
+pressure_error_m = pressure_error_m[:, 1:]
 
 
 # -----------------------------------------------------------------------------
@@ -376,6 +378,10 @@ M_vs_aoa_s = np.zeros(AoA.size)
 cL_vs_aoa_s = np.zeros(AoA.size)
 cD_vs_aoa_s = np.zeros(AoA.size)
 cM_vs_aoa_s = np.zeros(AoA.size)
+
+delta_N = np.zeros(AoA.size)
+delta_A = np.zeros(AoA.size)
+delta_M = np.zeros(AoA.size)
 
 for i in range(AoA.size):
 
@@ -405,10 +411,20 @@ for i in range(AoA.size):
     print(f"Lift = {L}, Drag = {D}, Moment = {M}")
     print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
 
-# Calculate uncertainties (assuming delta_rho and delta_c are zero).
+    # Calculate uncertainties (assuming delta_rho and delta_c are zero).
 
-delta_N = 0
-delta_A = 0
+    delta_N_term_1 = np.sum((-np.cos(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
+
+    delta_A_term_1 = np.sum((-np.sin(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
+
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
+
 delta_aoa = AOA_UNCERTAINTY
 
 delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
@@ -417,7 +433,6 @@ cL_uncertainty_s = cL_vs_aoa_s * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scan
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
 cD_uncertainty_s = cD_vs_aoa_s * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
-delta_M = 0
 cM_uncertainty_s = cM_vs_aoa_s * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 
@@ -434,6 +449,10 @@ M_vs_aoa_m = np.zeros(AoA.size)
 cL_vs_aoa_m = np.zeros(AoA.size)
 cD_vs_aoa_m = np.zeros(AoA.size)
 cM_vs_aoa_m = np.zeros(AoA.size)
+
+delta_N = np.zeros(AoA.size)
+delta_A = np.zeros(AoA.size)
+delta_M = np.zeros(AoA.size)
 
 for i in range(AoA.size):
 
@@ -462,20 +481,29 @@ for i in range(AoA.size):
     print(f"Lift = {L}, Drag = {D}, Moment = {M}")
     print(f"C_L = {cL}, C_D = {cD}, C_M = {cM}")
 
-# Calculate uncertainties (assuming delta_rho and delta_c are zero).
+    # Calculate uncertainties (assuming delta_rho and delta_c are zero).
 
-delta_N = 0
-delta_A = 0
+    delta_N_term_1 = np.sum((-np.cos(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_m[i, :11]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_m[i, 13:]) ** 2)
+    delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
+
+    delta_A_term_1 = np.sum((-np.sin(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_m[i, :11]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_m[i, 13:]) ** 2)
+    delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
+
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
+
 delta_aoa = AOA_UNCERTAINTY
 
 delta_L = np.sqrt((np.cos(AoA) * delta_N) ** 2 + (np.sin(AoA) * delta_A) ** 2 + ((N * np.sin(AoA) + A * np.cos(AoA)) * delta_aoa) ** 2)
-cL_uncertainty_m = cL_vs_aoa_m * np.sqrt((delta_L / L_vs_aoa_m) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cL_uncertainty_m = cL_vs_aoa_s * np.sqrt((delta_L / L_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 delta_D = np.sqrt((np.sin(AoA) * delta_N) ** 2 + (np.cos(AoA) * delta_A) ** 2 + ((N * np.cos(AoA) - A * np.sin(AoA)) * delta_aoa) ** 2)
-cD_uncertainty_m = cD_vs_aoa_m * np.sqrt((delta_D / D_vs_aoa_m) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cD_uncertainty_m = cD_vs_aoa_s * np.sqrt((delta_D / D_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
-delta_M = 0
-cM_uncertainty_m = cM_vs_aoa_m * np.sqrt((delta_M / M_vs_aoa_m) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
+cM_uncertainty_m = cM_vs_aoa_s * np.sqrt((delta_M / M_vs_aoa_s) ** 2 + (2 * scani_velocity_uncertainty / scani_velocity) ** 2)
 
 
 # -----------------------------------------------------------------------------
