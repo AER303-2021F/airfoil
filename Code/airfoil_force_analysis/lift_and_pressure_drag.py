@@ -1,9 +1,9 @@
 
 
 import numpy as np
-from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy.interpolate import interp1d
 
 
 # -----------------------------------------------------------------------------
@@ -283,11 +283,14 @@ def coefficients(L, D, M, velocity):
 
 AoA = np.array([0, 3, 6, 8, 10, 11, 13, 15, 16, 17, 20])
 
-mano_velocity_data = np.loadtxt("./Data/velocities_manometer.csv", delimiter=",")
+mano_velocity_file = "./Data/velocities_manometer.csv"
+scani_velocity_file = "./Data/velocities_scanivalve.csv"
+
+mano_velocity_data = np.loadtxt(mano_velocity_file, delimiter=",")
 mano_velocity = mano_velocity_data[0, :]
 mano_velocity_uncertainty = mano_velocity_data[1, :]
 
-scani_velocity_data = np.loadtxt("./Data/velocities_scanivalve.csv", delimiter=",")
+scani_velocity_data = np.loadtxt(scani_velocity_file, delimiter=",")
 scani_velocity = scani_velocity_data[0, :]
 scani_velocity_uncertainty = scani_velocity_data[1, :]
 
@@ -311,19 +314,12 @@ locations_y_upper = []
 locations_y_lower = []
 
 for loc in locations_x_upper:
-    locations_y_upper.append(interp1d(airfoil_x_upper, airfoil_y_upper, kind='cubic')(loc))
+    interp_loc = interp1d(airfoil_x_upper, airfoil_y_upper, kind='cubic')(loc)
+    locations_y_upper.append(interp_loc)
 
 for loc in locations_x_lower:
-    locations_y_lower.append(interp1d(airfoil_x_lower, airfoil_y_lower, kind='cubic')(loc))
-
-# plt.plot(airfoil_x_upper, airfoil_y_upper, label="Actual Upper")
-# plt.scatter(locations_x_upper, locations_y_upper, label="Interpolated Upper")
-# plt.plot(airfoil_x_lower, airfoil_y_lower, label="Actual Lower")
-# plt.scatter(locations_x_lower, locations_y_lower, label="Interpolated Lower")
-# plt.title("Airfoil Interpolation")
-# plt.legend()
-# plt.grid()
-# plt.show()
+    interp_loc = interp1d(airfoil_x_lower, airfoil_y_lower, kind='cubic')(loc)
+    locations_y_lower.append(interp_loc)
 
 
 # -----------------------------------------------------------------------------
@@ -363,7 +359,8 @@ pressure_error_m = pressure_error_m[:, 1:]
 # -----------------------------------------------------------------------------
 
 
-thetal, thetau = airfoil_theta(locations_x_lower, locations_y_lower, locations_x_upper, locations_y_upper)
+thetal, thetau = airfoil_theta(locations_x_lower, locations_y_lower,
+                               locations_x_upper, locations_y_upper)
 
 
 # -----------------------------------------------------------------------------
@@ -414,16 +411,19 @@ for i in range(AoA.size):
 
     # Calculate uncertainties (assuming delta_rho and delta_c are zero).
 
-    delta_N_term_1 = np.sum((-np.cos(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
-    delta_N_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    up_diff = np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2)
+    low_diff = np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2)
+
+    delta_N_term_1 = np.sum((-np.cos(thetau) * up_diff * pressure_error_s[i]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_s[i]) ** 2)
     delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
 
-    delta_A_term_1 = np.sum((-np.sin(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
-    delta_A_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_A_term_1 = np.sum((-np.sin(thetau) * up_diff * pressure_error_s[i]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_s[i]) ** 2)
     delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
 
-    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
-    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * up_diff * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * low_diff * pressure_error_s[i]) ** 2)
     delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
 
 delta_aoa = AOA_UNCERTAINTY
@@ -487,16 +487,19 @@ for i in range(AoA.size):
 
     # Calculate uncertainties (assuming delta_rho and delta_c are zero).
 
-    delta_N_term_1 = np.sum((-np.cos(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_m[i, :11]) ** 2)
-    delta_N_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_m[i, 13:]) ** 2)
+    up_diff = np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2)
+    low_diff = np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2)
+
+    delta_N_term_1 = np.sum((-np.cos(thetau) * up_diff * pressure_error_m[i, :11]) ** 2)
+    delta_N_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_m[i, 13:]) ** 2)
     delta_N[i] = np.sqrt(delta_N_term_1 + delta_N_term_2)
 
-    delta_A_term_1 = np.sum((-np.sin(thetau) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_m[i, :11]) ** 2)
-    delta_A_term_2 = np.sum((np.cos(thetal) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_m[i, 13:]) ** 2)
+    delta_A_term_1 = np.sum((-np.sin(thetau) * up_diff * pressure_error_m[i, :11]) ** 2)
+    delta_A_term_2 = np.sum((np.cos(thetal) * low_diff * pressure_error_m[i, 13:]) ** 2)
     delta_A[i] = np.sqrt(delta_A_term_1 + delta_A_term_2)
 
-    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * np.sqrt(np.diff(locations_x_upper) ** 2 + np.diff(locations_y_upper) ** 2) * pressure_error_s[i]) ** 2)
-    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * np.sqrt(np.diff(locations_x_lower) ** 2 + np.diff(locations_y_lower) ** 2) * pressure_error_s[i]) ** 2)
+    delta_M_term_1 = np.sum(((np.cos(thetau) * locations_x_upper[1:] - np.sin(thetau) * locations_y_upper[1:]) * up_diff * pressure_error_s[i]) ** 2)
+    delta_M_term_2 = np.sum(((np.cos(thetal) * locations_x_lower[1:] + np.sin(thetal) * locations_y_lower[1:]) * low_diff * pressure_error_s[i]) ** 2)
     delta_M[i] = np.sqrt(delta_M_term_1 + delta_M_term_2)
 
 delta_aoa = AOA_UNCERTAINTY
