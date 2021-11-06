@@ -521,7 +521,7 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
 \end{figure}
 
 \noindent
-Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, drag (due to pressure drag only) and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
+Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, (pressure) drag, and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
 \centering
@@ -612,7 +612,7 @@ In both plots, the coefficient of lift increases with the angle of attack until 
     
     \item A linear $C_L$-$\alpha$ dependency exists for angles of attack within the approximate range from $0^\circ$ to $8^\circ$. This region is characterized by a very minimal boundary layer that does not significantly hinder lift production.
     
-    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing lift slope. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the beginning of the plateau on the $C_p$ plots. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
+    \item For the approximate range from $8^\circ$ to $13^\circ$, there is a diminishing lift slope. As the angle of attack increases, the point of separation moves forward on the leading edge as seen by the beginning of the plateau on the $C_p$ plots in figure \ref{fig:cp}. The growing boundary layer inhibits lift production thereby reducing the rate of $C_L$ increase.
     
     \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an aircraft slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircraft's weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle is met at which the aircraft can no longer sustain flight.
     
@@ -623,10 +623,10 @@ In both plots, the coefficient of lift increases with the angle of attack until 
 The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $D_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
 
 \noindent
-Lastly, the coefficient of moment curves follow a behaviour inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. This behaviour of the moment force on an airfoil is essential from a pilot perspective as it provides safe handling characteristics around the point of a stall. When an aircraft stalls, the goal of the pilot is to increase the airflow over the airfoil to regain laminar flow and reduce the drag effects. This is accomplished by lowering the angle of attack. The $C_M$ behaviour exhibited by the Clark Y airfoil, would cause the airfoil to pitch down when in a stall configuration which would allow for the regain of lift. Thusly, the moment behavior of an airfoil is an important consideration in aircraft design.\newline
+Lastly, the coefficient of moment curves follow a behaviour that is weakly inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. With this in mind, the general trend of the $C_M$ curve weak and no significant results can be extracted. This result vaguely resembles the trends of XFOIL but are in line with the literature which describes the $C_M$ curve becoming positive at the onset of a stall. These discrepancies could be the result of experimental error or analysis error and deem further investigation. \newline
 
 \noindent
-The coefficients calculated from the experimental data can be compared to the results from XFOIL as seen in figures \ref{fig:scani_comp} and \ref{fig:mano_comp} for the scanivalve and manometer data respectively.\newline
+The coefficients calculated from the experimental data can be compared to the results from XFOIL as seen in figures \ref{fig:scani_comp} and \ref{fig:mano_comp} for the Scanivalve and manometer data respectively.\newline
 
 \noindent
 The experimental results are a better match for the $C_L$ and $C_D$ curve for the scanivalve data where the majority of the XFOIL data falls within the uncertainty of the experimental data. Since the experimental procedure did not calculate viscous effects, the experimental $C_D$ curve begins to deviate from the XFOIL $C_D$ curve at higher angles of attack when viscous effects become significant. XFOIL's viscous solver makes it a more accurate descriptor of the real flow in high viscous conditions. \newline
@@ -720,8 +720,10 @@ $20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $
 \label{tab:pressure_comparison}
 \end{table}
 
-Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. 
+\noindent
+Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. \newline
 
+\noindent
 The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
 
 
