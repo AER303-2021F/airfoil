@@ -131,7 +131,7 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 \section{Introduction and Background}\label{sec:introduction_and_background}
 
 \noindent
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions, and compare these methods to simulations and the literature.\newline
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions, and compare these methods to simulations and literature.\newline
 
 \noindent
 Airfoils are two-dimensional, wing cross-sections that produce lift by accelerating flow over their contour which result in a surface pressure distribution that can cause a net lifting action. At the same time, airfoils produce drag forces through skin friction and fluid viscosity. The combination of both the lift and drag forces impart a pitching moment on the airfoil which, in aircraft design, must be balanced by the horizontal stabilizer. Since the lift, drag, and moment forces depend on the airfoil's pressure distribution which varies with the angle of attack, the performance of the airfoil in producing sufficient lift to sustain flight will thusly depend on the angle the airfoil makes with the relative airflow. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil which are necessary in aircraft design.\newline
@@ -139,7 +139,7 @@ Airfoils are two-dimensional, wing cross-sections that produce lift by accelerat
 \subsection{Normal, Axial, and Moment Forces}
 
 \noindent
-Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of a pressure distribution over the airfoil. The normal force is the net pressure force exerted normal to the aircraft's chord. In contrast, the axial force is the net pressure force acting parallel to the aircraft's chord. These forces yield lift and pressure drag forces when combined with the angle of attack as will be discussed in section \ref{sec:LDC}\newline
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of a pressure distribution over the airfoil. The normal force is the net pressure force exerted normal to the aircraft's chord. In contrast, the axial force is the net pressure force acting parallel to the aircraft's chord. These forces yield lift and pressure drag forces when combined with the angle of attack as will be discussed in section \ref{sec:LDC}.\newline
 
 \noindent
 With an airfoil in a uniform flow, let $P_u$ and $P_\ell$ be the pressure distributions over the airfoil's top and bottom surfaces respectively. Additionally, let $\theta$ be the angle between the chord normal and the airfoil surface normal measured clockwise. From these measures, the normal and axial forces acting on the airfoil can be calculated using equations \ref{eq:normal_force} and \ref{eq:axial_force} where the normal and axial components are summed over the airfoil's surface to yield the net normal and net axial component. The normal and axial definitions can be represented pictorially in figure \ref{fig:airfoil_directions} where the expressed forces define their positive orientations. In a similar approach, the moment around the leading edge of the airfoil is given by equation \ref{eq:leading_edge_moment} which integrates the product of the moment arm and force acting in both the normal and axial direction. A positive moment value is defined to be the angular direction that increases the angle of attack.\newline
@@ -186,7 +186,7 @@ The lift of an airfoil is defined as the net force exerted on the airfoil normal
 To express the performance of an airfoil in a manner that is quasi-decoupled from the flow properties, the lift, drag, moment, and pressure distributions are often expressed in nondimensionalized form.
 
 \noindent
-The nondimensionalized pressure can be found using using equation \ref{eq:cp} where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the free stream dynamic pressure.\newline
+The nondimensionalized pressure can be found using using equation \ref{eq:cp} where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure. and $\Delta P$ is the difference between the local and freestream static pressures.\newline
 
 \begin{equation}
     C_p = \frac{\Delta P}{q_\infty}
@@ -363,7 +363,7 @@ Results in this section will be compared to data obtained from \textit{XFOIL}, a
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
 \noindent
-Pressure distributions were obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
+Pressure distributions were obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
 
 \newpage
 \begin{figure}[h]
@@ -1172,7 +1172,7 @@ For cases where we want the velocity of airfoil at a single pitot tube.
 
 \subsection{Free Stream Velocity}
 
-An average free stream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
+An average freestream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
 
 \begin{align*}
     U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 P_{20}}{\rho}} + \sqrt{\frac{2 P_{36}}{\rho}} \right) \\
@@ -1259,7 +1259,7 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Coefficient of Lift}
 
-% Assumptions include that we know our free stream density and chord length perfectly.
+% Assumptions include that we know our freestream density and chord length perfectly.
 
 \begin{align*}
     C_L &= \frac{L'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
@@ -1268,7 +1268,7 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Coefficient of Drag}
 
-% Assumptions include that we know our free stream density and chord length perfectly.
+% Assumptions include that we know our freestream density and chord length perfectly.
 
 \begin{align*}
     C_D &= \frac{D'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
@@ -1277,7 +1277,7 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Coefficient of Moment}
 
-% Assumptions include that we know our free stream density and chord length perfectly.
+% Assumptions include that we know our freestream density and chord length perfectly.
 
 \begin{align*}
     C_M &= \frac{M'}{\frac{1}{2}\rho_\infty U^2_\infty C^2} \\
@@ -1904,7 +1904,7 @@ def coefficients(L, D, M, velocity):
     M : float
         The moment force in Newtons.
     velocity : np.ndarray
-        Array of shape (n,) containing the free stream velocity at a given
+        Array of shape (n,) containing the freestream velocity at a given
         anngle of attack.
 
     Returns
@@ -1924,7 +1924,7 @@ def coefficients(L, D, M, velocity):
 
 
 # -----------------------------------------------------------------------------
-# Import free stream velocity data.
+# Import freestream velocity data.
 # -----------------------------------------------------------------------------
 
 
