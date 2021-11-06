@@ -766,16 +766,24 @@ The precision error for the Scanivalve reading is acquired via an autocorrelatio
     T &= \int_{0}^{\infty} \frac{\overline{(x(t)-\bar{x})\cdot(x(t-\tau)-\bar{x})}}{\overline{(x(t) - \bar{x})^2}} d\tau = \int_{0}^{\infty} B_{xx} d\tau
 \end{align}
 
+\noindent
 where $T$ is the integral time scale between two individual samples. We can then infer the precision uncertainty on the measurement to be
+
 \begin{align}\label{eq:scanivalve_err}
     P = 1.96 \frac{\sigma}{\sqrt{N}}
 \end{align}
+
+\noindent
 where $\sigma$ is the standard deviation of the time series acquired by 
+
 \begin{equation*}
     \sigma = \sqrt{\sum_{x = 1}^{N}\frac{(x_i - \bar{x})^2}{N}}
 \end{equation*}
+
+\noindent
 and N is the number of independent samples within the time series $$N = \frac{1}{2T}$$
 
+\noindent
 The autocorrelation error for each angle of attack is shown in table \ref{tab:auto_err}
 \newline
 \begin{table}[h]
