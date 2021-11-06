@@ -320,7 +320,7 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
 
-    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. Set the wind tunnel speed to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
+    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel speed is set to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
     
     \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer measurements into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
     
@@ -333,13 +333,16 @@ The procedure used for acquisition of pressure measurements is as follows:
 \end{enumerate}
 
 \noindent
+Due to equipment malfunction with the Betz manometer, steps 1 and 2 are not performed, and instead a pre-made calibration curve for the pressure transducer is provided ($P = 115V - 5$, where $V$ is the voltage reading from the transducer).
+
+\noindent
 Following the acquisition of pressure measurements, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
 
 \begin{enumerate}
 
     \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For the inclined manometer approach, the data is captured in images which were annotated using a web based data extraction tool for converting image embedded data into csv files.\cite{Rohatgi2020} In this annotation stage, the graph boundaries and the scale of the graph were specified. The peaks of each manometer tube were selected on the image. The program then interpolated between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
+    \item For the inclined manometer approach, the data is captured in images which were annotated using a web based data extraction tool for converting image embedded data into csv files \cite{Rohatgi2020}. In this annotation stage, the graph boundaries and the scale of the graph were specified. The peaks of each manometer tube were selected on the image. The program then interpolated between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
 
 \end{enumerate}
 
