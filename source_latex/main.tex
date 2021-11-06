@@ -69,11 +69,11 @@
 
 \begin{abstract}
 
-In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The center of pressure distributions, a momentum balance to determine the total drag, and numerical methods to calculate the coefficients of lift, (pressure) drag, and moment ($C_L$, $C_D$, and $C_M$, respectively) are calculated. The measurements for these calculations are collected using two separate methods, and their comparative effectiveness is evaluated.\newline
+In this report, the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The center of pressure distributions, a momentum balance to determine the total drag, and numerical methods to calculate the coefficients of lift, (pressure) drag, and moment are calculated. The measurements for these calculations are collected using two separate methods, and their comparative effectiveness is evaluated.\newline
 
-Though analysis it was found that the Clark Y airfoil appeared to stall at $\alpha\approx 13^\circ$. The $C_P$ plot showed a large plateau region for $\alpha\geq13^\circ$ indicating significant follow separation. For the same region, the $C_L$ curve experienced a significant drop in the lift slope and the $C_D$ curve had a sudden increase, both characteristic of a stalled airfoil. No useful information was extractable from the $C_M$ curve which remained relatively constant with respect to the angle of attack.\newline
+Through analysis, it was found that the Clark Y airfoil appeared to stall at $\alpha\approx 13^\circ$. This conclusion was supported by the $C_P$ curves which showed a large plateau region for $\alpha\geq13^\circ$ indicating significant flow separation. For the same region, the $C_L$ curve experienced a significant drop in the lift slope and the $C_D$ curve had a sudden increase. No useful information could be extracted from the $C_M$ curve which remained relatively constant regarding the angle of attack.\newline
 
-The empirically attained airfoil characteristics reflected the general trends and magnitudes of the the values calculated from XFOIL and reported in literature. This suggests that the results, within an experimental error, accurately reflect the true behaviour of a Clark Y airfoil in uniform flow at varying angles of attack.
+The empirically attained airfoil characteristics reflected the general trends and magnitudes of the values calculated from XFOIL and reported in the literature. This suggests that the results, within an experimental error, accurately reflect the true behaviour of a Clark Y airfoil in uniform flow at varying angles of attack.
 
 \keywords{Airfoil \and Stall \and Inclined Manometer \and Scanivalve}
 \end{abstract}
@@ -97,15 +97,16 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
         $A'$ & Axial force per unit span. \\
         $C$ & Chord length. \\
         $C_D$ & Coefficient of Drag. \\
+        $C_{D,p}$ & Coefficient of Drag based only on pressure drag. \\
         $C_L$ & Coefficient of lift. \\
         $C_M$ & Coefficient of Moment. \\
         $D'$ & Drag per unit span. \\
         $L'$ & Lift per unit span.\\
-        $LE$ & Airfoil leading Edge \\
+        $LE$ & Airfoil leading Edge. \\
         $M'$ & Moment of the airfoil around the leading edge per unit span. \\
         $N'$ & Normal force per unit span. \\
-        $P_\ell$ & The pressure felt on the airfoils lower surface. \\
-        $P_u$ & The pressure felt on the airfoils upper surface. \\
+        $P_\ell$ & The pressure exerted on the airfoils lower surface. \\
+        $P_u$ & The pressure exerted on the airfoils upper surface. \\
         $q_\infty$ & Free stream dynamic pressure. \\
         $Re$ & Reynolds number. \\
         $TE$ & Airfoil trailing edge. \\
@@ -117,7 +118,7 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
         $\theta$ & The angle made between the airfoils surface normal and the airfoils chord normal. \\
         \bottomrule
     \end{tabular}
-    \caption{Commonly used symbols and term.}
+    \caption{Commonly used symbols and terms.}
     \label{tab:nomenclature}
 \end{table}
 
@@ -130,21 +131,18 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 \section{Introduction and Background}\label{sec:introduction_and_background}
 
 \noindent
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.\newline
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions, and compare these methods to simulations and the literature.\newline
 
 \noindent
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.\newline
+Airfoils are two-dimensional, wing cross-sections that produce lift by accelerating flow over their contour which result in a surface pressure distribution that can cause a net lifting action. At the same time, airfoils produce drag forces through skin friction and fluid viscosity. The combination of both the lift and drag forces impart a pitching moment on the airfoil which, in aircraft design, must be balanced by the horizontal stabilizer. Since the lift, drag, and moment forces depend on the airfoil's pressure distribution which varies with the angle of attack, the performance of the airfoil in producing sufficient lift to sustain flight will thusly depend on the angle the airfoil makes with the relative airflow. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil which are necessary in aircraft design.\newline
 
 \subsection{Normal, Axial, and Moment Forces}
 
 \noindent
-Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.\newline
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of a pressure distribution over the airfoil. The normal force is the net pressure force exerted normal to the aircraft's chord. In contrast, the axial force is the net pressure force acting parallel to the aircraft's chord. These forces yield lift and pressure drag forces when combined with the angle of attack as will be discussed in section \ref{sec:LDC}\newline
 
 \noindent
-$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.\newline
-
-\noindent
-The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.\newline
+With an airfoil in a uniform flow, let $P_u$ and $P_\ell$ be the pressure distributions over the airfoil's top and bottom surfaces respectively. Additionally, let $\theta$ be the angle between the chord normal and the airfoil surface normal measured clockwise. From these measures, the normal and axial forces acting on the airfoil can be calculated using equations \ref{eq:normal_force} and \ref{eq:axial_force} where the normal and axial components are summed over the airfoil's surface to yield the net normal and net axial component. The normal and axial definitions can be represented pictorially in figure \ref{fig:airfoil_directions} where the expressed forces define their positive orientations. In a similar approach, the moment around the leading edge of the airfoil is given by equation \ref{eq:leading_edge_moment} which integrates the product of the moment arm and force acting in both the normal and axial direction. A positive moment value is defined to be the angular direction that increases the angle of attack.\newline
 
 \begin{align}
     N' &= \int_{LE}^{TE} -P_u\cos\theta ds_u + \int_{LE}^{TE} P_\ell\cos\theta ds_\ell
@@ -155,10 +153,10 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
     \label{eq:leading_edge_moment}
 \end{align}
 
-\subsection{Calculating Lift, Drag and Dimensionless Coefficients}
+\subsection{Calculating Lift, Drag and Dimensionless Coefficients}\label{sec:LDC}
 
 \noindent
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.\newline
+The lift of an airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force parallel to the relative airflow. These forces per unit span can be calculated using equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoil's chord line and the relative airflow. The lift and drag definitions can be represented pictorially in figure \ref{fig:airfoil_directions} where the expressed forces define their positive orientations.\newline
 
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
@@ -184,7 +182,11 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
     \label{fig:airfoil_directions}
 \end{figure}
 
-Pressure on measurement sites are nondimensionalized using Equation
+\noindent
+To express the performance of an airfoil in a manner that is quasi-decoupled from the flow properties, the lift, drag, moment, and pressure distributions are often expressed in nondimensionalized form.
+
+\noindent
+The nondimensionalized pressure can be found using using equation \ref{eq:cp} where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the free stream dynamic pressure.\newline
 
 \begin{equation}
     C_p = \frac{\Delta P}{q_\infty}
@@ -192,24 +194,27 @@ Pressure on measurement sites are nondimensionalized using Equation
 \end{equation}
 
 \noindent
-where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\newline
+Lift, drag, and moment can also be nondimensionalized using equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $C$ is the airfoil's chord length.\newline
 
-\noindent
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.\newline
-
-\begin{align}
-    C_L &= \frac{L'}{q_\infty c}
-    \label{eq:cl}\\
-    C_D &= \frac{D'}{q_\infty c}
-    \label{eq:cd}\\
-    C_M &= \frac{M'}{q_\infty c^2}
+\begin{multicols}{3}
+\begin{equation}
+    C_L = \frac{L'}{q_\infty C}
+    \label{eq:cl}
+\end{equation}
+\begin{equation}
+    C_D = \frac{D'}{q_\infty C}
+    \label{eq:cd}
+\end{equation}
+\begin{equation}
+    C_M = \frac{M'}{q_\infty C^2}
     \label{eq:cm}
-\end{align}
+\end{equation}
+\end{multicols}
 
 \subsection{Calculating Total Drag from Wake Velocity}
 
 \noindent
-The drag force formulation from above ignores viscous effects, because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in Equation \ref{eq:drag} only gives pressure drag. Instead, total drag calculation is performed by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it.\newline
+The drag force formulation stated earlier (equation \ref{eq:drag}) ignores viscous effects because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in equation \ref{eq:drag} only gives pressure drag. The total drag, typically a value of interest is calculated by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it. The equation to calculate the total drag is given in equation \ref{eq:wake_drag}.\newline
 
 \begin{align}
     D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
@@ -218,22 +223,22 @@ The drag force formulation from above ignores viscous effects, because this expe
 \subsection{Stall}
 
 \noindent
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\newline
+An airfoil stall is characterized by a significant separation of flow from the airfoil surface resulting in several effects that can be observed in the dimensionless curves.
+
+\begin{itemize}
+
+    \item When flow separation occurs, the $C_P$ distribution plateaus in the region of separation as separation will occur in the presence of non-favourable pressure gradients.
+    
+    \item As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak and then falls sharply. The peak and fall of the $C_L$ curve is a result of the increasingly dominant viscous effects associated with this higher angles of attack.
+    
+    \item The flow separation associated with an impending stall incurs higher drag, resulting in increasing $C_D$ curve for all angles of attack above the minimum stall angle (critical angle of attack).
+    
+    \item $C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes increasingly more negative which forces an unconstrained airfoil to pitch down.
+    
+\end{itemize}
 
 \noindent
-When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\newline
-
-\noindent
-As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\newline
-
-\noindent
-Flow separation incurs higher drag, resulting in higher $C_D$.\newline
-
-\noindent
-$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\newline
-
-\noindent
-Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+Stalled conditions lead to unpredictable behaviour of an airfoil and reduced aircraft controllability as the lack of airflow over control surfaces cause a slow and sloppy control response. It is important to understand the behaviour of varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand its limitations.
 
 
 % -----------------------------------------------------------------------------
@@ -358,10 +363,10 @@ Results in this section are compared to data obtained from \textit{XFOIL}, a fre
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
 \noindent
-Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix \ref{app:CP}. \newline
+Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix[WHICH SECTION].\newline
 
 \noindent
-Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically at the small section directly succeeding the leading edge. In lower angles of attack, the $C_p$ changes gradually after the leading edge, but in a higher angle of attack, a pressure plateau is visible on graphs due to stalling effects. \newline
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift.\newline
 
 \begin{figure}[h]
     \centering
