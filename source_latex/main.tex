@@ -363,40 +363,101 @@ Results in this section are compared to data obtained from \textit{XFOIL}, a fre
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
 \noindent
-Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distribution over the chord when $\alpha = 0^\circ, 6^\circ $ and $15^\circ$. Results of all other $C_p$ distribution are attached in Appendix[WHICH SECTION].\newline
+Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates all of the $C_p$ distributions. \newline
 
 \noindent
-Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift.\newline
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. In lower angles of attack, the $C_p$ changes gradually after the leading edge, but in a higher angle of attack, due to stalling effects, a pressure plateau is visible on graphs when $\alpha \ge 13^\circ$. These stalls creates pressure increment on the top surface of the wing, in turn results in loss of lift of the aircraft. Designers must consider stalling effects, and optimize the stall angles. Pilots also should be reminded about stall angles to prevent accidents during flight (specifically when pitching upward). \newline
 
-\begin{figure}[h]
+\noindent
+The general pattern of $C_p$ distribution, as well as the stall angle is verified with XFOIL. Experimental results deviate slightly at the leading edge with XFOIL, which likely originates from the assumptions XFOIL makes, despite having a separate viscous solver. The errors alerts aerodynamicists where models differs from real life, and experiments must be conducted in order to see the full picture.
+
+\noindent
+Moreover, the $C_p$ distribution is consistent with literature{\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}}(Relevant page: 80). The relevant plot agrees with the overall pattern resulted in our experiment
+
+\begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/AOA0.png}
-         \caption{}
-         \label{fig:cp_0}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/AOA6.png}
-         \caption{}
-         \label{fig:cp_6}
-     \end{subfigure}
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{figures/AOA15.png}
-         \caption{}
-         \label{fig:cp_6}
-     \end{subfigure}
-    \caption{$C_p$ distribution at $\alpha = 0^\circ$,$6^\circ$ and $15^\circ$}
-    \label{fig:cp}
+    \includegraphics{figures/reference_cp.png}
+    \caption{Reference $C_p$ distribution with various AOA.}
+    \label{fig:lit_cp}
+\end{figure}
+
+\newpage
+\begin{figure}[H]\label{fig:cp}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA0.png}
+        \caption{$C_p$ distribution at $\alpha = 0^\circ$}
+        \label{fig:cp_0}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA3.png}
+        \caption{$C_p$ distribution at $\alpha = 3^\circ$}
+        \label{fig:cp_3}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA6.png}
+        \caption{$C_p$ distribution at $\alpha = 6^\circ$}
+        \label{fig:cp_6}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA8.png}
+        \caption{$C_p$ distribution at $\alpha = 8^\circ$}
+        \label{fig:cp_8}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA10.png}
+        \caption{$C_p$ distribution at $\alpha = 10^\circ$}
+        \label{fig:cp_10}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA11.png}
+        \caption{$C_p$ distribution at $\alpha = 11^\circ$}
+        \label{fig:cp_11}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA13.png}
+        \caption{$C_p$ distribution at $\alpha = 13^\circ$}
+        \label{fig:cp_13}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA15.png}
+        \caption{$C_p$ distribution at $\alpha = 15^\circ$}
+        \label{fig:cp_15}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA16.png}
+        \caption{$C_p$ distribution at $\alpha = 16^\circ$}
+        \label{fig:cp_16}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA17.png}
+        \caption{$C_p$ distribution at $\alpha = 17^\circ$}
+        \label{fig:cp_17}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/AOA20.png}
+        \caption{$C_p$ distribution at $\alpha = 20^\circ$}
+        \label{fig:cp_20}
+    \end{subfigure}
+    \caption{$C_p$ distribution of all angles of attack}
 \end{figure}
 
 
 \subsection{Wake Velocity Profile}
 
 \noindent
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost and bottommost rakes. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
 \noindent
 The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
@@ -700,6 +761,46 @@ Table \ref{tab:quant_error} contains sources of quantifiable error and their ass
 \end{center}
 \caption{Quantifiable Sources of Error, Tabulated}
 \label{tab:quant_error}
+\end{table}
+
+The precision error for the Scanivalve reading is acquired via an autocorrelation analysis. The autocorrelation formula is:
+\begin{align}\label{eq:autocorrelation}
+    T &= \int_{0}^{\infty} \frac{\overline{(x(t)-\bar{x})\cdot(x(t-\tau)-\bar{x})}}{\overline{(x(t) - \bar{x})^2}} d\tau = \int_{0}^{\infty} B_{xx} d\tau
+\end{align}
+
+where $T$ is the integral time scale between two individual samples. We can then infer the precision uncertainty on the measurement to be
+\begin{align}\label{eq:scanivalve_err}
+    P = 1.96 \frac{\sigma}{\sqrt{N}}
+\end{align}
+where $\sigma$ is the standard deviation of the time series acquired by 
+\begin{equation*}
+    \sigma = \sqrt{\sum_{x = 1}^{N}\frac{(x_i - \bar{x})^2}{N}}
+\end{equation*}
+and N is the number of independent samples within the time series $$N = \frac{1}{2T}$$
+
+The autocorrelation error for each angle of attack is shown in table \ref{tab:auto_err}
+\newline
+\begin{table}[h]
+\centering
+\begin{tabular}{||l|l||}
+\toprule
+$\alpha$ & error\\
+\midrule
+$0^\circ$ & $\pm$ 0.00062 \\
+$3^\circ$ & $\pm$ 0.0063 \\
+$6^\circ$ & $\pm$ 0.0043\\
+$8^\circ$ & $\pm$ 0.0033 \\
+$10^\circ$ & $\pm$ 0.0043	\\
+$11^\circ$ & $\pm$ 0.0028 \\
+$13^\circ$ & $\pm$ 0.0021 \\
+$15^\circ$ & $\pm$ 0.0042 \\
+$16^\circ$ & $\pm$ 0.0049 \\
+$17^\circ$ & $\pm$ 0.0063	\\
+$20^\circ$ & $\pm$ 0.0029\\
+\bottomrule
+\end{tabular}
+\caption{Autocorrelation error on each angle of attack}
+\label{tab:auto_err}
 \end{table}
 
 \subsection{Non-Quantifiable Sources of Error}
@@ -1195,7 +1296,7 @@ The coefficient and its uncertainty can be calculated as follows:
 
 \begin{align*}
     C_p &= \frac{\Delta P}{q_\infty} \\
-    \frac{\delta C_p}{C_p} &= \sqrt{ (\frac{\delta \Delta P}{\Delta P})^2 + (\frac{\delta q_\infty}{q_\infty})^2}
+    \frac{\delta C_p}{C_p} &= \sqrt{ \left(\frac{\delta \Delta P}{\Delta P}\right)^2 + \left(\frac{\delta q_\infty}{q_\infty}\right)^2}
 \end{align*}
 
 \subsection{Coefficient of Lift}
@@ -1241,61 +1342,6 @@ The coefficient of moment is calculated using the following:
 In practice, we assume that the free stream density, and the chord length are known with no error.
 
 \newpage
-\section{$C_p$ Distribution}\label{app:CP}
-
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA3.png}
-        \caption{$C_p$ distribution at $\alpha = 3^\circ$}
-        \label{fig:cp_3}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA8.png}
-        \caption{$C_p$ distribution at $\alpha = 8^\circ$}
-        \label{fig:cp_8}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA10.png}
-        \caption{$C_p$ distribution at $\alpha = 10^\circ$}
-        \label{fig:cp_10}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA11.png}
-        \caption{$C_p$ distribution at $\alpha = 11^\circ$}
-        \label{fig:cp_11}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA13.png}
-        \caption{$C_p$ distribution at $\alpha = 13^\circ$}
-        \label{fig:cp_13}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA16.png}
-        \caption{$C_p$ distribution at $\alpha = 16^\circ$}
-        \label{fig:cp_16}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA17.png}
-        \caption{$C_p$ distribution at $\alpha = 17^\circ$}
-        \label{fig:cp_17}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.37\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/AOA20.png}
-        \caption{$C_p$ distribution at $\alpha = 20^\circ$}
-        \label{fig:cp_20}
-    \end{subfigure}
-    \label{fig:all_CP}
-\end{figure}
-
 \section{MATLAB and Python Code}
 
 \subsection{Manometer Data Conversion}
