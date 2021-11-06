@@ -214,7 +214,7 @@ Lift, drag, and moment can also be nondimensionalized using equations \ref{eq:cl
 \subsection{Calculating Total Drag from Wake Velocity}
 
 \noindent
-The drag force formulation stated earlier (equation \ref{eq:drag}) ignores viscous effects because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in equation \ref{eq:drag} only gives pressure drag. The total drag, typically a value of interest is calculated by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it. The equation to calculate the total drag is given in equation \ref{eq:wake_drag}.\newline
+The drag force formulation stated earlier (equation \ref{eq:drag}) ignores viscous effects because this experiment cannot directly measure the shear force distribution over the surface of the airfoil. That means the force in equation \ref{eq:drag} only gives pressure drag. The total drag, typically a value of interest is calculated by performing a momentum balance in a control volume containing the airfoil, to determine how much the airfoil has decelerated the flow around it. The equation to calculate the total drag per unit span is given in equation \ref{eq:wake_drag}.\newline
 
 \begin{align}
     D' &= \rho\int_{\text{rake}} u (U_\infty - u) dy \label{eq:wake_drag}
@@ -249,12 +249,12 @@ Stalled conditions lead to unpredictable behaviour of an airfoil and reduced air
 \section{Experimental Set-Up}
 
 \noindent
-This details the lab setup and experimental procedure used in the experiment.
+This section details the lab setup and procedure used in the experiment.
 
 \subsection{Apparatus}
 
 \noindent
-The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of the span allowing pressure measurements over the surface. Pressure tap locations are presented in Table \ref{tab:pressure_taps}.\newline
+The Clark Y airfoil specimen used in the experiment is a 3D printed model, with 19 holes along the centerline of the span allowing pressure measurements over the surface. The pressure tap locations are presented in table \ref{tab:pressure_taps}.\newline
 
 \begin{table}
     \centering
@@ -264,12 +264,12 @@ The Clark Y airfoil is 3D printed, with 19 small holes along the centerline of t
         x/c & 0.85 & 1.00 & 0.90 & 0.60 & 0.40 & 0.30 & 0.20 & 0.10 & 0.05&\\\hline
         Tap Number & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19&\\\hline
     \end{tabular}
-    \caption{Static pressure tap locations for the test model. Taps 1 through 12 are on the top surface, while 13 thought 19 are on the bottom surface.}
+    \caption{Static pressure tap locations for the test model. Taps 1 through 12 are located on the top surface, while 13 thought 19 are located on the bottom surface.}
     \label{tab:pressure_taps}
 \end{table}
 
 \noindent
-Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in Figure \ref{fig:wind_tunnel_setup}. The airfoil is installed using a rotary mechanism to vary the angle of attack across runs, shown in Figure \ref{fig:aoa_select}.\newline
+The tests on the airfoil are conducted in an ELD Model 402B subsonic open-return wind tunnel, with a 304.8 x 304.8 x 610 mm  square prismatic test section. The airfoil is shown installed in the wind tunnel in figure \ref{fig:wind_tunnel_setup}. The airfoil is secured using a rotary mechanism to vary the angle of attack across trials and can be seen in figure \ref{fig:aoa_select}.\newline
 
 \begin{figure}
     \centering
@@ -286,18 +286,18 @@ Tests are conducted in an ELD Model 402B subsonic open-return wind tunnel, with 
 \end{figure}
 
 \noindent
-In addition to 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed 27 cm downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurement, with the pitot tube connected to a Betz manometer, and the static tube used as the reference pressure in the two measurement devices.\newline
+In addition to the 19 static pressure taps on the airfoil, there are 17 pitot tubes arranged as a rake, placed $27\si{cm}$ downstream of the airfoil's trailing edge. A pitot-static tube placed upstream of the airfoil is used for wind tunnel speed measurements, with the pitot tube connected to a Betz manometer and the static tube used as the reference pressure in the two measurement devices.\newline
 
 \noindent
-A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connects to the Betz manometer, and the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into a multi-channel Scanivalve-transducer system, and the other into an inclined manometer.\newline
+A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connecting to the Betz manometer while the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into both a multi-channel Scanivalve-transducer system and an inclined manometer.\newline
 
 \noindent
-The Scanivalve system is pictured in Figure \ref{fig:scanivalve}. An analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.\newline
+The Scanivalve system is pictured in figure \ref{fig:scanivalve} and is responsible for redirecting a specific pressure tube to an output measuring device. Th analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.\newline
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{Apparatus Pictures/scanivalve.jpg}
-    \caption{Scanivalve system, connected to a pressure transducer. The system allows rapid switching of each of the 36 channels to the transducer to sweep through all pressure measurements.}
+    \caption{Scanivalve system, connected to a pressure transducer. The system allows for rapid switching between the 36 channels to allow the transducer to sweep through all pressure inputs.}
     \label{fig:scanivalve}
 \end{figure}
 
