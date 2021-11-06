@@ -358,12 +358,12 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \subsection{XFOIL Reference}
 
 \noindent
-Results in this section are compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. Reference results with XFOIL are obtained from analysis of the .dat file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}, using 240 panels nodes in the viscous solver mode at $Re = 200000$. Pressure distributions, and the dimensionless coefficients are determined for all $\alpha$ values used in the experiment.\newline
+Results in this section will be compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. The results generated from XFOIL were specified to the Clark Y airfoil using a \verb|.dat| file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}. For the setup, 240 panel nodes were used in the viscous solver mode, with a Reynolds number of $Re = 200000$. Pressure distributions, and the dimensionless coefficients were determined for all $\alpha$ values used in the experiment.\newline
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
 \noindent
-Pressure is obtained via pre-processing procedures described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the uppermost (port 20) and bottommost (port 36) rakes. Figure \ref{fig:cp} illustrates all of the $C_p$ distributions. \newline
+Pressure distributions were obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
 
 \noindent
 Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. The upper surface of the airfoil will have a negative pressure peak around the leading edge. The peak negative pressure is directly proportional to the angle of attack. In lower angles of attack, the $C_p$ changes gradually after the leading edge, but in a higher angle of attack, due to stalling effects, $C_p$ drastically decays after the negative peak, and a pressure plateau is visible on graphs when $\alpha \ge 13^\circ$.\newline   
@@ -453,24 +453,33 @@ Moreover, the $C_p$ distribution is consistent with literature{\cite{lyon_broere
         \caption{$C_p$ distribution at $\alpha = 20^\circ$}
         \label{fig:cp_20}
     \end{subfigure}
-    \caption{$C_p$ distribution of all angles of attack}
+    \caption{$C_p$ distribution of all angles of attack.}
     \label{fig:cp}
 \end{figure}
 
+\noindent
+Overall, the trends of the $C_p$ distribution fit the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing. The resulting pressure differential provides lift to the airfoil. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. For lower angles of attack, the $C_p$ changes gradually after the leading edge, but for higher angles of attack, due to viscous effects, a pressure plateau becomes. Such plateaus become significant for $\alpha \ge 13^\circ$ which is associated with the stalling of the airfoil. The plateau of the upper airfoil surface $C_p$ distribution reduces the pressure gradient between the top and bottom airfoil surfaces which then result in a loss of lift. Aircraft designers must consider stalling effects, and optimize the stall angles. Pilots also should be reminded about stall angles to prevent accidents during flight (specifically when making abrupt pitching actions).\newline
+
+\noindent
+The general pattern of the $C_p$ distribution, as well as the stall angle is verified with XFOIL. Experimental results deviate slightly at the leading edge with XFOIL, which likely originates from the assumptions XFOIL employs (despite having a separate viscous solver). Such errors between representations can alert aerodynamicists where a model differs from real life thereby highlighting where experiments must be conducted in order to see the full picture. Furthermore, the $C_p$ distribution is consistent with the literature\cite{lyon_broeren_giguere_gopalarathnam_selig_1997} which reports the $C_p$ distribution as seen in figure \ref{fig:lit_cp} and agrees with the overall pattern seen in the experiment.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/reference_cp.png}
+    \caption{Reference $C_p$ distribution with various AOA.}
+    \label{fig:lit_cp}
+\end{figure}
 
 \subsection{Wake Velocity Profile}
 
 \noindent
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
 \noindent
 The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
 
 \noindent
-In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.\newline
-
-\noindent
-$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
+In both sets of plots, a dramatic change occurs between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall as separated flow produces much more drag than well-attached flow. Additionally, the $C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
 
 \noindent
 Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
@@ -480,16 +489,16 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
-          \caption{}
+          \caption{Scanivalve wake deficit.}
          \label{fig:scanivalve_wake_velocity}
      \end{subfigure}
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
-         \caption{}
+         \caption{Manometer wake deficit.}
          \label{fig:manometer_wake_velocity}
      \end{subfigure}
-    \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
+    \caption{Velocity deficit, $U_\infty - u$, in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
 
@@ -2365,8 +2374,11 @@ writematrix(d_c_D, "cd_error_scanivalve.csv")
 writematrix(drag_force, "total_drag_scanivalve.csv")
 writematrix(d_drag_force, "total_drag_error_scanivalve.csv")
 \end{minted}
+
 \subsubsection{Manometer}
+
 Source file: \verb|wake_analysis/wake_analysis_manometer.m|
+
 \begin{minted}{matlab}
 % http://brennen.caltech.edu/fluidbook/externalflows/drag/dragNwake.pdf
 load("../../Data/calibrated_manometer_data_Pa.mat");
