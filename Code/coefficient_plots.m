@@ -15,6 +15,18 @@ cl_err = scani_coeff_uncertainty.data(:, 2);
 cdp_err = scani_coeff_uncertainty.data(:, 3);
 cm_err = scani_coeff_uncertainty.data(:, 4);
 
+total_drag_scani = importdata("wake_analysis/total_drag_scanivalve.csv");
+total_drag_scani_error = importdata("wake_analysis/total_drag_error_scanivalve.csv");
+
+figure
+errorbar(total_drag_scani, cl, cl_err, cl_err, total_drag_scani_error, total_drag_scani_error, 'linewidth', 0.5)
+xlabel('$C_{D}$', "interpreter", "latex")
+ylabel('$C_L$', "interpreter", "latex")
+title('$C_L$ vs $C_{D}$ for Scanivalve Data', 'interpreter', 'latex')
+grid on
+set(gca, 'FontSize', 15)
+saveas(gcf,'scanivalve_cl__vs_cd_tot.png')
+
 % Plot coefficients.
 figure
 yyaxis left
@@ -86,6 +98,18 @@ cm = mano_coeff_data.data(:, 4);
 cl_err = mano_coeff_uncertainty.data(:, 2);
 cdp_err = mano_coeff_uncertainty.data(:, 3);
 cm_err = mano_coeff_uncertainty.data(:, 4);
+
+total_drag_mano = importdata("wake_analysis/total_drag_manometer.csv");
+total_drag_mano_error = importdata("wake_analysis/total_drag_error_manometer.csv");
+
+figure
+errorbar(total_drag_mano, cl, cl_err, cl_err, total_drag_mano_error, total_drag_mano_error, 'linewidth', 0.5)
+xlabel('$C_{D}$', "interpreter", "latex")
+ylabel('$C_L$', "interpreter", "latex")
+title('$C_L$ vs $C_{D}$ for Manometer Data', 'interpreter', 'latex')
+grid on
+set(gca, 'FontSize', 15)
+saveas(gcf,'manometer_cl__vs_cd_tot.png')
 
 % Plot coefficients.
 figure
