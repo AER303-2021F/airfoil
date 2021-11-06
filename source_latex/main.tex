@@ -131,10 +131,10 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 \section{Introduction and Background}\label{sec:introduction_and_background}
 
 \noindent
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions, and compare these methods to simulations and literature.\newline
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions and compare these methods to simulations and literature.\newline
 
 \noindent
-Airfoils are two-dimensional, wing cross-sections that produce lift by accelerating flow over their contour which result in a surface pressure distribution that can cause a net lifting action. At the same time, airfoils produce drag forces through skin friction and fluid viscosity. The combination of both the lift and drag forces impart a pitching moment on the airfoil which, in aircraft design, must be balanced by the horizontal stabilizer. Since the lift, drag, and moment forces depend on the airfoil's pressure distribution which varies with the angle of attack, the performance of the airfoil in producing sufficient lift to sustain flight will thusly depend on the angle the airfoil makes with the relative airflow. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil which are necessary in aircraft design.\newline
+Airfoils are two-dimensional, wing cross-sections that produce lift by accelerating flow over their contour which results in a surface pressure distribution that can cause a net lifting action. At the same time, airfoils produce drag forces through skin friction and fluid viscosity. The combination of both the lift and drag forces impart a pitching moment on the airfoil which, in aircraft design, must be balanced by the horizontal stabilizer. Since the lift, drag, and moment forces depend on the airfoil's pressure distribution which varies with the angle of attack, the performance of the airfoil in producing sufficient lift to sustain flight will thusly depend on the angle the airfoil makes with the relative airflow. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil which are necessary for aircraft design.\newline
 
 \subsection{Normal, Axial, and Moment Forces}
 
@@ -316,19 +316,19 @@ The inclined manometer takes in 36 input channels and one reference channel to m
 % What is measured and how it is acquired.
 
 \noindent
-The procedure used for acquisition of pressure measurements is as follows:
+The procedure used for the acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
 
-    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel speed is set to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
+    \item The sampling frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel speed is set to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output is then taken and autocorrelated to determine the sampling frequency and data acquisition time required for $\pm 1\%$ accuracy.
     
     \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer measurements into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
     
-    \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experienced in the wind tunnel.
+    \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and the wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experienced in the wind tunnel.
     
     \item Next, the angle of attack is changed in the positive and negative directions to determine the angle of attack associated with the airfoil stall. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen are \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
 
-    \item Cycling through each angle of attack, the pressure distribution is measured along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values are measured by reading the fluid height changes from the inclined manometer. To get greater precision in the wake measurements, the wake rake is displaced by $5\si{mm}$ for a second round of measurements to fill the gaps between each rake tube. Pressure measurements are taken using two methods: (1) the pressure transducer fed by the scanivalve device and (2) the inclined manometer.
+    \item Cycling through each angle of attack, the pressure distribution is measured along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoil's wake. These values are measured by reading the fluid height changes from the inclined manometer. To get greater precision in the wake measurements, the wake rake is displaced by $5\si{mm}$ for a second round of measurements to fill the gaps between each rake tube. Pressure measurements are taken using two methods: (1) the pressure transducer fed by the scanivalve device and (2) the inclined manometer.
 
 \end{enumerate}
 
@@ -342,7 +342,7 @@ Following the acquisition of pressure measurements, the data is pre-processed to
 
     \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For the inclined manometer approach, the data is captured in images which are annotated using a web based data extraction tool for converting image embedded data into csv files \cite{Rohatgi2020}. In this annotation stage, the graph boundaries and the scale of the graph are specified. The peaks of each manometer tube are selected on the image. The program then interpolates between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
+    \item For the inclined manometer approach, the data is captured in images which are annotated using a web-based data extraction tool for converting image embedded data into CSV files \cite{Rohatgi2020}. In this annotation stage, the graph boundaries and the scale of the graph are specified. The peaks of each manometer tube are selected on the image. The program then interpolates between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the CSV data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
 
 \end{enumerate}
 
@@ -361,7 +361,7 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \subsection{XFOIL Reference}
 
 \noindent
-Results in this section will be compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. The results generated from XFOIL are specified to the Clark Y airfoil using a \verb|.dat| file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}. For the setup, 240 panel nodes are used in the viscous solver mode, with a Reynolds number of $Re = 200000$. Pressure distributions, and the dimensionless coefficients were determined for all $\alpha$ values used in the experiment.\newline
+Results in this section will be compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. The results generated from XFOIL are specified to the Clark Y airfoil using a \verb|.dat| file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}. For the setup, 240-panel nodes are used in the viscous solver mode, with a Reynolds number of $Re = 200000$. Pressure distributions and the dimensionless coefficients were determined for all $\alpha$ values used in the experiment.\newline
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
@@ -442,13 +442,13 @@ Pressure distributions are obtained using the pre-processing procedure described
 \end{figure}
 
 \noindent
-Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. The upper surface of the airfoil has a negative pressure peak around the leading edge, whose magnitude is directly proportional to the angle of attack.For lower angles of attack, the $C_p$ changes gradually after the leading edge, but for higher angles of attack, due to viscous effects, a pressure plateau becomes significant for $\alpha \ge 13^\circ$, which is associated with the stalling of the airfoil.\newline 
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. The upper surface of the airfoil has a negative pressure peak around the leading edge, whose magnitude is directly proportional to the angle of attack. For lower angles of attack, the $C_p$ changes gradually after the leading edge, but for higher angles of attack, due to viscous effects, a pressure plateau becomes significant for $\alpha \ge 13^\circ$, which is associated with the stalling of the airfoil.\newline 
 
 \noindent
 The plateau of the upper airfoil surface $C_p$ distribution reduces the pressure gradient between the top and bottom airfoil surfaces, which results in a loss of lift. Aircraft designers must consider stalling effects, and optimize the stall angles. Pilots also should be reminded about stall angles to prevent accidents during flight (specifically when making abrupt pitching actions).\newline
 
 \noindent
-The general pattern of the $C_p$ distribution, as well as the stall angle is verified with XFOIL. Experimental results deviate slightly at the leading edge with XFOIL, which likely originates from the assumptions XFOIL employs (despite having a separate viscous solver). Such errors between representations can alert aerodynamicists where a model differs from real life thereby highlighting where experiments must be conducted in order to see the full picture. Furthermore, the $C_p$ distribution is consistent with the literature\cite{lyon_broeren_giguere_gopalarathnam_selig_1997} which reports the $C_p$ distribution as seen in figure \ref{fig:lit_cp} and agrees with the overall pattern seen in the experiment.
+The general pattern of the $C_p$ distribution, as well as the stall angle, is verified with XFOIL. Experimental results deviate slightly at the leading edge with XFOIL, which likely originates from the assumptions XFOIL employs (despite having a separate viscous solver). Such errors between representations can alert aerodynamicists where a model differs from real-life thereby highlighting where experiments must be conducted to see the full picture. Furthermore, the $C_p$ distribution is consistent with the literature\cite{lyon_broeren_giguere_gopalarathnam_selig_1997} which reports the $C_p$ distribution as seen in figure \ref{fig:lit_cp} and agrees with the overall pattern seen in the experiment.
 
 \begin{figure}[h]
     \centering
@@ -463,13 +463,13 @@ The general pattern of the $C_p$ distribution, as well as the stall angle is ver
 Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
 \noindent
-The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are artifacts of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
+The shape of the wake velocity distributions is consistent with theory, indicating that the airfoil only disturbs flow near it and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are artifacts of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period if the experiment were to be repeated with more time allotted.\newline
 
 \noindent
-In both sets of plots, a dramatic change occurs between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall as separated flow produces much more drag than well-attached flow. Additionally, the $C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
+In both sets of plots, a dramatic change occurs between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward and is not related to stall. The dramatically large peak is indicative of stall as separated flow produces much more drag than well-attached flow. Additionally, the $C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
 
 \noindent
-Both sets of measurements agree with XFOIL in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
+Both sets of measurements agree with XFOIL in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the data points, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
 
 \begin{figure}
     \centering
@@ -528,7 +528,7 @@ Both sets of measurements agree with XFOIL in terms of predicting stall angle, a
 \end{figure}
 
 \noindent
-Both the scanivalve and manometer data are calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, (pressure) drag, and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
+Both the scanivalve and manometer data are calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, (pressure) drag, and moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
 \centering
@@ -627,10 +627,10 @@ In both plots, the coefficient of lift increases with the angle of attack until 
 \end{itemize}
 
 \noindent
-The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $C_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
+The coefficient of drag plots decreases initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $C_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently, more drag experienced.\newline
 
 \noindent
-Lastly, the coefficient of moment curves follow a behaviour that is weakly inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. With this in mind, the general trend of the $C_M$ curve weak and no significant results can be extracted. This result vaguely resembles the trends of XFOIL but are in line with the literature which describes the $C_M$ curve becoming positive at the onset of a stall. These discrepancies could be the result of experimental error or analysis error and deem further investigation. \newline
+Lastly, the coefficient of moment curves follows a behaviour that is weakly inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. With this in mind, the general trend of the $C_M$ curve is weak and no significant results can be extracted. This result vaguely resembles the trends of XFOIL but is in line with the literature which describes the $C_M$ curve becoming positive at the onset of a stall. These discrepancies could be the result of experimental error or analysis error and deem further investigation. \newline
 
 \noindent
 The coefficients calculated from the experimental data can be compared to the results from XFOIL as seen in figures \ref{fig:scani_comp} and \ref{fig:mano_comp} for the Scanivalve and manometer data respectively.\newline
@@ -679,10 +679,10 @@ For the manometer data, there is a larger deviation between the lift and drag co
 
 \noindent
 Experimental performance data of a Clark Y airfoil is available in literature
-\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in figure \ref{fig:clark_y_reference}.\newline
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on pages 81 and 83 give experimental results for dimensionless coefficients measured more professionally. These are shown in figure \ref{fig:clark_y_reference}.\newline
 
 \noindent
-The shape of the $C_L$ vs $\alpha$ plot in figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees. Additionally, the experimentally derrived $C_L$ vs $C_D$ plots take on a similar form as the corresponding plot in the literature as seen in figure \ref{fig:reference_cl_cd} albeit of a slightly different order or magnitude.
+The shape of the $C_L$ vs $\alpha$ plot in figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees. Additionally, the experimentally derived $C_L$ vs $C_D$ plots take on a similar form as the corresponding plot in the literature as seen in figure \ref{fig:reference_cl_cd} albeit of a slightly different order of magnitude.
 
 \begin{figure}[h]
     \centering
@@ -728,7 +728,7 @@ $20.0\pm0.25$ &     $1.242\pm0.811$ &    $1.379\pm0.965$ &  $15.284\pm1.619$ & $
 \end{table}
 
 \noindent
-Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. \newline
+Pressure drag makes up only a small portion of total drag for all measurements taken, consistent with theory from AER307 on airfoils at low speed. Total drag jumps sharply at stall $\alpha \approx 13^\circ$, indicative of a large viscous wake forming from the separated flow. Pressure drag increases with $\alpha$ due to the airfoil itself pitching up. \newline
 
 \noindent
 The relative errors in the drag calculations are large, particularly for the pressure drag values. Therefore, trends observed in the pressure drag values are unreliable.
@@ -805,16 +805,16 @@ $20^\circ$ & $\pm$ 0.0029\\
 \label{sec:non_quantifiable_sources_of_error}
 
 \noindent
-The experimental setup contained various areas of non-quantifiable sources of error such as the low frequency response in the pressure tubes, the precision error of the manometer, the turbulence in the airfoil wake, and the distortion effect in image acquisition.\newline
+The experimental setup contained various areas of non-quantifiable sources of error such as the low-frequency response in the pressure tubes, the precision error of the manometer, the turbulence in the airfoil wake, and the distortion effect in image acquisition.\newline
 
 \noindent
-For the pressure experienced in the wind tunnel to be measured by the scanivalve or manometer, the pressure changes had to travel down a series of long tubes before reaching the measuring devices. This long transit will cause a damping in the strength of pressure gradients and thus the extent or pressure changes at the manometer and scanivalve ends. This effect will result in a low frequency response of our measurements.\newline
+For the pressure experienced in the wind tunnel to be measured by the scanivalve or manometer, the pressure changes had to travel down a series of long tubes before reaching the measuring devices. This long transit will cause a damping in the strength of pressure gradients and thus the extent of pressure changes at the manometer and scanivalve ends. This effect will result in a low-frequency response of our measurements.\newline
 
 \noindent
 Two other sources of error arise from the unpredictable fluctuations in pressure information. Specifically, the imaging method of data acquisition from the manometer took a snapshot of the measurements in time. Not gaining a time series of the data prevents us from knowing the precision error of our measurements which would allow us to quantify the probability of getting the measurements we received from the distribution from all possible fluctuations. Another aspect of pressure fluctuations was seen in the airfoil's wake whose turbulent flow created random undulations in the measured pressure. The snapshot of this unsteady flow as measured by the rake device failed to capture the time series of these fluctuations, again, preventing the quantification of such oscillations in the airfoil wake velocity.\newline
 
 \noindent
-The last source of a non-quantifiable source of error is the the effect of image distortion on data annotation. In the data annotation workflow, we would mark upon the manometer images reference points and the length scale in between the reference points. The program then linearly interpolated this scale to measure the coordinates of points placed on the image. Although, angular distortions in an image cause a non-linear length scale which skews the measurements gained from the program thus adding to the error of the experiment. This error could be reduced through more direct manometer images, providing an image correction, or determining by hand, each manometer tube height.
+The last source of a non-quantifiable source of error is the effect of image distortion on data annotation. In the data annotation workflow, we would mark upon the manometer images reference points and the length scale in between the reference points. The program then linearly interpolated this scale to measure the coordinates of points placed on the image. Although, angular distortions in an image cause a non-linear length scale which skews the measurements gained from the program thus adding to the error of the experiment. This error could be reduced through more direct manometer images, providing an image correction, or determining by hand, each manometer tube height.
 
 
 % -----------------------------------------------------------------------------
@@ -825,17 +825,17 @@ The last source of a non-quantifiable source of error is the the effect of image
 \section{Conclusion}
 The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$. The variation of the dimensionless coefficients with $\alpha$ is summarized:
 \begin{itemize}
-    \item The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
-    \item $C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall.
-    \item This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$, owing to the strong viscous wake induced from separated flow.
-    \item $C_M$ remains relatively constant throughout all measurements, with no clear trend. Literature and simulations have a similarly shaped relatively constant $C_M$ curve, only increasing mildly with $\alpha$ . Further work is needed to better understand the variation of $C_M$ with $\alpha$, as this experiment does not clearly yield any trends.
+    \item The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating the onset of stall.
+    \item $C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at a stall.
+    \item This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$, owing to the strong viscous wake induced from the separated flow.
+    \item $C_M$ remains relatively constant throughout all measurements, with no clear trend. Literature and simulations have a similarly shaped relatively constant $C_M$ curve, only increasing mildly with $\alpha$ . Further work is needed to better understand the variation of $C_M$ with $\alpha$, as this experiment does not yield any trends.
 \end{itemize}
 
 \noindent
-The overall uncertainties of measurements made with the Scanivalve pressure transducer system are smaller than those of the inclined manometer, both in terms of quantifiable and non-quantifiable errors. However, both measurement techniques result in comparable values for quantifiable errors. Overall, both measurement techniques produce reaults of similar quality, with the Scanivalve being slightly better in terms of uncertainty.
+The overall uncertainties of measurements made with the Scanivalve pressure transducer system are smaller than those of the inclined manometer, both in terms of quantifiable and non-quantifiable errors. However, both measurement techniques result in comparable values for quantifiable errors. Overall, both measurement techniques produce results of similar quality, with the Scanivalve being slightly better in terms of uncertainty.
 
 \noindent
-For future experiments, there are several improvements which can be made:
+For future experiments, several improvements can be made:
 \begin{itemize}
     \item Multiple measurements at each angle of attack could be used to provide a better estimate of precision error.
     \item Bias errors of instrumentation in the experiment could be determined from references or by other experiments to better estimate the bias error of the pressure transducer, data acquisition card, and other components excluded.
@@ -844,7 +844,7 @@ For future experiments, there are several improvements which can be made:
 \end{itemize}
 
 \noindent
-Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around stall, and comparing the two measurement techniques used for performance characterization.
+Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around the stall and comparing the two measurement techniques used for performance characterization.
 
 
 % -----------------------------------------------------------------------------
