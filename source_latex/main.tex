@@ -69,7 +69,7 @@
 
 \begin{abstract}
 
-In this report, the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The center of pressure distributions, a momentum balance to determine the total drag, and numerical methods to calculate the coefficients of lift, (pressure) drag, and moment are calculated. The measurements for these calculations are collected using two separate methods, and their comparative effectiveness is evaluated.\newline
+In this report, the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The coefficient of pressure distributions, a momentum balance to determine the total drag, and numerical methods for the coefficients of lift, (pressure) drag, and moment are calculated. Empirical data measurements for these calculations are collected using two separate methods, and their comparative effectiveness is evaluated.\newline
 
 Through analysis, it was found that the Clark Y airfoil appeared to stall at $\alpha\approx 13^\circ$. This conclusion was supported by the $C_P$ curves which showed a large plateau region for $\alpha\geq13^\circ$ indicating significant flow separation. For the same region, the $C_L$ curve experienced a significant drop in the lift slope and the $C_D$ curve had a sudden increase. No useful information could be extracted from the $C_M$ curve which remained relatively constant regarding the angle of attack.\newline
 
@@ -233,7 +233,7 @@ An airfoil stall is characterized by a significant separation of flow from the a
     
     \item The flow separation associated with an impending stall incurs higher drag, resulting in increasing $C_D$ curve for all angles of attack above the minimum stall angle (critical angle of attack).
     
-    \item $C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes increasingly more negative which forces an unconstrained airfoil to pitch down.
+    \item $C_{M, LE}$ remains a nearly constant negative value. Even when the airfoil stalls, the pitching moment at the leading edge is not affected as the pressure gradient happens most drastically at the leading edge, which does not affect the moment at the leading edge.
     
 \end{itemize}
 
@@ -365,6 +365,7 @@ Results in this section will be compared to data obtained from \textit{XFOIL}, a
 \noindent
 Pressure distributions were obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The free stream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
 
+\newpage
 \begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
@@ -438,7 +439,10 @@ Pressure distributions were obtained using the pre-processing procedure describe
 \end{figure}
 
 \noindent
-Overall, the trends of the $C_p$ distribution fit the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing. The resulting pressure differential provides lift to the airfoil. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. For lower angles of attack, the $C_p$ changes gradually after the leading edge, but for higher angles of attack, due to viscous effects, a pressure plateau becomes. Such plateaus become significant for $\alpha \ge 13^\circ$ which is associated with the stalling of the airfoil. The plateau of the upper airfoil surface $C_p$ distribution reduces the pressure gradient between the top and bottom airfoil surfaces which then result in a loss of lift. Aircraft designers must consider stalling effects, and optimize the stall angles. Pilots also should be reminded about stall angles to prevent accidents during flight (specifically when making abrupt pitching actions).\newline
+Overall, the trend of the $C_p$ distribution fits the theoretical prediction. The upper wing has a more negative pressure distribution than the lower wing, which in turn provides lift. The $C_p$ changes drastically in the small region directly succeeding the leading edge due to the static pressure. The upper surface of the airfoil has a negative pressure peak around the leading edge, whose magnitude is directly proportional to the angle of attack.For lower angles of attack, the $C_p$ changes gradually after the leading edge, but for higher angles of attack, due to viscous effects, a pressure plateau becomes significant for $\alpha \ge 13^\circ$, which is associated with the stalling of the airfoil.\newline 
+
+\noindent
+The plateau of the upper airfoil surface $C_p$ distribution reduces the pressure gradient between the top and bottom airfoil surfaces, which results in a loss of lift. Aircraft designers must consider stalling effects, and optimize the stall angles. Pilots also should be reminded about stall angles to prevent accidents during flight (specifically when making abrupt pitching actions).\newline
 
 \noindent
 The general pattern of the $C_p$ distribution, as well as the stall angle is verified with XFOIL. Experimental results deviate slightly at the leading edge with XFOIL, which likely originates from the assumptions XFOIL employs (despite having a separate viscous solver). Such errors between representations can alert aerodynamicists where a model differs from real life thereby highlighting where experiments must be conducted in order to see the full picture. Furthermore, the $C_p$ distribution is consistent with the literature\cite{lyon_broeren_giguere_gopalarathnam_selig_1997} which reports the $C_p$ distribution as seen in figure \ref{fig:lit_cp} and agrees with the overall pattern seen in the experiment.
@@ -816,16 +820,16 @@ The last source of a non-quantifiable source of error is the the effect of image
 
 
 \section{Conclusion}
-The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.
+The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$. The variation of the dimensionless coefficients with $\alpha$ is summarized:
+\begin{itemize}
+    \item The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
+    \item $C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall.
+    \item This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$, owing to the strong viscous wake induced from separated flow.
+    \item $C_M$ remains relatively constant throughout all measurements, with no clear trend. Literature and simulations have a similarly shaped relatively constant $C_M$ curve, only increasing mildly with $\alpha$ . Further work is needed to better understand the variation of $C_M$ with $\alpha$, as this experiment does not clearly yield any trends.
+\end{itemize}
 
 \noindent
-The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
-
-\noindent
-$C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.
-
-\noindent
-$C_M$ remains relatively constant throughout all measurements, with no clear trend. This is not consistent with expectations in theory, and warrants additional investigation.
+The overall uncertainties of measurements made with the Scanivalve pressure transducer system are smaller than those of the inclined manometer, both in terms of quantifiable and non-quantifiable errors. However, both measurement techniques result in comparable values for quantifiable errors. Overall, both measurement techniques produce reaults of similar quality, with the Scanivalve being slightly better in terms of uncertainty.
 
 \noindent
 For future experiments, there are several improvements which can be made:
@@ -837,7 +841,7 @@ For future experiments, there are several improvements which can be made:
 \end{itemize}
 
 \noindent
-Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around stall.
+Overall, this experiment was successful in characterizing a Clark Y airfoil up to and around stall, and comparing the two measurement techniques used for performance characterization.
 
 
 % -----------------------------------------------------------------------------
