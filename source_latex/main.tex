@@ -453,16 +453,13 @@ The general pattern of the $C_p$ distribution, as well as the stall angle is ver
 \subsection{Wake Velocity Profile}
 
 \noindent
-Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using Equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using Equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
+Wake velocities are obtained from total pressure measurements in the wake to determine the flow velocity distribution over the height of the pressure rake. Resulting total drag is computed numericall using equation \ref{fig:total_drag_coefficient} and \verb|trapz| in MATLAB. The drag coefficient $C_D$ is obtained using equation \ref{eq:cd}. Wake velocity and $C_D$ results are shown in Figures \ref{fig:wake_velocities} and \ref{fig:total_drag_coefficient}.\newline
 
 \noindent
 The shape of the wake velocity distributions are consistent with theory, indicating that the airfoil only disturbs flow near it, and that the velocity profile going off to infinity approaches the freestream velocity. It should be noted that the wake velocity profiles, especially for $\alpha$ near and around stall, exhibit time-varying effects such as vortex shedding not captured by the static measurements of this experiment. The large jagged fluctuations in the observed data are an artifact of the measurement process. The wake velocity distributions should be collected using a time-averaging method of many measurements over a long period of time if the experiment were to be repeated with more time allotted.\newline
 
 \noindent
-In both sets of plots, a dramatic change happens between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall, separated flow produces much more drag than well-attached flow.\newline
-
-\noindent
-$C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
+In both sets of plots, a dramatic change occurs between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. The peak velocity deficit increases in magnitude, and shifts downward in position. The downwards movement of the peak is due to the increasing angle of attack deflecting more flow downward, and is not related to stall. The dramatically large peak is indicative of stall as separated flow produces much more drag than well-attached flow. Additionally, the $C_D$ jumps up dramatically between $\alpha = 13^\circ$ and $\alpha = 15 ^\circ$. This is indicative of stall occurring and producing more drag. Based on these measurements, the stall angle appears to be about $13^\circ$.\newline
 
 \noindent
 Both sets of measurements agree with XFOIL, both in terms of predicting stall angle, as well as the general shape of the $C_D$ curve. Error bars overlap the simulation data for most of the datapoints, suggesting good measurements and a good estimation of error. The manometer error bars are larger than those of the scanivalve, due to many sources of error in the scanivalve not being accounted for.\newline
@@ -472,16 +469,16 @@ Both sets of measurements agree with XFOIL, both in terms of predicting stall an
     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/scanivalve_wake_velocities.png}
-          \caption{}
+          \caption{Scanivalve wake deficit.}
          \label{fig:scanivalve_wake_velocity}
      \end{subfigure}
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{figures/manometer_wake_velocities.png}
-         \caption{}
+         \caption{Manometer wake deficit.}
          \label{fig:manometer_wake_velocity}
      \end{subfigure}
-    \caption{Velocity deficit $U_\infty - u$ in the wake for each $\alpha$, from both the scanivalve and manometer data.}
+    \caption{Velocity deficit, $U_\infty - u$, in the wake for each $\alpha$, from both the scanivalve and manometer data.}
     \label{fig:wake_velocities}
 \end{figure}
 
