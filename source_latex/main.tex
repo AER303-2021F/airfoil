@@ -69,7 +69,11 @@
 
 \begin{abstract}
 
-In this report the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The lift and drag are then calculated which are used to determine coefficients of lift, drag, and moment ($C_L$, $C_D$, and $C_M$, respectively). Measurements are collected using two separate methods, and their comparative effectiveness is evaluated.
+In this report, the properties of the Clark Y airfoil are empirically explored at varying angles of attack by measuring airfoil surface and wake pressure distributions in a subsonic wind tunnel. The center of pressure distributions, a momentum balance to determine the total drag, and numerical methods to calculate the coefficients of lift, (pressure) drag, and moment are calculated. The measurements for these calculations are collected using two separate methods, and their comparative effectiveness is evaluated.\newline
+
+Through analysis, it was found that the Clark Y airfoil appeared to stall at $\alpha\approx 13^\circ$. This conclusion was supported by the $C_P$ curves which showed a large plateau region for $\alpha\geq13^\circ$ indicating significant flow separation. For the same region, the $C_L$ curve experienced a significant drop in the lift slope and the $C_D$ curve had a sudden increase. No useful information could be extracted from the $C_M$ curve which remained relatively constant regarding the angle of attack.\newline
+
+The empirically attained airfoil characteristics reflected the general trends and magnitudes of the values calculated from XFOIL and reported in the literature. This suggests that the results, within an experimental error, accurately reflect the true behaviour of a Clark Y airfoil in uniform flow at varying angles of attack.
 
 \keywords{Airfoil \and Stall \and Inclined Manometer \and Scanivalve}
 \end{abstract}
@@ -93,15 +97,16 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
         $A'$ & Axial force per unit span. \\
         $C$ & Chord length. \\
         $C_D$ & Coefficient of Drag. \\
+        $C_{D,p}$ & Coefficient of Drag based only on pressure drag. \\
         $C_L$ & Coefficient of lift. \\
         $C_M$ & Coefficient of Moment. \\
         $D'$ & Drag per unit span. \\
         $L'$ & Lift per unit span.\\
-        $LE$ & Airfoil leading Edge \\
+        $LE$ & Airfoil leading Edge. \\
         $M'$ & Moment of the airfoil around the leading edge per unit span. \\
         $N'$ & Normal force per unit span. \\
-        $P_\ell$ & The pressure felt on the airfoils lower surface. \\
-        $P_u$ & The pressure felt on the airfoils upper surface. \\
+        $P_\ell$ & The pressure exerted on the airfoils lower surface. \\
+        $P_u$ & The pressure exerted on the airfoils upper surface. \\
         $q_\infty$ & Free stream dynamic pressure. \\
         $Re$ & Reynolds number. \\
         $TE$ & Airfoil trailing edge. \\
@@ -113,7 +118,7 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
         $\theta$ & The angle made between the airfoils surface normal and the airfoils chord normal. \\
         \bottomrule
     \end{tabular}
-    \caption{Commonly used symbols and term.}
+    \caption{Commonly used symbols and terms.}
     \label{tab:nomenclature}
 \end{table}
 
@@ -126,21 +131,18 @@ Refer to Table \ref{tab:nomenclature} for definitions and symbols common to this
 \section{Introduction and Background}\label{sec:introduction_and_background}
 
 \noindent
-This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack to understand the dependence of its performance characteristics on $\alpha$. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions.\newline
+This report aims to explore the experimental performance of a Clark Y airfoil at varying angles of attack, $\alpha$, to understand the characteristic dependency on the angle of attack. A secondary goal of the report is to evaluate the comparative effectiveness of two methods of measuring pressure distributions, and compare these methods to simulations and the literature.\newline
 
 \noindent
-Airfoils are two-dimensional cross sections of wings which produce lift by redirecting flow over their surface such that the resulting surface pressure distribution causes a net upward force. At the same time, skin friction effects impart viscous drag forces on the airfoil. The combination of both the lift and drag forces impart a pitching moment on the airfoil. Lift, drag, and moment depend on the pressure distribution over the airfoil which will not remain constant over different angles of attack, and changes sharply near stall. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil.\newline
+Airfoils are two-dimensional, wing cross-sections that produce lift by accelerating flow over their contour which result in a surface pressure distribution that can cause a net lifting action. At the same time, airfoils produce drag forces through skin friction and fluid viscosity. The combination of both the lift and drag forces impart a pitching moment on the airfoil which, in aircraft design, must be balanced by the horizontal stabilizer. Since the lift, drag, and moment forces depend on the airfoil's pressure distribution which varies with the angle of attack, the performance of the airfoil in producing sufficient lift to sustain flight will thusly depend on the angle the airfoil makes with the relative airflow. Gaining insight into the angle of attack evolution of the airfoil's lift, drag, and moment is necessary for learning the stall and performance characteristics of the airfoil which are necessary in aircraft design.\newline
 
 \subsection{Normal, Axial, and Moment Forces}
 
 \noindent
-Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of pressure on an airfoil. These forces yield lift and drag when combined with the angle of attack.\newline
+Ignoring viscous effects, the normal and axial forces on an airfoil describe the net effect of a pressure distribution over the airfoil. The normal force is the net pressure force exerted normal to the aircraft's chord. In contrast, the axial force is the net pressure force acting parallel to the aircraft's chord. These forces yield lift and pressure drag forces when combined with the angle of attack as will be discussed in section \ref{sec:LDC}\newline
 
 \noindent
-$P_u$ and $P_\ell$ are the pressure distributions over the airfoils top and bottom surfaces respectively, and $\theta$ is the clockwise angle between the chord normal and the airfoil surface normal.\newline
-
-\noindent
-The normal and axial forces acting on the airfoil are given by Equations \ref{eq:normal_force} and \ref{eq:axial_force}, integrating the pressure distribution over the surface to get the net forces where a positive value indicates forces acting upward normal to the chord and axially toward the trailing edge respectively. The moment around the leading edge of the airfoil is given by Equation \ref{eq:leading_edge_moment}, integrating the product of the moment arm and force acting in both the normal and axial direction. A positive value of $M_{LE}'$ pitches the airfoil up towards a higher angle of attack.\newline
+With an airfoil in a uniform flow, let $P_u$ and $P_\ell$ be the pressure distributions over the airfoil's top and bottom surfaces respectively. Additionally, let $\theta$ be the angle between the chord normal and the airfoil surface normal measured clockwise. From these measures, the normal and axial forces acting on the airfoil can be calculated using equations \ref{eq:normal_force} and \ref{eq:axial_force} where the normal and axial components are summed over the airfoil's surface to yield the net normal and net axial component. The normal and axial definitions can be represented pictorially in figure \ref{fig:airfoil_directions} where the expressed forces define their positive orientations. In a similar approach, the moment around the leading edge of the airfoil is given by equation \ref{eq:leading_edge_moment} which integrates the product of the moment arm and force acting in both the normal and axial direction. A positive moment value is defined to be the angular direction that increases the angle of attack.\newline
 
 \begin{align}
     N' &= \int_{LE}^{TE} -P_u\cos\theta ds_u + \int_{LE}^{TE} P_\ell\cos\theta ds_\ell
@@ -151,10 +153,10 @@ The normal and axial forces acting on the airfoil are given by Equations \ref{eq
     \label{eq:leading_edge_moment}
 \end{align}
 
-\subsection{Calculating Lift, Drag and Dimensionless Coefficients}
+\subsection{Calculating Lift, Drag and Dimensionless Coefficients}\label{sec:LDC}
 
 \noindent
-The lift of the airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force exerted on the airfoil parallel to the relative airflow. These forces can be calculated using Equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoils chord line and the relative airflow. The relative directions of the forces mentioned for far are shown in Figure \ref{fig:airfoil_directions}.\newline
+The lift of an airfoil is defined as the net force exerted on the airfoil normal to the relative airflow, whereas the drag is the net force parallel to the relative airflow. These forces per unit span can be calculated using equations \ref{eq:lift} and \ref{eq:drag} where the angle of attack, $\alpha$, is the angle between the airfoil's chord line and the relative airflow. The lift and drag definitions can be represented pictorially in figure \ref{fig:airfoil_directions} where the expressed forces define their positive orientations.\newline
 
 \begin{align}
     L' &= N'\cos\alpha - A'\sin\alpha \label{eq:lift} \\
@@ -180,7 +182,11 @@ The lift of the airfoil is defined as the net force exerted on the airfoil norma
     \label{fig:airfoil_directions}
 \end{figure}
 
-Pressure on measurement sites are nondimensionalized using Equation
+\noindent
+To express the performance of an airfoil in a manner that is quasi-decoupled from the flow properties, the lift, drag, moment, and pressure distributions are often expressed in nondimensionalized form.
+
+\noindent
+The nondimensionalized pressure can be found using using equation \ref{eq:cp} where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the free stream dynamic pressure.\newline
 
 \begin{equation}
     C_p = \frac{\Delta P}{q_\infty}
@@ -188,19 +194,22 @@ Pressure on measurement sites are nondimensionalized using Equation
 \end{equation}
 
 \noindent
-where $q_\infty\equiv\frac{1}{2}\rho_\infty U_\infty^2$ is the freestream dynamic pressure.\newline
+Lift, drag, and moment can also be nondimensionalized using equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $C$ is the airfoil's chord length.\newline
 
-\noindent
-Lift, drag, and moment are nondimensionalized using Equations \ref{eq:cl}, \ref{eq:cd}, and \ref{eq:cm} respectively, where $c$ is the chord length.\newline
-
-\begin{align}
-    C_L &= \frac{L'}{q_\infty c}
-    \label{eq:cl}\\
-    C_D &= \frac{D'}{q_\infty c}
-    \label{eq:cd}\\
-    C_M &= \frac{M'}{q_\infty c^2}
+\begin{multicols}{3}
+\begin{equation}
+    C_L = \frac{L'}{q_\infty C}
+    \label{eq:cl}
+\end{equation}
+\begin{equation}
+    C_D = \frac{D'}{q_\infty C}
+    \label{eq:cd}
+\end{equation}
+\begin{equation}
+    C_M = \frac{M'}{q_\infty C^2}
     \label{eq:cm}
-\end{align}
+\end{equation}
+\end{multicols}
 
 \subsection{Calculating Total Drag from Wake Velocity}
 
@@ -214,22 +223,22 @@ The drag force formulation stated earlier (equation \ref{eq:drag}) ignores visco
 \subsection{Stall}
 
 \noindent
-Airfoil stall is characterized by a significant separation in flow from the airfoil surface resulting in several effects.\newline
+An airfoil stall is characterized by a significant separation of flow from the airfoil surface resulting in several effects that can be observed in the dimensionless curves.
+
+\begin{itemize}
+
+    \item When flow separation occurs, the $C_P$ distribution plateaus in the region of separation as separation will occur in the presence of non-favourable pressure gradients.
+    
+    \item As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak and then falls sharply. The peak and fall of the $C_L$ curve is a result of the increasingly dominant viscous effects associated with this higher angles of attack.
+    
+    \item The flow separation associated with an impending stall incurs higher drag, resulting in increasing $C_D$ curve for all angles of attack above the minimum stall angle (critical angle of attack).
+    
+    \item $C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes increasingly more negative which forces an unconstrained airfoil to pitch down.
+    
+\end{itemize}
 
 \noindent
-When flow separation occurs, the $C_P$ distribution becomes flat in the region of separation.\newline
-
-\noindent
-As $\alpha$ increases, $C_L$ increases linearly until it reaches a peak, and then falls sharply at stall.\newline
-
-\noindent
-Flow separation incurs higher drag, resulting in higher $C_D$.\newline
-
-\noindent
-$C_{M, LE}$ remains a nearly constant negative value until the airfoil stalls, at which point $C_{M, LE}$ becomes zero or slightly positive.\newline
-
-\noindent
-Such conditions lead to unpredictable behaviour of an airfoil, and reduced aircraft controlability due to reduced effectiveness of aircraft control surfaces. It is important to understand the behaviour of a varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand the limitations of the airfoil.
+Stalled conditions lead to unpredictable behaviour of an airfoil and reduced aircraft controllability as the lack of airflow over control surfaces cause a slow and sloppy control response. It is important to understand the behaviour of varying the angle of attack on the lift, drag, and moment characteristics of an airfoil to understand its limitations.
 
 
 % -----------------------------------------------------------------------------
@@ -615,6 +624,7 @@ In both plots, the coefficient of lift increases with the angle of attack until 
     \item For $\alpha\approx13^\circ$, we have the critical angle of attack (where $C_L$ is a maximum) where the increased flow separation dominates causing diminishing lift. The critical angle of attack is a significant characteristic of an airfoil as it sets a lower bound on the speed at which an aircraft can fly. As an aircraft slows down, a higher angle of attack is necessary to produce sufficient lift to counterbalance the aircraft's weight. Although increasing the angle of attack, as seen in the $C_L$ plots will only be met with increasing lift until this critical angle is met at which the aircraft can no longer sustain flight.
     
     \item For the remainder of the $C_L$ curve, increasing the angle of attack emphasizes the domination of flow separation and the continual decrease in lift production.
+    
 \end{itemize}
 
 \noindent
@@ -731,11 +741,14 @@ The relative errors in the drag calculations are large, particularly for the pre
 \section{Sources of Error}\label{sec:source_of_error}
 
 \subsection{Quantifiable Sources of Errors}
+
+Table \ref{tab:quant_error} contains sources of quantifiable error and their associated uncertainty.
+
 \begin{table}[H]
 \begin{center}
     \begin{tabular}{ll}
         \toprule
-        \multicolumn{2}{c}{Quantifiable Error}\\
+        Source & Error \\
         \midrule
         Manometer Uncertainty Reading & $\pm 1 \si{mm}$\\
         Manometer Angle Uncertainty & $\pm 0.5^\circ$ \\
@@ -812,24 +825,30 @@ The last source of a non-quantifiable source of error is the the effect of image
 
 
 \section{Conclusion}
-The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.
+The pressure distribution and nondimensional coefficients of flow around a Clark Y airfoil were determined at 11 different angles of attack. Measurements were taken separately using a scanivalve pressure transducer system and an inclined manometer. Both sets of measurements agree well with simulations from XFOIL and literature \cite{lyon_broeren_giguere_gopalarathnam_selig_1997}, and suggest a stall angle of $\alpha \approx 13^\circ$.\newline
 
 \noindent
-The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.
+The $C_P$ distribution very clearly shows a large plateau region for $\alpha \ge 13^\circ$, indicating onset of stall.\newline
 
 \noindent
-$C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.
+$C_L$ increases linearly with $\alpha$ up to around 13 degrees, at which point it rounds off and drops sharply at stall. This is supported by a sharp rise in $C_D$ at $\alpha \approx 13^\circ$.\newline
 
 \noindent
-$C_M$ remains relatively constant throughout all measurements, with no clear trend. This is not consistent with expectations in theory, and warrants additional investigation.
+$C_M$ remains relatively constant throughout all measurements, with no clear trend. This is not consistent with expectations in theory, and warrants additional investigation.\newline
 
 \noindent
 For future experiments, there are several improvements which can be made:
+
 \begin{itemize}
+
     \item Multiple measurements at each angle of attack could be used to provide a better estimate of precision error.
+    
     \item Bias errors of instrumentation in the experiment could be determined from references or by other experiments to better estimate the bias error of the pressure transducer, data acquisition card, and other components excluded.
+    
     \item Perform better measurements of the manometer data, using a tripod-mounted camera to eliminate parallax error.
+    
     \item Take time-average measurements of the pressure distribution for higher angles of attack to better capture the time-varying behaviour.
+    
 \end{itemize}
 
 \noindent
@@ -1131,21 +1150,29 @@ $-1098\pm10$ &  $-1158\pm10$ &  $-1072\pm10$ &    $-977.8\pm9.8$ &    $-729.1\pm
 \caption{Manometer rake pressure data at position b in pascals.}
 \label{tab:pressure_manometer_rake_b}
 \end{sidewaystable}
+
 \newpage
+
 \section{Uncertainty Propagation}
 
+This appendix details the error propagation formulas employed throughout the experiment.
+
 \subsection{Scanivalve Calibration}
+
+The uncertainty of the pressure difference associated with scanivalve calibration can be found in the following:
 
 \begin{align*}
     \Delta P &= kV + m \\
     \delta \Delta P &= k\delta V\\
 \end{align*}
 
-The precision error of $\delta V$ on Scanivalve is given by autocorrelation analysis on port 36 for all 11 AOAs 
+
+\noindent
+Note that the precision error of $\delta V$ for Scanivalve measurements is given by autocorrelation analysis on port 36 for each angle of attack.
 
 \subsection{Manometer Pressure}
 
-Reference height $h_R = 18.2 \ \si{cm}$ (assumed errorless) on manometer used for baseline. $\theta = 61 \pm 0.1^\circ$
+The manometer pressure calculations use a reference height of $h_R = 18.2\;\si{cm}$ that we assume to be errorless for a baseline. In these calculations, $\theta = 61 \pm 0.1^\circ$.
 
 \begin{align*}
     P_{mano} &= -\rho g (h - h_R) \sin\theta\\
@@ -1155,7 +1182,7 @@ Reference height $h_R = 18.2 \ \si{cm}$ (assumed errorless) on manometer used fo
 
 \subsection{Flow Velocity}
 
-For cases where we want the velocity of airfoil at a single pitot tube.
+For cases where the airfoil velocity at a single pitot tube is desired, we can calculate the velocity and its uncertainty as follows:
 
 \begin{align*}
     U_\infty &=  \sqrt{\frac{2 \Delta P}{\rho}} \\
@@ -1164,7 +1191,7 @@ For cases where we want the velocity of airfoil at a single pitot tube.
 
 \subsection{Free Stream Velocity}
 
-An average free stream velocity was obtained using ports 20 and 36. Assume zero error in $\rho$.
+An average free stream velocity and its uncertainty can be obtained by the following methods that use the pressure measurements from ports 20 and 36. Here we assume zero error in $\rho$.
 
 \begin{align*}
     U_\infty &= \frac{1}{2} \left(\sqrt{\frac{2 P_{20}}{\rho}} + \sqrt{\frac{2 P_{36}}{\rho}} \right) \\
@@ -1173,16 +1200,16 @@ An average free stream velocity was obtained using ports 20 and 36. Assume zero 
 
 \subsection{Velocity Deficit}
 
-This is used to create the wake velocity distribution.
+The velocity deficit is a tool used to create the wake velocity distribution. Its calculation and uncertainty is given by the following:
 
 \begin{align*}
     \Delta V &= U_\infty - u\\
     \delta \Delta V &= \sqrt{\delta U_\infty^2 + \delta u^2}
 \end{align*}
 
-\subsection{Drag Force}
+\subsection{Total Drag Force}
 
-This was evaluated numerically using trapezoidal rule, ignoring the errors associated with it.
+The total drag force was evaluated numerically using the trapezoidal rule.
 
 \begin{align*}
     D &= \rho\int u (U_\infty - u) dS\\
@@ -1193,32 +1220,46 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Dynamic Pressure}
 
+The following gives the dynamic pressure and its uncertainty assuming no error for the free stream density.
+
 \begin{align*}
     q_\infty &= \frac{1}{2} \rho_\infty U_\infty^2\\
-    \delta q_\infty &= \rho_\infty U_\infty \delta U
+    \delta q_\infty &= \rho_\infty U_\infty \delta U_\infty
 \end{align*}
 
 \subsection{Normal Force}
 
 % Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
 
+The normal force experienced by the airfoil and its uncertainty can be calculated by the following:
+
 \begin{align*}
     N' &= \int-P_u\cos\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
     \delta N' &= \sqrt{\left(\int-\cos\theta ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int P_u\sin\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
 \end{align*}
 
+\noindent
+In practice, the uncertainty of the angle $\theta$ is assumed to be zero as its calculation is dependent only on the tap positions with which we assume have no error.
+
 \subsection{Axial Force}
 
 % Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
+
+The axial force experienced by the airfoil and its uncertainty can be calculated by the following:
 
 \begin{align*}
     A' &= \int-P_u\sin\theta ds_u + \int P_\ell\cos\theta ds_\ell \\
     \delta A' &= \sqrt{\left(\int-\sin\theta ds_u\delta P_u\right)^2 + \left(\int\cos\theta ds_\ell\delta P_\ell\right)^2 + \left(\left[\int -P_u\cos\theta ds_u - \int P_\ell\sin\theta ds_u\right]\delta\theta\right)^2}
 \end{align*}
 
+\noindent
+In practice, the uncertainty of the angle $\theta$ is assumed to be zero as its calculation is dependent only on the tap positions with which we assume have no error.
+
 \subsection{Moment Force}
 
 % Assumptions include that our tap locations are known perfectly and thus we have no theta uncertainty.
+
+The moment force experienced by the airfoil and its uncertainty can be calculated by the following:
 
 \begin{align*}
     M' &= \int \left(P_ux\cos\theta - P_uy\sin\theta\right) ds_u + \int \left(P_\ell x\cos\theta + P_\ell y\sin\theta\right) ds_\ell \\
@@ -1228,7 +1269,12 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
     \eta &= \int \left(-P_ux\sin\theta -P_uy\cos\theta\right)ds_u + \int \left(-P_\ell x\sin\theta + P_\ell y\cos\theta\right) ds_u \\
 \end{align*}
 
+\noindent
+In practice, the uncertainty of the angle $\theta$ is assumed to be zero as its calculation is dependent only on the tap positions with which we assume have no error.
+
 \subsection{Lift Force}
+
+The lift uncertainty can be calculated using the following where the uncertainty associated with the angle of attack is $\delta\alpha=\pm 0.25^\circ$.
 
 \begin{align*}
     L &= N\cos\alpha - A\sin\alpha \\
@@ -1237,12 +1283,16 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 \subsection{Pressure Drag Force}
 
+The pressure drag uncertainty can be calculated using the following where the uncertainty associated with the angle of attack is $\delta\alpha=\pm 0.25^\circ$.
+
 \begin{align*}
     D &= N\sin\alpha + A\cos\alpha \\
     \delta D &= \sqrt{\left(\sin(\alpha)\delta N\right)^2 + \left(\cos(\alpha)\delta A\right)^2 + \left(\left[N\cos\alpha - A\sin\alpha\right]\delta \alpha\right)^2}
 \end{align*}
 
 \subsection{Coefficient of Pressure}
+
+The coefficient and its uncertainty can be calculated as follows:
 
 \begin{align*}
     C_p &= \frac{\Delta P}{q_\infty} \\
@@ -1253,12 +1303,19 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
 
 % Assumptions include that we know our free stream density and chord length perfectly.
 
+The coefficient of lift is calculated using the following:
+
 \begin{align*}
     C_L &= \frac{L'}{\frac{1}{2}\rho_\infty U^2_\infty C} \\
     \frac{\delta C_L}{C_L} &= \sqrt{\left(\frac{\delta L'}{L'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
 \end{align*}
 
+\noindent
+In practice, we assume that the free stream density, and the chord length are known with no error.
+
 \subsection{Coefficient of Drag}
+
+The coefficient of drag is calculated using the following:
 
 % Assumptions include that we know our free stream density and chord length perfectly.
 
@@ -1267,175 +1324,25 @@ This was evaluated numerically using trapezoidal rule, ignoring the errors assoc
     \frac{\delta C_D}{C_D} &= \sqrt{\left(\frac{\delta D'}{D'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(\frac{\delta C}{C}\right)^2}
 \end{align*}
 
+\noindent
+In practice, we assume that the free stream density, and the chord length are known with no error.
+
 \subsection{Coefficient of Moment}
 
 % Assumptions include that we know our free stream density and chord length perfectly.
+
+The coefficient of moment is calculated using the following:
 
 \begin{align*}
     C_M &= \frac{M'}{\frac{1}{2}\rho_\infty U^2_\infty C^2} \\
     \frac{\delta C_M}{C_M} &= \sqrt{\left(\frac{\delta M'}{M'}\right)^2 + \left(\frac{\delta\rho_\infty}{\rho_\infty}\right)^2 + \left(2\frac{\delta U_\infty}{U_\infty}\right)^2 +\left(2\frac{\delta C}{C}\right)^2}
 \end{align*}
 
+\noindent
+In practice, we assume that the free stream density, and the chord length are known with no error.
+
 \newpage
 \section{MATLAB and Python Code}
-
-\subsection{Scanivalve Linear Interpolation}
-
-Source file: \verb|interpolation.mlx|
-
-\begin{minted}{matlab}
-clear
-%creating interpolation function
-Scani_V       = linspace(-10, 10, 100);   % Scanivalve output 
-
-coeffs        = [115, -5]; %interpolation coefficients              
-P_mmH20       = polyval(coeffs, Scani_V); 
-
-
-
-load('Code/location.mat')
-%location.mat stores location of each pressure measurement site along the
-%chord of the airfoil
-locations_a = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20] + 1;
-locations_b = [0, 1.67 3.33 5 6 7 8 9 10 11 12 13 14 15 16.67 18.33, 20] + 0.5;
-%locations_a and _b are measurement site in the wake
-location_combined = [locations_a locations_b];
-
-%Each block has the same functionality
-%1. Corresponding measurement data are loaded from scanivalve
-load('Data/MATLAB_data/Experimental_data_0.mat')
-%2. Measurements are calibrated from to pressure (in Pa)
-p0 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_0 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_0 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_3.mat')
-p3 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_3 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_3 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_6.mat')
-p6 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_6 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_6 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_8.mat')
-p8 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_8 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_8 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_10.mat')
-p10 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_10 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_10 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_11.mat')
-p11 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_11 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_11 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_13.mat')
-p13 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_13 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_13 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_15.mat')
-p15 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_15 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_15 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_16.mat')
-p16 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_16 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_16 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_17.mat')
-p17 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_17 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_17 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-
-load('Data/MATLAB_data/Experimental_data_20.mat')
-p20 = interp1(Scani_V, P_mmH20, p_airfoil) * 9.80665;
-p_rakea_20 = interp1(Scani_V, P_mmH20, p_rake1) * 9.80665;
-p_rakeb_20 = interp1(Scani_V, P_mmH20, p_rake2) * 9.80665;
-\end{minted}
-
-Variables $p_i, p_rakea_i, p_rakeb_i$ are saved in \newline 
-\verb|Data\Calibrated_Airfoil_Pressure_Pa_Interpolated_Coeffs.mat|
-
-\subsection{Autocorrelation}
-
-Source file: \verb|AutoCorrelation.mlx|
-
-\begin{minted}{matlab}
-    clear
-
-%creating for loop variables and formatspec
-idx = [0,3,6,8,10,11,13,15,16,17,20];
-formatspec = 'Data/MATLAB_data/Experimental_data_%d.mat';
-
-%output vector that stores uncertainty in all AOA
-err = zeros(11,1);
-
-
-for index = 1:11
-    figure
-    %load file
-    filename = sprintf(formatspec,idx(1, index));
-    load(filename)
-    plot(time, data,'.')
-    %calculate M
-    M = mean(data)
-    hold on
-    plot(time, zeros(1, 5000) + M)
-    hold off
-    xlabel('Time (s)')
-    ylabel('Voltage')
-    title('Voltage vs Time diagram')
-    s_k = zeros(5000,1);
-    
-    %Calculate Variance and B_xx
-    for k = 0:4999 
-        i = 5000 - k;
-        t1 = data(1:i) - M;
-        t2 = data(1+k:i+k) - M;
-        s_k(k+1,1) = dot(t1',t2);    
-    end
-    var = dot((data - M)', data-M);
-    B_xx = s_k ./ var;
-    figure
-    plot(time, B_xx, '.')
-    hold on 
-    %These are datapoints so we graph using points
-    sum = 0;
-    j = 1;
-    %Using trapezoidal rule to integrate B_xx 
-    % and get the integral time scale
-    while B_xx(j)*B_xx(j+1) > 0
-        traps = B_xx(j) + B_xx(j+1);
-        dt = time(j+1) - time(j);
-        sum = sum + dt*traps/2;
-        j = j+1;
-    end
-    time(j);
-    T = trapz(time(1:j),B_xx(1:j))
-    sum;
-    %make a graphical illustration
-    H1=area(time(1:j),B_xx(1:j),'FaceColor',[1 0 0]);
-    hold off
-    xlabel('Time (s)')
-    ylabel('B_{xx}')
-    title('B_{xx} of Voltage')
-    %calculating St.D, Number of independent samples 
-    sigma = sqrt(var/5000)
-    N = 1/(2 * T)
-    %Calculate uncertainty with 95% confidence. 
-    err(index) = 1.96* sigma/sqrt(N);
-end
-\end{minted}
-
-variable \verb|err| is saved in 
-\verb|Data\autocorrelation_error_deltaP.mat|
 
 \subsection{Manometer Data Conversion}
 
@@ -1550,86 +1457,6 @@ for i = 1:11
     writematrix([v_inf_manometer; d_v_inf_manometer], "../Data/velocities_manometer.csv");
     writematrix([v_inf_scanivalve; d_v_inf_scanivalve], "../Data/velocities_scanivalve.csv");
 end
-\end{minted}
-
-\subsection{Pressure Coefficients}
-
-Source file: \verb|C_p_Calc.mlx|
-
-\begin{minted}{MATLAB}
-%loading some data
-load('Data\Calibrated_Airfoil_Pressure_Pa_Interpolated_Coeffs.mat')
-load('Data\calibrated_manometer_data_Pa.mat')
-load('Code\location.mat')
-velocity = importdata('Data/velocities_manometer.csv')
-load('Data\autocorrelation_error_deltaP.mat')
-gif = 'Data\C_p Graphs\Animated.gif';
-
-%setting constant values
-q = 1/2 * 1.225 * velocity(1,:).^2;
-delta_u = velocity(2,:);
-
-%combine all p value in a tensor
-p = [p0; p3; p6; p8; 
-     p10; p11; p13; p15;
-     p16; p17; p20];
-idx = [0, 3, 6, 8, 10, 11, 13, 15, 16, 17, 20];
-formatspec = 'XFOIL Analysis/clark_y_%d.cp';
-
-delta_Cp = zeros(11, 19);
-delta_Cp_mano = zeros(11,19);
-for i = 1:11
-    h = figure;
-    %error caluclation
-    delta_dp = 115*err(i,1);
-    delta_q = 2 * q(1,i)/velocity(1,i) * velocity(2,i);
-    err_dp = 1/q(1,i) * delta_dp;
-    err_q = p(i, :)/(q(1,i)^2) * delta_q;
-    
-    delta_Cp(i,:) = sqrt(err_dp^2 ...
-                    +(err_q).^2);
-    
-    %Plot Scanivalve Data with error bars
-    errorbar(location, p(i, :)/q(1,i), delta_Cp(i,:));
-    hold on
-    
-    
-    %Plot Manometer Data acquired from Mingde
-    err_p_mano = 1./q(1,i) .* d_airfoil_manometer(i,:);
-    delta_Cp_mano(i,:) = sqrt(err_p_mano.^2 ...
-                    +(err_q).^2);
-    errorbar(location, airfoil_manometer(i, :)/q(1,i), delta_Cp_mano(i,:));
-    
-    
-    %Plot XFOIL Data
-    filename = sprintf(formatspec, idx(1,i));
-    A = importdata(filename,' ', 3);
-    plot(A.data(:,1), A.data(:, 3))
-    hold off
-    
-    %Setting a reversed graph and adding labels
-    set(gca, 'YDir','reverse')
-    xlim([0 1])
-    xlabel('$x/c$', "interpreter", "latex")
-    ylabel('$C_p$',"interpreter",'latex')
-    title(strcat(sprintf('$C_p$ vs chord position, AOA = %d', idx(1, i)), '$^\circ$'), 'interpreter', 'latex')
-    legend('Scanivalve Data', 'Manometer Data','XFOIL Data','location',"best")
-    grid on
-    
-    saveas(h, sprintf('Data/C_p Graphs/AOA%d.png', idx(1,i)))
-    %Creating a gif for fun
-    frame = getframe(h); 
-    im = frame2im(frame); 
-    [imind,cm] = rgb2ind(im,256);
-    
-    if i == 1
-        imwrite(imind,cm,gif,'gif', 'Loopcount',inf);  
-    else 
-        imwrite(imind,cm,gif,'gif','WriteMode','append'); 
-    end
-    
-end
-
 \end{minted}
 
 \subsection{Lift, Pressure Drag, and Moment Coefficients}
