@@ -320,17 +320,20 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
 
-    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. Set the wind tunnel speed to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
+    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel speed is set to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
     
     \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer measurements into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
     
     \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experienced in the wind tunnel.
     
-    \item Next, the angle of attack is changed in the positive and negative directions to determine the angle of attack associated with the airfoil stall. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen were \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
+    \item Next, the angle of attack is changed in the positive and negative directions to determine the angle of attack associated with the airfoil stall. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen are \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
 
     \item Cycling through each angle of attack, the pressure distribution is measured along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values are measured by reading the fluid height changes from the inclined manometer. To get greater precision in the wake measurements, the wake rake is displaced by $5\si{mm}$ for a second round of measurements to fill the gaps between each rake tube. Pressure measurements are taken using two methods: (1) the pressure transducer fed by the scanivalve device and (2) the inclined manometer.
 
 \end{enumerate}
+
+\noindent
+Due to equipment malfunction with the Betz manometer, steps 1 and 2 are not performed, and instead a pre-made calibration curve for the pressure transducer is provided ($P = 115V - 5$, where $V$ is the voltage reading from the transducer).
 
 \noindent
 Following the acquisition of pressure measurements, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
@@ -339,7 +342,7 @@ Following the acquisition of pressure measurements, the data is pre-processed to
 
     \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For the inclined manometer approach, the data is captured in images which were annotated using a web based data extraction tool for converting image embedded data into csv files.\cite{Rohatgi2020} In this annotation stage, the graph boundaries and the scale of the graph were specified. The peaks of each manometer tube were selected on the image. The program then interpolated between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
+    \item For the inclined manometer approach, the data is captured in images which are annotated using a web based data extraction tool for converting image embedded data into csv files \cite{Rohatgi2020}. In this annotation stage, the graph boundaries and the scale of the graph are specified. The peaks of each manometer tube are selected on the image. The program then interpolates between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
 
 \end{enumerate}
 
@@ -358,12 +361,12 @@ After the data is pre-processed, the data is analyzed to determine the lift, mom
 \subsection{XFOIL Reference}
 
 \noindent
-Results in this section will be compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. The results generated from XFOIL were specified to the Clark Y airfoil using a \verb|.dat| file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}. For the setup, 240 panel nodes were used in the viscous solver mode, with a Reynolds number of $Re = 200000$. Pressure distributions, and the dimensionless coefficients were determined for all $\alpha$ values used in the experiment.\newline
+Results in this section will be compared to data obtained from \textit{XFOIL}, a free airfoil analysis software. The results generated from XFOIL are specified to the Clark Y airfoil using a \verb|.dat| file obtained from \href{http://airfoiltools.com/airfoil/details?airfoil=clarky-il}{airfoiltools.com}. For the setup, 240 panel nodes are used in the viscous solver mode, with a Reynolds number of $Re = 200000$. Pressure distributions, and the dimensionless coefficients were determined for all $\alpha$ values used in the experiment.\newline
 
 \subsection{Pressure Visualization and Coefficient of Pressure}
 
 \noindent
-Pressure distributions were obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. Figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
+Pressure distributions are obtained using the pre-processing procedure described in section \ref{sec:procedure}, and further normalized using equation \ref{eq:cp}. The freestream velocity $U_\infty$ is taken to be the mean between the measured velocity at the upper-most (port 20) and bottom-most (port 36) rakes. figure \ref{fig:cp} illustrates the $C_p$ distributions at each angle of attack. \newline
 
 \newpage
 \begin{figure}[h]
@@ -525,7 +528,7 @@ Both sets of measurements agree with XFOIL in terms of predicting stall angle, a
 \end{figure}
 
 \noindent
-Both the scanivalve and manometer data were calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, (pressure) drag, and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
+Both the scanivalve and manometer data are calibrated and then processed according to the methods detailed in section \ref{sec:procedure} to yield the lift, (pressure) drag, and  moment coefficients for the Clark Y airfoil. The coefficient relationship with the angle of attack is displayed pictorially in figures \ref{fig:scani_coeff} and \ref{fig:mano_coeff} as well as in tabular form in tables \ref{tab:scani_coeff} and \ref{tab:mano_coeff}.\newline
 
 \begin{table}[h]
 \centering
@@ -624,7 +627,7 @@ In both plots, the coefficient of lift increases with the angle of attack until 
 \end{itemize}
 
 \noindent
-The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $D_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
+The coefficient of drag plots decrease initially but as they begin nearing the critical angle of attack, they begin to increase indicating an increased pressure drag force applied to the airfoil. The increasing nature of the $C_{D,p}$ curve around and past the critical angle is due to the increasing boundary layer thickness which results in higher viscous effects and consequently more drag experienced.\newline
 
 \noindent
 Lastly, the coefficient of moment curves follow a behaviour that is weakly inverse to that of the (pressure) drag coefficient where it increases with an increasing angle of attack until the critical angle is reached before becoming more negative with a further increase in the angle of attack. With this in mind, the general trend of the $C_M$ curve weak and no significant results can be extracted. This result vaguely resembles the trends of XFOIL but are in line with the literature which describes the $C_M$ curve becoming positive at the onset of a stall. These discrepancies could be the result of experimental error or analysis error and deem further investigation. \newline
@@ -676,10 +679,14 @@ For the manometer data, there is a larger deviation between the lift and drag co
 
 \noindent
 Experimental performance data of a Clark Y airfoil is available in literature
-\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in Figure \ref{fig:clark_y_reference}.\newline
+\cite{lyon_broeren_giguere_gopalarathnam_selig_1997}. The relevant plots on page 81 and 83 give experimental results for dimensionless coefficients measured in a more professional manner. These are shown in figure \ref{fig:clark_y_reference}.\newline
 
 \noindent
+<<<<<<< HEAD
 The shape of the $C_L$ vs $\alpha$ plot in Figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees. Additionally, the experimental $C_L$ vs $C_D$ curves as seen in figure \ref{fig:cL_vs_cD} follow the same general shape as that seen in \ref{fig:reference_cl_cd}.
+=======
+The shape of the $C_L$ vs $\alpha$ plot in figure \ref{fig:coeffs} agrees well with the reference experiment in terms of stall angle, as well as the plateau behaviour around 10 degrees.
+>>>>>>> 8de78a9cc53561c2df5c675f389ee277635f1c98
 
 \begin{figure}[h]
     \centering
