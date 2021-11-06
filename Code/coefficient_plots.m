@@ -15,8 +15,8 @@ cl_err = scani_coeff_uncertainty.data(:, 2);
 cdp_err = scani_coeff_uncertainty.data(:, 3);
 cm_err = scani_coeff_uncertainty.data(:, 4);
 
-total_drag_scani = importdata("wake_analysis/total_drag_scanivalve.csv");
-total_drag_scani_error = importdata("wake_analysis/total_drag_error_scanivalve.csv");
+total_drag_scani = importdata("wake_analysis/cd_scanivalve.csv");
+total_drag_scani_error = importdata("wake_analysis/cd_error_scanivalve.csv");
 
 figure
 errorbar(total_drag_scani, cl, cl_err, cl_err, total_drag_scani_error, total_drag_scani_error, 'linewidth', 0.5)
@@ -99,8 +99,8 @@ cl_err = mano_coeff_uncertainty.data(:, 2);
 cdp_err = mano_coeff_uncertainty.data(:, 3);
 cm_err = mano_coeff_uncertainty.data(:, 4);
 
-total_drag_mano = importdata("wake_analysis/total_drag_manometer.csv");
-total_drag_mano_error = importdata("wake_analysis/total_drag_error_manometer.csv");
+total_drag_mano = importdata("wake_analysis/cd_manometer.csv");
+total_drag_mano_error = importdata("wake_analysis/cd_error_manometer.csv");
 
 figure
 errorbar(total_drag_mano, cl, cl_err, cl_err, total_drag_mano_error, total_drag_mano_error, 'linewidth', 0.5)
