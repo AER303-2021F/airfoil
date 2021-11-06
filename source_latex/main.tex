@@ -283,7 +283,7 @@ In addition to the 19 static pressure taps on the airfoil, there are 17 pitot tu
 A total of 38 pressure tubes exit the wind tunnel; one is the upstream pitot tube connecting to the Betz manometer while the other 37 connect to the measurement devices. The latter 37 tubes are bifurcated to feed into both a multi-channel Scanivalve-transducer system and an inclined manometer.\newline
 
 \noindent
-The Scanivalve system is pictured in figure \ref{fig:scanivalve} and is responsible for redirecting a specific pressure tube to an output measuring device. Th analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected sampling tube rapidly switches between 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card, connected to a computer running MATLAB to collect data.\newline
+The Scanivalve system is pictured in figure \ref{fig:scanivalve} and is responsible for redirecting a specific pressure tube to an output measuring device. The analog pressure transducer is connected to the sampling and reference outputs of the Scanivalve. The connected Scanivalve rapidly switches between the 36 pressure tubes such that the pressure transducer measures the pressure difference between the sampled pressure and the reference pressure from the upstream static tube. The analog signal from the pressure transducer is fed into a data acquisition card connected to a computer running MATLAB to collect the data.\newline
 
 \begin{figure}[h]
     \centering
@@ -293,12 +293,12 @@ The Scanivalve system is pictured in figure \ref{fig:scanivalve} and is responsi
 \end{figure}
 
 \noindent
-The inclined manometer takes in 36 input channels and one reference channel to measure the pressure difference between each of the 36 inputs compared to the reference. The reference pressure is set to that of the upstream static tube.
+The inclined manometer takes in 36 input channels and one reference channel to measure the pressure difference between each of the 36 inputs compared to the reference pressure which is set to that of the upstream static tube.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{Apparatus Pictures/inclined_manometer_slope_graduations.jpg}
-    \caption{Inclined manometer.}
+    \caption{Inclined manometer slope graduations.}
     \label{fig:manometer}
 \end{figure}
 
@@ -311,26 +311,26 @@ The procedure used for acquisition of pressure measurements is as follows:
 
 \begin{enumerate}
 
-    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. The wind tunnel is set to a speed of $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
+    \item The sample frequency and data acquisition time are determined such that the pressure transducer measurements admit a $\pm 1\%$ accuracy. Set the wind tunnel speed to $110\si{km.h^{-1}}$. A series of representative measurements from the pressure transducer output are then taken and autocorrelated to determine the sample frequency and data acquisition time required for $\pm 1\%$ accuracy.
     
-    \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements are taken at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
+    \item The calibration curve for the pressure transducer is constructed next. This allows interpolated conversion from voltage-pressure representations of pressure transducer measurements into equivalent pressure values. The curve is constructed by taking ten different voltage-pressure measurements at varying wind tunnel speeds using scanivalve readings while finding the corresponding pressure measurements using the Betz manometer. This correspondence between representations is used to calibrate the pressure-voltage curve of the transducer.
     
-    \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experiences in the wind tunnel.
+    \item The wind tunnel speed is set back to $110\si{km.h^{-1}}$ and wind tunnel's pitot-static pressure difference is measured to calculate the actual wind speed experienced in the wind tunnel.
     
-    \item Next, the angle of attack is changed in the positive and negative directions to determine the stall angle values. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen were \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
+    \item Next, the angle of attack is changed in the positive and negative directions to determine the angle of attack associated with the airfoil stall. Using this information, it is determined what angles of attack would be useful to measure to accurately represent the airfoil properties up to and past stall conditions. The angle of attack values chosen were \numlist{0;3;6;8;10;11;13;15;16;17;20} degrees.
 
     \item Cycling through each angle of attack, the pressure distribution is measured along the top and bottom surfaces of the airfoil in addition to the pressure distribution in the airfoils wake. These values are measured by reading the fluid height changes from the inclined manometer. To get greater precision in the wake measurements, the wake rake is displaced by $5\si{mm}$ for a second round of measurements to fill the gaps between each rake tube. Pressure measurements are taken using two methods: (1) the pressure transducer fed by the scanivalve device and (2) the inclined manometer.
 
 \end{enumerate}
 
 \noindent
-Once the pressure measurements were taken, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.\newline
+Following the acquisition of pressure measurements, the data is pre-processed to obtain pressure distributions as well as pressure coefficients over the airfoil and in its wake. This pre-processing follows the following procedure depending on the measurement method.
 
 \begin{enumerate}
 
     \item For data calculated using the pressure transducer, the calibration curve for the pressure transducer is used to convert raw data into equivalent pressure readings, using an interpolation script.
 
-    \item For the inclined manometer approach, the data is captured in images which we annotate using a web based data extraction tool for converting our image embedded data to csv files.\cite{Rohatgi2020} In this annotation stage, we specify graph boundaries and the scale of the graph. We then select the peaks of each manometer tube. The program will then interpolate between the boundaries to get a measure of our selection. Distortions in the image can cause nonlinear length scales that can provide error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state which and using Bernoulli's relation.
+    \item For the inclined manometer approach, the data is captured in images which were annotated using a web based data extraction tool for converting image embedded data into csv files.\cite{Rohatgi2020} In this annotation stage, the graph boundaries and the scale of the graph were specified. The peaks of each manometer tube were selected on the image. The program then interpolated between the boundaries to get a measure of the selection. Distortions in the image can cause nonlinear length scales that can introduce error into the data acquisition as discussed in section \ref{sec:non_quantifiable_sources_of_error}. From the csv data, the change in static pressure is determined from the change of fluid height for each manometer tube compared to an "at-rest" state and using Bernoulli's relation.
 
 \end{enumerate}
 
